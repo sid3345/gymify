@@ -1,4 +1,4 @@
-# GYMIFY Appointment-Booking
+# GYMIFY Fitness-Slot-Booking
 
 <!-- PROJECT LOGO -->
 <br />

@@ -21,7 +21,7 @@
 
 ## About The Project
 
-This is an web application booking between people a lot easier. The usual process is to exchange mails between people till they find a convenient time. But this application can skip this process and book appointment by displaying available slots to users.
+Our idea is to create a Gym / sport club slot booking application for employees. The application will be booking & subscription platform that enables employees to browse and book fitness & wellness services across partnered gyms / sports clubs in India (or any local campus for now) making it a holistic destination for all things fitness and sports.
 
 ### Built With
 

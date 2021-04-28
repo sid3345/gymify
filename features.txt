@@ -1,0 +1,37 @@
+Features:
+
+- Login / Register (may be google login): User / Admin
+
+-User section:
+	-Dashboard for users:
+		- Book nearby gyms / sports clubs (location)
+			- Check / Add review / ratings
+			- Check type / equipments / sports available
+			- Check hourly charges / discounts
+			- Book slot timings
+			- Fitness activity visualisation
+
+- Admin section:
+
+	- Dashboard for Gym / sport clubs
+		- Add / remove gyms / clubs
+		- Gym slot timings
+		- Timing (per hour) charges
+		- Location
+		- Type
+		- Review / ratings
+		- Equipments / Sports available
+		- Data visualisation (plots / charts)
+		- Discounts
+		- Subscriptions
+
+	- Dashboard for user management:
+		- Data visualisation (plots / charts)
+		- Employee fitness activity usage visualisation
+		- Personalised trainers
+		- Pre-defined Template exercise routines
+
+Additional features (later):
+- Community:
+	- User chat / interact / discuss
+	- User events

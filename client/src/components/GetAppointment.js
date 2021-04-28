@@ -5,7 +5,7 @@ import { Button } from "reactstrap";
 import axios from "axios";
 import moment from "moment-timezone";
 import timezones from "../timezones";
-moment.tz.setDefault("Asia/Mumbai");
+moment.tz.setDefault("Asia/Kolkata");
 
 export default class CreateEvent extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ export default class CreateEvent extends Component {
   componentDidMount() {
     this.setState({
       date: new Date(),
-      timezone: "Asia/Mumbai",
+      timezone: "Asia/Kolkata",
       duration: 30,
     });
   }
@@ -102,8 +102,8 @@ export default class CreateEvent extends Component {
   onSlotSelect(e) {
     let refSlots = [];
     this.state.slots.map((slot) => {
-      refSlots.push(moment.tz(slot, "America/New_York"));
-      return moment.tz(slot, "America/New_York");
+      refSlots.push(moment.tz(slot, "Asia/Kolkata"));
+      return moment.tz(slot, "Asia/Kolkata");
     });
     let index = this.state.buttons.indexOf(e.button);
     const selectedSlot = refSlots[index];
@@ -116,7 +116,7 @@ export default class CreateEvent extends Component {
 
     // let eventDateTime = new Date(yr, month, day, hr, min, 0);
     let eventDateTime = moment
-      .tz([yr, month, day, hr, min], "America/New_York")
+      .tz([yr, month, day, hr, min], "Asia/Kolkata")
       .format();
     console.log(eventDateTime);
 
@@ -150,23 +150,7 @@ export default class CreateEvent extends Component {
                   />
                 </div>
               </div>
-              <div className="form-group">
-                <select
-                  ref="timezoneInput"
-                  required
-                  className="form-control"
-                  value={this.state.timezone}
-                  onChange={this.onChangeTimezone}
-                >
-                  {this.state.timezones.map((timezone) => {
-                    return (
-                      <option key={timezone} value={timezone}>
-                        {timezone}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
+              
               <div className="form-group">
                 <label> Duration</label>
                 <input

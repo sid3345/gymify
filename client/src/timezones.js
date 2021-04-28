@@ -307,7 +307,7 @@ const timezones = [
   "Europe/Uzhgorod",
   "Europe/Zaporozhye",
   "Pacific/Wake",
-  "America/New_York",
+  "Asia/Kolkata",
   "America/Detroit",
   "America/Kentucky/Louisville",
   "America/Kentucky/Monticello",

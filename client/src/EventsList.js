@@ -4,7 +4,7 @@ import Calendar from "react-calendar";
 import axios from "axios";
 import { Table } from "reactstrap";
 import moment from "moment-timezone";
-moment.tz.setDefault("America/New_York");
+moment.tz.setDefault("Asia/Kolkata");
 
 export default class CreateEvent extends Component {
   constructor(props) {
@@ -26,11 +26,11 @@ export default class CreateEvent extends Component {
     this.setState({
       events: [],
       startDate: moment()
-        .tz("America/New_York")
+        .tz("Asia/Kolkata")
         .set({ hour: 0, minute: 0, second: 0 })
         .toDate(),
       endDate: moment()
-        .tz("America/New_York")
+        .tz("Asia/Kolkata")
         .set({ hour: 23, minute: 59, second: 59 })
         .toDate(),
     });
@@ -39,7 +39,7 @@ export default class CreateEvent extends Component {
   onChangeStart = (start) => {
     this.setState({
       startDate: moment(start)
-        .tz("America/New_York")
+        .tz("Asia/Kolkata")
         .set({ hour: 0, minute: 0, second: 0 })
         .add(1, "day")
         .toDate(),
@@ -50,7 +50,7 @@ export default class CreateEvent extends Component {
   onChangeEnd = (end) => {
     this.setState({
       endDate: moment(end)
-        .tz("America/New_York")
+        .tz("Asia/Kolkata")
         .set({ hour: 23, minute: 59, second: 59 })
         .add(1, "day")
         .toDate(),
@@ -68,8 +68,8 @@ export default class CreateEvent extends Component {
     e.preventDefault();
 
     const range = {
-      reqStart: moment.tz(this.state.startDate, "America/New_York").toDate(),
-      reqEnd: moment.tz(this.state.endDate, "America/New_York").toDate(),
+      reqStart: moment.tz(this.state.startDate, "Asia/Kolkata").toDate(),
+      reqEnd: moment.tz(this.state.endDate, "Asia/Kolkata").toDate(),
     };
 
     axios.post("http://localhost:5000/getEvents/", range).then((res) => {

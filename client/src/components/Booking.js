@@ -1,13 +1,25 @@
 import { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
 import GetAppointment from "./GetAppointment";
+import {connect} from 'react-redux'
+
 
 const Booking = (props) => {
   const { className, size, title } = props;
 
   const [modal, setModal] = useState(false);
 
-  const toggle = () => setModal(!modal);
+  const toggle = () => {
+  if(props.uservalue.user){
+    setModal(!modal)
+    }
+  else{
+    alert("Please Sign In First!")
+  }
+  }
+  
+  
+  
 
   const closeBtn = (
     <button className="close" onClick={toggle}>
@@ -38,4 +50,11 @@ const Booking = (props) => {
   );
 };
 
-export default Booking;
+
+const mapStateToProps = (state) =>{
+  return{
+    uservalue : state
+  }
+}
+
+export default connect(mapStateToProps)(Booking);

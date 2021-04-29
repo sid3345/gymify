@@ -3,7 +3,7 @@ export const gyms = [
       "bookID": 1,
       "title": "Gold GYM",
       "average_rating": 4.56,
-      "isbn": 439785960,
+      "location": 439785960,
       "type": "full-fledge",
       "ratings_count": 1944099,
       "price": 2300
@@ -12,7 +12,7 @@ export const gyms = [
       "bookID": 2,
       "title": "BodyFit",
       "average_rating": 4.49,
-      "isbn": 439358078,
+      "location": 439358078,
       "type": "rope + tyre",
       "ratings_count": 1996446,
       "price": 231
@@ -22,7 +22,7 @@ export const gyms = [
       "title": "Gold GYM",
       "authors": "J.K. Rowling-Mary GrandPré",
       "average_rating": 4.47,
-      "isbn": 439554934,
+      "location": 439554934,
       "type": "gym + sports club",
       "ratings_count": 5629932,
       "price": 232
@@ -32,7 +32,7 @@ export const gyms = [
       "title": "BodyFit",
       "authors": "J.K. Rowling",
       "average_rating": 4.41,
-      "isbn": 439554896,
+      "location": 439554896,
       "type": "full-fledge",
       "ratings_count": 6267,
       "price": 233
@@ -42,7 +42,7 @@ export const gyms = [
       "title": "Gymmers",
       "authors": "J.K. Rowling-Mary GrandPré",
       "average_rating": 4.55,
-      "isbn": "043965548X",
+      "location": "043965548X",
       "type": "gym + sports club",
       "ratings_count": 2149872,
       "price": 234
@@ -52,7 +52,7 @@ export const gyms = [
       "title": "Gold GYM",
       "authors": "J.K. Rowling-Mary GrandPré",
       "average_rating": 4.78,
-      "isbn": 439682584,
+      "location": 439682584,
       "type": "full-fledge",
       "ratings_count": 38872,
       "price": 235
@@ -62,7 +62,7 @@ export const gyms = [
       "title": "Gymmers",
       "authors": "W. Frederick Zimmerman",
       "average_rating": 3.69,
-      "isbn": 976540606,
+      "location": 976540606,
       "type": "rope + tyre",
       "ratings_count": 18,
       "price": 236
@@ -72,7 +72,7 @@ export const gyms = [
       "title": "BodyFit",
       "authors": "J.K. Rowling",
       "average_rating": 4.73,
-      "isbn": 439827604,
+      "location": 439827604,
       "type": "yoga + gym",
       "ratings_count": 27410,
       "price": 237
@@ -82,7 +82,7 @@ export const gyms = [
       "title": "Gymmers",
       "authors": "Douglas Adams",
       "average_rating": 4.38,
-      "isbn": 517226952,
+      "location": 517226952,
       "type": "rope + tyre",
       "ratings_count": 3602,
       "price": 238
@@ -92,7 +92,7 @@ export const gyms = [
       "title": "Gymmers",
       "authors": "Douglas Adams",
       "average_rating": 4.38,
-      "isbn": 345453743,
+      "location": 345453743,
       "type": "yoga + gym",
       "ratings_count": 240189,
       "price": 239
@@ -102,7 +102,7 @@ export const gyms = [
       "title": "Gold GYM",
       "authors": "Bill Bryson",
       "average_rating": 3.9,
-      "isbn": "076790382X",
+      "location": "076790382X",
       "type": "full-fledge",
       "ratings_count": 47490,
       "price": 247
@@ -112,17 +112,17 @@ export const gyms = [
       "title": "BodyFit",
       "authors": "Bill Bryson",
       "average_rating": 3.83,
-      "isbn": 60920084,
+      "location": 60920084,
       "type": "rope + tyre",
       "ratings_count": 43779,
       "price": 248
     },
     {
       "bookID": 27,
-      "title": "Neither Here nor There: Travels in Europe",
+      "title": "Bodybuilders",
       "authors": "Bill Bryson",
       "average_rating": 3.87,
-      "isbn": 380713802,
+      "location": 380713802,
       "type": "gym + sports club",
       "ratings_count": 46397,
       "price": 249
@@ -132,7 +132,7 @@ export const gyms = [
       "title": "Gold GYM",
       "authors": "Bill Bryson",
       "average_rating": 3.92,
-      "isbn": 380727501,
+      "location": 380727501,
       "type": "yoga + gym",
       "ratings_count": 76476,
       "price": 250
@@ -142,7 +142,7 @@ export const gyms = [
       "title": "Gymmers",
       "authors": "Bill Bryson",
       "average_rating": 3.94,
-      "isbn": 380715430,
+      "location": 380715430,
       "type": "rope + tyre",
       "ratings_count": 26672,
       "price": 251

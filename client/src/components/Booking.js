@@ -3,7 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
 import GetAppointment from "./GetAppointment";
 
 const Booking = (props) => {
-  const { className, size } = props;
+  const { className, size, title } = props;
 
   const [modal, setModal] = useState(false);
 
@@ -28,7 +28,7 @@ const Booking = (props) => {
         size="lg"
       >
         <ModalHeader toggle={toggle} close={closeBtn}>
-          Schedule a slot
+          Schedule a slot for {title}
         </ModalHeader>
         <ModalBody>
           <GetAppointment />

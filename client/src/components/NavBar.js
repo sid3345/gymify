@@ -48,8 +48,6 @@ var listEvent = <Link to="/listAll">
                         {props.uservalue.user ? 'Sign Out' : 'Sign In'}
                   </Button>
             </Link>
-
-            <Booking className="BookApp" />
           </Nav>
         </Collapse>
       </Navbar>

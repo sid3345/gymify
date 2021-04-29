@@ -54,7 +54,7 @@ export const gyms = [
     },
     {
       "gymID": 8,
-      "title": "Gold GYM",
+      "title": "Muscle Builders",
       "authors": "J.K. Rowling-Mary GrandPré",
       "average_rating": 4.78,
       "location": 'Nariman, Mumbai',
@@ -98,7 +98,7 @@ export const gyms = [
     },
     {
       "gymID": 13,
-      "title": "Gymmers",
+      "title": "Muscle Builders",
       "authors": "Douglas Adams",
       "average_rating": 4.38,
       "location": 'Hinjwadi, Pune',
@@ -142,7 +142,7 @@ export const gyms = [
     },
     {
       "gymID": 28,
-      "title": "Gold GYM",
+      "title": "Muscle Builders",
       "authors": "Bill Bryson",
       "average_rating": 3.92,
       "location": 'Hinjwadi, Pune',

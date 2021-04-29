@@ -1,17 +1,54 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Container } from "reactstrap";
 import doc1 from "../assets/img/fitness1.jfif";
 import doc2 from "../assets/img/fitness2.jpg";
 import BookList from './BookList';
+import {books} from './data';
 
-const Information = ({books}) => {
+const Information = () => {
+    const [keyword, setKeyword] = useState('');
+
+   const handleSearchChange=(e)=>{
+    setKeyword(e.target.value.toLowerCase());
+    }
+    
+    const handleSearchSubmit=(e)=>{
+      e.preventDefault();
+    }
+   const filteredBooks = books.filter((book)=>{
+  let bookTitle = book.title.toString().toLowerCase();
+  return bookTitle.indexOf(keyword) > -1;
+  });
+
   return (
-    <div>
+      <div>
       <Container fluid>
         <div className="row m-3 d-flex align-items-center">
-            <div className="container">
-		    	<BookList books={books}/>
+
+          <div className="col-12 col-md-6 p-5">
+            <img src={doc1} alt="" width="100%" height="auto" />
           </div>
+          <div className="col-12 col-md-6 text-center p-5">
+            <h3 className="display-4">Nothing truly great comes from a comfort zone ! </h3>
+          </div>
+        </div>
+
+        <form className="search-form" onSubmit={(e)=>handleSearchSubmit(e)}>
+        <input type="text" value={keyword} placeholder="Search for gyms / sports clubs..."  
+        onChange={(e)=>handleSearchChange(e)}/>
+					</form>
+
+            <div className="container">
+		    	<BookList books={filteredBooks}/>
+          </div>
+
+          <div className="row m-3 d-flex align-items-center">
+          <div className="col-12 col-md-6 text-center p-5">
+            <h4 className="display-4">Your body can stand almost anything. It’s your mind that you have to convince !</h4>
+          </div>
+          <div className="col-12 col-md-6 p-5">
+            <img src={doc2} alt="" width="100%" height="auto" />
+        </div>
         </div>
       </Container>
     </div>

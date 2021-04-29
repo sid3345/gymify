@@ -121,7 +121,7 @@ html {
 
 .gym-list-item {
   width: 200px;
-  height: 280px;
+  height: 450px;
   padding: 5px;
   margin: 15px;
   background-color: #fff;
@@ -133,8 +133,8 @@ html {
 }
 
 .gym-list-item img {
-  width: 200px;
-  height: 250px;
+  width: 150px;
+  height: 150px;
 }
 .gym-list-item .gym-details {
   font-size: 12px;

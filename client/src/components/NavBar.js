@@ -13,9 +13,24 @@ import {
   Button,
 } from "reactstrap";
 import Booking from "./Booking";
+import {books} from './data';
+import Greeting from "./Greeting";
+import Information from "./Information";
 
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [keyword, setKeyword] = useState('');
+
+  let {
+			handleSearchChange,  
+			handleSearchSubmit} = props;
+
+   handleSearchChange=(e)=>{
+    setKeyword(e.target.value.toLowerCase());
+    }
+    handleSearchSubmit=(e)=>{
+      e.preventDefault();
+    }
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -39,6 +54,10 @@ var listEvent = <Link to="/listAll">
               </Link>
 
   
+  const filteredBooks = books.filter((book)=>{
+  let bookTitle = book.title.toString().toLowerCase();
+  return bookTitle.indexOf(keyword) > -1;
+  });
 
   return (
     <div>
@@ -49,17 +68,25 @@ var listEvent = <Link to="/listAll">
           <Nav className="ml-auto" navbar>
             {props.uservalue.user ? listEvent : null}
 
+					<form className="search-form" onSubmit={(e)=>handleSearchSubmit(e)}>
+						<input type="text" value={keyword} placeholder="Search for gyms / sports clubs..."  
+            onChange={(e)=>handleSearchChange(e)}/>
+					</form>
+
             <Link to = {!props.uservalue.user && '/login'}>
                   <Button color="primary" className="mx-2" onClick = {handleAuthentication}>
                         {props.uservalue.user ? 'Sign Out' : 'Sign In'}
                   </Button>
-               
             </Link>
 
             <Booking className="BookApp" />
           </Nav>
         </Collapse>
       </Navbar>
+      <div className="container">
+            <Greeting />
+		    	<Information books={filteredBooks}/>
+	     	</div>
     </div>
   );
 };

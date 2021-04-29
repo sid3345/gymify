@@ -11,7 +11,7 @@ const GymCard = ({gym}) =>{
 			<p className="gym-details"><i className="fas fa-rupee-sign"></i> Type: {gym.type}</p>
 			<p className="gym-details"><i className="fas fa-rupee-sign"></i> Rating: {gym.average_rating}</p>
 			<p className="gym-details"><i className="fas fa-rupee-sign"></i> Rating Count: {gym.ratings_count}</p>
-			<p className="gym-price"><i className="fas fa-rupee-sign"></i> Cost per hour: {gym.price}</p>
+			<p className="gym-price"><i className="fas fa-rupee-sign"></i> Cost per hour: ₹ {gym.price}</p>
 			
           <Nav className="auto">
             <Booking title={gym.title} className="BookApp" />

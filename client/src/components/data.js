@@ -6,7 +6,7 @@ export const gyms = [
       "location": 439785960,
       "type": "full-fledge",
       "ratings_count": 1944099,
-      "price": 2300
+      "price": 230
     },
     {
       "bookID": 2,

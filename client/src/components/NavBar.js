@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import {auth} from "../firebase"
+import {connect} from 'react-redux'
+
+
 import {
   Collapse,
   Navbar,
@@ -15,6 +19,27 @@ const NavBar = (props) => {
 
   const toggle = () => setIsOpen(!isOpen);
 
+  const history = useHistory()
+
+  
+
+  const handleAuthentication = () =>{
+    if (props.uservalue.user){
+        auth.signOut()
+        history.push('/')
+    }
+
+   
+}
+
+var listEvent = <Link to="/listAll">
+                <Button color="primary" className="mx-2">
+                  List All events
+                </Button>
+              </Link>
+
+  
+
   return (
     <div>
       <Navbar color="light" light expand="md" fixed="top">
@@ -22,11 +47,15 @@ const NavBar = (props) => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
-            <Link to="/listAll">
-              <Button color="primary" className="mx-2">
-                List All events
-              </Button>
+            {props.uservalue.user ? listEvent : null}
+
+            <Link to = {!props.uservalue.user && '/login'}>
+                  <Button color="primary" className="mx-2" onClick = {handleAuthentication}>
+                        {props.uservalue.user ? 'Sign Out' : 'Sign In'}
+                  </Button>
+               
             </Link>
+
             <Booking className="BookApp" />
           </Nav>
         </Collapse>
@@ -35,4 +64,10 @@ const NavBar = (props) => {
   );
 };
 
-export default NavBar;
+const mapStateToProps = (state) =>{
+  return{
+    uservalue : state
+  }
+}
+
+export default connect(mapStateToProps)(NavBar);

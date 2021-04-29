@@ -1,4 +1,4 @@
-export const books = [
+export const gyms = [
     {
       "bookID": 1,
       "title": "Gold GYM",

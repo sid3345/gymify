@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import { Container } from "reactstrap";
 import doc1 from "../assets/img/fitness1.jfif";
 import doc2 from "../assets/img/fitness2.jpg";
-import BookList from './BookList';
-import {books} from './data';
+import GymList from './GymList';
+import {gyms} from './data';
 
 const Information = () => {
     const [keyword, setKeyword] = useState('');
@@ -15,8 +15,8 @@ const Information = () => {
     const handleSearchSubmit=(e)=>{
       e.preventDefault();
     }
-   const filteredBooks = books.filter((book)=>{
-  let bookTitle = book.title.toString().toLowerCase();
+   const filteredBooks = gyms.filter((gym)=>{
+  let bookTitle = gym.title.toString().toLowerCase();
   return bookTitle.indexOf(keyword) > -1;
   });
 
@@ -39,7 +39,7 @@ const Information = () => {
 					</form>
 
             <div className="container">
-		    	<BookList books={filteredBooks}/>
+		    	<GymList gyms={filteredBooks}/>
           </div>
 
           <div className="row m-3 d-flex align-items-center">

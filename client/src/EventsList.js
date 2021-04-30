@@ -4,9 +4,14 @@ import Calendar from "react-calendar";
 import axios from "axios";
 import { Table } from "reactstrap";
 import moment from "moment-timezone";
+import {connect} from 'react-redux'
+
+
 moment.tz.setDefault("Asia/Kolkata");
 
-export default class CreateEvent extends Component {
+
+
+class CreateEvent extends Component {
   constructor(props) {
     super(props);
 
@@ -70,6 +75,7 @@ export default class CreateEvent extends Component {
     const range = {
       reqStart: moment.tz(this.state.startDate, "Asia/Kolkata").toDate(),
       reqEnd: moment.tz(this.state.endDate, "Asia/Kolkata").toDate(),
+      userEmail: this.props.uservalue.user.email
     };
 
     axios.post("http://localhost:5000/getEvents/", range).then((res) => {
@@ -77,6 +83,7 @@ export default class CreateEvent extends Component {
     });
   }
   render() {
+    
     return (
       <div className="container">
         <form className="range-selector row mt-5" onSubmit={this.onSubmit}>
@@ -128,3 +135,12 @@ export default class CreateEvent extends Component {
     );
   }
 }
+
+
+const mapStateToProps = (state) =>{
+  return{
+    uservalue : state
+  }
+}
+
+export default connect(mapStateToProps)(CreateEvent)

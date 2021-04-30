@@ -13,10 +13,14 @@ router.route("/").post((req, res) => {
     .set({ hour: 23, minute: 59, second: 59 })
     // .tz(staticConfig.timezone)
     .toDate();
+  reqUserEmail = req.body.userEmail
   console.log(reqStart);
   console.log(reqEnd);
+  console.log(reqUserEmail)
   let eventsList = [];
   db.collection("events")
+    
+    .where("userEmail", "==", reqUserEmail)
     .where("dateTime", ">", reqStart)
     .where("dateTime", "<", reqEnd)
     .get()

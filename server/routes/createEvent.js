@@ -10,12 +10,15 @@ moment.tz.setDefault(staticConfig.timezone);
 router.route("/").post((req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.send("New slot added");
+  
   const reqDateTime = moment.utc(req.body.reqDateTime).toDate();
   const reqDuration = parseInt(req.body.reqDuration);
-  console.log(reqDateTime);
+  const reqUserEmail = req.body.userEmail
+
   db.collection("events").add({
     dateTime: admin.firestore.Timestamp.fromDate(reqDateTime),
     duration: reqDuration,
+    userEmail: reqUserEmail
   });
 });
 

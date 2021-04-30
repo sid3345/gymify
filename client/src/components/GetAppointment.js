@@ -5,9 +5,13 @@ import { Button } from "reactstrap";
 import axios from "axios";
 import moment from "moment-timezone";
 import timezones from "../timezones";
+import {connect} from 'react-redux'
+
+
 moment.tz.setDefault("Asia/Kolkata");
 
-export default class CreateEvent extends Component {
+
+class CreateEvent extends Component {
   constructor(props) {
     super(props);
 
@@ -27,7 +31,7 @@ export default class CreateEvent extends Component {
       buttons: [],
     };
   }
-
+  
   componentDidMount() {
     this.setState({
       date: new Date(),
@@ -100,6 +104,7 @@ export default class CreateEvent extends Component {
   }
 
   onSlotSelect(e) {
+    
     let refSlots = [];
     this.state.slots.map((slot) => {
       refSlots.push(moment.tz(slot, "Asia/Kolkata"));
@@ -123,7 +128,10 @@ export default class CreateEvent extends Component {
     const eventParam = {
       reqDateTime: eventDateTime,
       reqDuration: this.state.duration,
+      userEmail: this.props.uservalue.user.email
     };
+
+  
 
     axios
       .post("http://localhost:5000/createEvent", eventParam)
@@ -136,6 +144,8 @@ export default class CreateEvent extends Component {
   }
 
   render() {
+    console.log(this.props.uservalue.user.email)
+
     return (
       <div>
         <div className="row px-3">
@@ -189,3 +199,11 @@ export default class CreateEvent extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) =>{
+  return{
+    uservalue : state
+  }
+}
+
+export default connect(mapStateToProps)(CreateEvent)

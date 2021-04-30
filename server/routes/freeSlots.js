@@ -47,7 +47,7 @@ router.route("/").post((req, res) => {
     changedStart = moment(changedStart).add(staticConfig.duration, "minutes");
     slots.push(moment(changedStart));
   }
-  console.log(slots);
+  
 
   res.send(slots);
 });

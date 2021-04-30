@@ -2,8 +2,6 @@ import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import {auth} from "../firebase"
 import {connect} from 'react-redux'
-
-
 import {
   Collapse,
   Navbar,

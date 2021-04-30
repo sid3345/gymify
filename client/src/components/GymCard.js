@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Booking from "./Booking";
-import {Nav} from "reactstrap";
+import {Nav, Button} from "reactstrap";
 
 const GymCard = ({gym}) =>{
 	return(
@@ -13,9 +13,7 @@ const GymCard = ({gym}) =>{
 			<p className="gym-details"><i className="fas fa-rupee-sign"></i> Rating Count: {gym.ratings_count}</p>
 			<p className="gym-price"><i className="fas fa-rupee-sign"></i> Cost per hour: ₹ {gym.price}</p>
 			
-          <Nav className="auto">
             <Booking title={gym.title} className="BookApp" />
-          </Nav>
 		</div>
 	);
 	

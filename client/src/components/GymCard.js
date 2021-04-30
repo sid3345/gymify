@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import Booking from "./Booking";
-import {Nav, Button} from "reactstrap";
 
 const GymCard = ({gym}) =>{
 	return(

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
 import store from '../Store';
-
+import { Button } from "reactstrap";
 
 
 class Payments extends Component {
@@ -16,9 +16,9 @@ class Payments extends Component {
         token={token => store.dispatch({type : 'SET_TOKEN' , payload : token})}
         stripeKey={process.env.REACT_APP_STRIPE_KEY}
       >
-        <button color="primary" className="m-2">
+        <Button color="success" className="m-2">
           Payments
-        </button>
+        </Button>
       </StripeCheckout >
        
      

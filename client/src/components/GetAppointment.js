@@ -204,7 +204,7 @@ class CreateEvent extends Component {
             })}
             <Payments />
             <span>
-                {this.props.userState.token ? 'Paid' : 'Please Pay'}
+                {this.props.userState.token ? 'Paid' : 'Please Pay to book slot'}
             </span>
           </div>
         </div>

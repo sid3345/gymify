@@ -1,5 +1,6 @@
 const initialState = {
-    user : null
+    user : null,
+    token : null
 
 }
 const reducer = (state = initialState , action) =>{
@@ -10,6 +11,12 @@ const reducer = (state = initialState , action) =>{
             return{
                 ...state,
                 user : action.payload
+            }
+        
+        case "SET_TOKEN":
+            return{
+                ...state,
+                token : action.payload
             }
 
         default:

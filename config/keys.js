@@ -1,0 +1,4 @@
+module.exports = {
+stripePublishabaleKey : 'pk_test_51Im2GbSILJIS7OlrPxiT5SvsA9nUGahEJw2PU5pOp7yIeNJt1OUO9x3eiOe1FyEwda9ly5TR5HTU9IXGnIEyS9B6003MOgDdv1',
+stripeSecretKey : 'sk_test_51Im2GbSILJIS7OlrxhSFSJUNwzNztS9b1DV9YYybkmyVk4a3aKvv5newbs2Ct0SOVGChkT3RoAGfijWQOH175wvu00n9JCkGcb',
+}

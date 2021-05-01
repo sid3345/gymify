@@ -6,6 +6,7 @@ import axios from "axios";
 import moment from "moment-timezone";
 import timezones from "../timezones";
 import {connect} from 'react-redux'
+import Payments from "./Payments";
 
 
 moment.tz.setDefault("Asia/Kolkata");
@@ -123,16 +124,15 @@ class CreateEvent extends Component {
     let eventDateTime = moment
       .tz([yr, month, day, hr, min], "Asia/Kolkata")
       .format();
-    console.log(eventDateTime);
+    // console.log(eventDateTime);
 
     const eventParam = {
       reqDateTime: eventDateTime,
       reqDuration: this.state.duration,
-      userEmail: this.props.uservalue.user.email
+      userEmail: this.props.userState.user.email
     };
 
-  
-
+  if(this.props.userState.token){
     axios
       .post("http://localhost:5000/createEvent", eventParam)
       .then(() => {
@@ -142,9 +142,18 @@ class CreateEvent extends Component {
         window.location = `/Error/:442`;
       });
   }
+  else{
+    alert("Please Pay First!")
+  }
+
+    
+  }
 
   render() {
-    console.log(this.props.uservalue.user.email)
+    console.log(this.props.userState.user.email)
+    console.log(this.props.userState.token)
+
+
 
     return (
       <div>
@@ -193,6 +202,10 @@ class CreateEvent extends Component {
                 </Button>
               );
             })}
+            <Payments />
+            <span>
+                {this.props.userState.token ? 'Paid' : 'Please Pay'}
+            </span>
           </div>
         </div>
       </div>
@@ -202,7 +215,7 @@ class CreateEvent extends Component {
 
 const mapStateToProps = (state) =>{
   return{
-    uservalue : state
+    userState : state
   }
 }
 

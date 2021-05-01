@@ -10,7 +10,8 @@ import {
   Nav,
   Button,
 } from "reactstrap";
-import Booking from "./Booking";
+
+
 
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +41,7 @@ var listEvent = <Link to="/listAll">
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             {props.uservalue.user ? listEvent : null}
-
+            
             <Link to = {!props.uservalue.user && '/login'}>
                   <Button color="primary" className="mx-2" onClick = {handleAuthentication}>
                         {props.uservalue.user ? 'Sign Out' : 'Sign In'}

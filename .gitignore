@@ -107,3 +107,7 @@ server/serviceAccountKey.json
 
 server/build/
 server/build/static/
+config/keys.js
+client/.env.development
+*.lock
+client/package-lock.json

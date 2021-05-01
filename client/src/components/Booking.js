@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 
 
 const Booking = (props) => {
-  const { className, size, title } = props;
+  const { className, size, title , price} = props;
 
   const [modal, setModal] = useState(false);
 
@@ -43,7 +43,7 @@ const Booking = (props) => {
           Schedule a slot for {title}
         </ModalHeader>
         <ModalBody>
-          <GetAppointment />
+          <GetAppointment priceOnPayment = {price}/>
         </ModalBody>
       </Modal>
     </div>

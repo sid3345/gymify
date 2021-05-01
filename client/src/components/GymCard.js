@@ -12,7 +12,7 @@ const GymCard = ({gym}) =>{
 			<p className="gym-details"><i className="fas fa-rupee-sign"></i> Rating Count: {gym.ratings_count}</p>
 			<p className="gym-price"><i className="fas fa-rupee-sign"></i> Cost per hour: ₹ {gym.price}</p>
 			
-            <Booking title={gym.title} className="BookApp" />
+            <Booking title={gym.title} price={gym.price} className="BookApp" />
 		</div>
 	);
 	

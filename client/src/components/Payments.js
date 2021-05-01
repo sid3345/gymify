@@ -7,11 +7,11 @@ import { Button } from "reactstrap";
 
 class Payments extends Component {
   render() {
-
+    // console.log(this.props.price)
     return (
       <StripeCheckout
         name= "GYMIFY"
-        amount={500}
+        amount={this.props.price * 100}
         currency = 'INR'
         token={token => store.dispatch({type : 'SET_TOKEN' , payload : token})}
         stripeKey={process.env.REACT_APP_STRIPE_KEY}

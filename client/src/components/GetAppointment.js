@@ -34,6 +34,7 @@ class CreateEvent extends Component {
   }
   
   componentDidMount() {
+    console.log()
     this.setState({
       date: new Date(),
       timezone: "Asia/Kolkata",
@@ -150,8 +151,9 @@ class CreateEvent extends Component {
   }
 
   render() {
-    console.log(this.props.userState.user.email)
-    console.log(this.props.userState.token)
+    // console.log(this.props.priceOnPayment)
+    // console.log(this.props.userState.user.email)
+    // console.log(this.props.userState.token)
 
 
 
@@ -202,7 +204,7 @@ class CreateEvent extends Component {
                 </Button>
               );
             })}
-            <Payments />
+            <Payments price = {this.props.priceOnPayment}/>
             <span>
                 {this.props.userState.token ? 'Paid' : 'Please Pay to book slot'}
             </span>

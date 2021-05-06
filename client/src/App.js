@@ -18,7 +18,6 @@ import "./dashboard/assets/css/material-dashboard-react.css?v=1.9.0";
 
 // core components
 import Admin from "./dashboard/layouts/Admin";
-import RTL from "./dashboard/layouts/RTL";
 
 const hist = createBrowserHistory();
 
@@ -49,7 +48,6 @@ const App = (props) => {
         <Route path="/login" component={Login} />
 
         <Route path="/admin" component={Admin} />
-      <Route path="/rtl" component={RTL} />
 
         <Route path="*" component={Error} />
       </Switch>

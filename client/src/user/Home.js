@@ -1,3 +1,4 @@
+import React from "react";
 import "./assets/css/App.css";
 import Greeting from "./components/Greeting";
 import Information from "./components/Information";

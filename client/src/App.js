@@ -1,18 +1,26 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
-import "./assets/css/App.css";
-import NavBar from "./components/NavBar";
-import Home from "./Home";
-import Status from "./Status";
-import Error from "./Error";
-import EventsList from "./EventsList";
-import Login from "./components/Login";
-import { auth } from "./firebase";
+import "./user/assets/css/App.css";
+import NavBar from "./user/components/NavBar";
+import Home from "./user/Home";
+import Status from "./user/Status";
+import Error from "./user/Error";
+import EventsList from "./user/EventsList";
+import Login from "./user/components/Login";
+import { auth } from "./user/firebase";
+import { createBrowserHistory } from "history";
 
 import {connect} from 'react-redux'
-import store from "./Store";
+import store from "./user/Store";
 
+import "./dashboard/assets/css/material-dashboard-react.css?v=1.9.0";
+
+// core components
+import Admin from "./dashboard/layouts/Admin";
+import RTL from "./dashboard/layouts/RTL";
+
+const hist = createBrowserHistory();
 
 const App = (props) => {
  
@@ -32,13 +40,16 @@ const App = (props) => {
 
   return (
 
-    <Router>
+    <Router history={hist}>
       <NavBar />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/status" component={Status} />
         <Route path="/listAll" component={EventsList} />
         <Route path="/login" component={Login} />
+
+        <Route path="/admin" component={Admin} />
+      <Route path="/rtl" component={RTL} />
 
         <Route path="*" component={Error} />
       </Switch>

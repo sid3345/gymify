@@ -1,3 +1,4 @@
+import React from "react";
 import { Jumbotron, Container } from "reactstrap";
 import doc2 from "../assets/img/fitness2.jpg";
 

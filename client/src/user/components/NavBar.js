@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import {auth} from "../firebase"
 import {connect} from 'react-redux'
@@ -33,6 +33,12 @@ var listEvent = <Link to="/listAll">
                 </Button>
               </Link>
 
+var admin = <Link to="/admin">
+                <Button color="primary" className="mx-2">
+                  Admin Login
+                </Button>
+              </Link>
+
   return (
     <div>
       <Navbar color="light" light expand="md" fixed="top">
@@ -47,6 +53,7 @@ var listEvent = <Link to="/listAll">
                         {props.uservalue.user ? 'Sign Out' : 'Sign In'}
                   </Button>
             </Link>
+            {!props.uservalue.user ? admin : null}
           </Nav>
         </Collapse>
       </Navbar>

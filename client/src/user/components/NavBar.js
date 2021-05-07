@@ -33,12 +33,6 @@ var listEvent = <Link to="/listAll">
                 </Button>
               </Link>
 
-var admin = <Link to="/admin">
-                <Button color="primary" className="mx-2">
-                  Admin Login
-                </Button>
-              </Link>
-
   return (
     <div>
       <Navbar color="light" light expand="md" fixed="top">
@@ -53,7 +47,6 @@ var admin = <Link to="/admin">
                         {props.uservalue.user ? 'Sign Out' : 'Sign In'}
                   </Button>
             </Link>
-            {!props.uservalue.user ? admin : null}
           </Nav>
         </Collapse>
       </Navbar>

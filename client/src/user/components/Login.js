@@ -10,12 +10,18 @@ function Login() {
 
     const signIn = e =>{
         e.preventDefault()
-        auth
-            .signInWithEmailAndPassword(email , password)
-            .then(auth => {
-                history.push('/')
-            })
-            .catch(error => alert(error.message))
+        if (email== 'admin@admin.com' && password== 'admin'){
+                    history.push('/admin')
+                }
+        else{
+            auth
+                .signInWithEmailAndPassword(email , password)
+                .then(auth => {
+
+                    history.push('/')
+                })
+                .catch(error => alert(error.message))
+            }
     }
 
     const register = e =>{

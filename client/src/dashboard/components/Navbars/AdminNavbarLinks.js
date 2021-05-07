@@ -37,16 +37,20 @@ export default function AdminNavbarLinks() {
   const handleCloseNotification = () => {
     setOpenNotification(null);
   };
-  const handleClickProfile = event => {
-    if (openProfile && openProfile.contains(event.target)) {
-      setOpenProfile(null);
-    } else {
-      setOpenProfile(event.currentTarget);
+
+  const handleAuthentication = () =>{
+
+    /******  SIGNOUT FUNCTIONALITY 
+
+    if (props.uservalue.user){
+        auth.signOut()
+        history.push('/')
     }
-  };
-  const handleCloseProfile = () => {
-    setOpenProfile(null);
-  };
+    
+    */
+    
+  }
+
   return (
     <div>
       <div className={classes.searchWrapper}>
@@ -156,43 +160,7 @@ export default function AdminNavbarLinks() {
         </Poppers>
       </div>
       <div className={classes.manager}>
-        <Button
-          color={window.innerWidth > 959 ? "transparent" : "white"}
-          justIcon={window.innerWidth > 959}
-          simple={!(window.innerWidth > 959)}
-          aria-owns={openProfile ? "profile-menu-list-grow" : null}
-          aria-haspopup="true"
-          onClick={handleClickProfile}
-          className={classes.buttonLink}
-        >
-          <Person className={classes.icons} />
-          <Hidden mdUp implementation="css">
-            <p className={classes.linkText}>Profile</p>
-          </Hidden>
-        </Button>
-        <Poppers
-          open={Boolean(openProfile)}
-          anchorEl={openProfile}
-          transition
-          disablePortal
-          className={
-            classNames({ [classes.popperClose]: !openProfile }) +
-            " " +
-            classes.popperNav
-          }
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              id="profile-menu-list-grow"
-              style={{
-                transformOrigin:
-                  placement === "bottom" ? "center top" : "center bottom"
-              }}
-            >
-            </Grow>
-          )}
-        </Poppers>
+        <Button color="primary" className="mx-2" onClick = {handleAuthentication}>Sign Out</Button>
       </div>
     </div>
   );

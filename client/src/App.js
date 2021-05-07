@@ -51,7 +51,7 @@ const App = (props) => {
 
     <Router history={hist}>
       {showNav ? <NavBar /> : null}
-      
+      {/* <NavBar /> */}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/status" component={Status} />

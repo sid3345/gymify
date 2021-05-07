@@ -21,9 +21,14 @@ import Button from "../../components/CustomButtons/Button.js";
 
 import styles from "../../assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 
+import {connect} from 'react-redux'
+import {auth} from '../../../user/firebase'
+import { Link, useHistory } from "react-router-dom";
+
+
 const useStyles = makeStyles(styles);
 
-export default function AdminNavbarLinks() {
+function AdminNavbarLinks(props) {
   const classes = useStyles();
   const [openNotification, setOpenNotification] = React.useState(null);
   const [openProfile, setOpenProfile] = React.useState(null);
@@ -38,16 +43,17 @@ export default function AdminNavbarLinks() {
     setOpenNotification(null);
   };
 
+  const history = useHistory()
+
+  // Logout Function
   const handleAuthentication = () =>{
-
-    /******  SIGNOUT FUNCTIONALITY 
-
+    
     if (props.uservalue.user){
         auth.signOut()
         history.push('/')
     }
     
-    */
+    
     
   }
 
@@ -165,3 +171,12 @@ export default function AdminNavbarLinks() {
     </div>
   );
 }
+
+
+const mapStateToProps = (state) =>{
+  return{
+    uservalue : state
+  }
+}
+
+export default connect(mapStateToProps)(AdminNavbarLinks)

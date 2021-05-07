@@ -22,8 +22,9 @@ import Admin from "./dashboard/layouts/Admin";
 const hist = createBrowserHistory();
 
 const App = (props) => {
- 
+
   useEffect(() =>{
+    
     auth.onAuthStateChanged((authUser =>{
       
       if (authUser){
@@ -37,10 +38,20 @@ const App = (props) => {
     }))
   }, [])
 
+  var showNav = true
+
+  if(props.uservalue.user){
+    // console.log(props.uservalue.user.email)
+    if(props.uservalue.user.email == "admin@admin.com"){
+      showNav = false
+      
+    }
+  }
   return (
 
     <Router history={hist}>
-      <NavBar />
+      {showNav ? <NavBar /> : null}
+      
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/status" component={Status} />
@@ -57,5 +68,10 @@ const App = (props) => {
 
 
 
+const mapStateToProps = (state) =>{
+  return{
+    uservalue : state
+  }
+}
 
-export default connect()(App);
+export default connect(mapStateToProps)(App);

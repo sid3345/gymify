@@ -14,8 +14,13 @@ function Login() {
             auth
                 .signInWithEmailAndPassword(email , password)
                 .then(auth => {
-
-                    history.push('/')
+                    // console.log(auth.user.email)
+                    if(auth.user.email == "admin@admin.com"){
+                        history.push('/admin')
+                    }
+                    else{
+                        history.push('/')
+                    }
                 })
                 .catch(error => alert(error.message))
     }

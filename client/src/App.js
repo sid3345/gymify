@@ -39,11 +39,13 @@ const App = (props) => {
   }, [])
 
   var showNav = true
+  var admin = false
 
   if(props.uservalue.user){
     // console.log(props.uservalue.user.email)
     if(props.uservalue.user.email == "admin@admin.com"){
       showNav = false
+      admin = true
       
     }
   }
@@ -55,10 +57,10 @@ const App = (props) => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/status" component={Status} />
-        <Route path="/listAll" component={EventsList} />
+        {props.uservalue.user ? <Route path="/listAll" component={EventsList} /> : null}
         <Route path="/login" component={Login} />
 
-        <Route path="/admin" component={Admin} />
+        {admin ? <Route path="/admin" component={Admin} /> : null}  
 
         <Route path="*" component={Error} />
       </Switch>

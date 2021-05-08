@@ -16,7 +16,8 @@ router.route("/").post((req, res) => {
    city : req.body.city,
    address : req.body.address,
    postal : req.body.postal,
-   description : req.body.description
+   description : req.body.description,
+   approved: 0
   });
 });
 

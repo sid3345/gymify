@@ -28,11 +28,15 @@ const getSlotsRouter = require("./routes/freeSlots");
 const getEventsRouter = require("./routes/getEvents");
 const createEventsRouter = require("./routes/createEvent");
 const registerGym = require("./routes/registerGym");
+const createUser = require("./routes/createUser")
+const fetchUser = require("./routes/fetchUser")
 
 app.use("/freeSlots", getSlotsRouter);
 app.use("/getEvents", getEventsRouter);
 app.use("/createEvent", createEventsRouter);
 app.use("/gym_register", registerGym);
+app.use("/createUser", createUser)
+app.use("/fetchUser", fetchUser)
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

@@ -79,6 +79,7 @@ class CreateEvent extends Component {
     };
 
     axios.post("http://localhost:5000/getEvents/", range).then((res) => {
+      console.log(res.data)
       this.getEventsList(res.data);
     });
   }

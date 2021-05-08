@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 import { Link , useHistory} from 'react-router-dom'
 import '../assets/css/Login.css'
@@ -7,6 +8,7 @@ function Login() {
     const history = useHistory()
     const [email , setEmail] = useState('')
     const [password , setPassword] = useState('')
+    const [checked , setChecked] = useState(false)
 
     const signIn = e =>{
         e.preventDefault()
@@ -18,9 +20,20 @@ function Login() {
                     if(auth.user.email == "admin@admin.com"){
                         history.push('/admin')
                     }
-                    else{
-                        history.push('/')
+                    else if(auth){
+                        axios.post("http://localhost:5000/fetchUser" , {email : auth.user.email})
+                        .then((res) =>{
+                            // console.log(res.data[0].email)
+                            if(res.data[0].checked == true){
+                                history.push('/register_gym')
+                            }
+                            else{
+                                history.push('/')
+                            }
+                        })
                     }
+                    // history.push('/')
+
                 })
                 .catch(error => alert(error.message))
     }
@@ -31,17 +44,24 @@ function Login() {
             .createUserWithEmailAndPassword(email , password)
             .then((auth) =>{
                 if(auth){
-                    history.push('/')
+                    axios.post("http://localhost:5000/createUser" , {email : auth.user.email , check : {checked}})
+                    .then((res) =>{
+                        if(res.data.check.checked == true){
+                            history.push('/register_gym')
+                        }
+                        else{
+                            history.push('/')
+                        }
+                    })
                 }
+                
             })
             .catch(error => alert(error.message))
 
     }
 
-    const gym_register = e =>{
-        e.preventDefault()
-        history.push('/register_gym')
-    }
+  
+    // console.log(checked)
 
     return (
         <div className = "login">
@@ -60,13 +80,20 @@ function Login() {
                     <h5>Password</h5>
                     <input type = "password" value = {password} onChange = {e => setPassword(e.target.value)}/>
 
+                    <label>
+                        <input type="checkbox" defaultChecked={checked} onChange={() => setChecked(!checked)} />
+                        GYM OWNER
+                    </label>
+
                     <button type = "submit" onClick = {signIn} className = "login__signInButton">Sign In</button>
+
+                    
                 </form>
 
 
                 <button onClick = {register} className = "login__registerButton">Create Your Account</button>
 
-                <button onClick = {gym_register} className = "login__registerButton">Register your Gym</button>
+                
 
             </div>
         </div>

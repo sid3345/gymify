@@ -45,7 +45,7 @@ const dashboardRoutes = [
   },
   {
     path: "/user",
-    name: "User Profile",
+    name: "Gym Profile",
     rtlName: "ملف تعريفي للمستخدم",
     icon: Person,
     component: GymProfile,

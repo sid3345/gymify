@@ -135,9 +135,9 @@ export default function Notifications() {
           and styled by{" "}
           <a
             target="_blank"
-            href="https://www.creative-tim.com/?ref=mdr-notifications-page"
+            href=""
           >
-            Creative Tim
+            Gymify
           </a>
           . Please checkout the{" "}
           <a href="#pablo" target="_blank">

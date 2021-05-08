@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 // @material-ui/core components
+import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 // core components
@@ -38,33 +39,53 @@ const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
   const classes = useStyles();
+
+  const [gym , setGym] = useState('')
+  const [cost , setCost] = useState('')
+  const [email , setEmail] = useState('')
+  const [name , setName] = useState('')
+  const [propertyGovt , setPropertyGovt] = useState('')
+  const [city , setCity] = useState('')
+  const [country , setCountry] = useState('')
+  const [postal , setPostal] = useState('')
+  const [description , setDescription] = useState('')
+
+  const onSubmit= (e) => {
+    e.preventDefault();
+
+    const data= {
+      'gym':gym,
+      'email':email,
+      'name':name,
+      'propertyGovt':propertyGovt,
+      'cost':cost,
+      'city':city,
+      'country':country,
+      'postal':postal,
+      'description':description
+    }
+
+    axios.post("http://localhost:5000/gym_register/", data).then((res) => {
+      console.log(res.data);
+    });
+  }
+
   return (
     <div>
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
-              <p className={classes.cardCategoryWhite}>Complete your profile</p>
+              <h4 className={classes.cardTitleWhite}>Check Gym Profile</h4>
+              <p className={classes.cardCategoryWhite}>Modify or Approve</p>
             </CardHeader>
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
-                    labelText="Company (disabled)"
-                    id="company-disabled"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      disabled: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Username"
-                    id="username"
+                    labelText="Gym / Club name"
+                    id="gym"
+                    onChange = {e => setGym(e.target.value)}
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -74,6 +95,17 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Email address"
                     id="email-address"
+                    onChange = {e => setEmail(e.target.value)}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={3}>
+                  <CustomInput
+                    labelText="Cost per hour"
+                    id="cost"
+                    onChange = {e => setCost(e.target.value)}
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -83,8 +115,9 @@ export default function UserProfile() {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="First Name"
-                    id="first-name"
+                    labelText="Owner Name"
+                    id="name"
+                    onChange = {e => setName(e.target.value)}
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -92,8 +125,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="Last Name"
-                    id="last-name"
+                    labelText="Gym property govt registration"
+                    id="gym-registration"
+                    onChange = {e => setPropertyGovt(e.target.value)}
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -105,6 +139,7 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="City"
                     id="city"
+                    onChange = {e => setCity(e.target.value)}
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -114,6 +149,7 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Country"
                     id="country"
+                    onChange = {e => setCountry(e.target.value)}
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -123,6 +159,7 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Postal Code"
                     id="postal-code"
+                    onChange = {e => setPostal(e.target.value)}
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -131,10 +168,11 @@ export default function UserProfile() {
               </GridContainer>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
-                  <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel>
+                  <InputLabel style={{ color: "#AAAAAA" }}>Description</InputLabel>
                   <CustomInput
-                    labelText="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
+                    labelText="Check data and approve to register gym"
                     id="about-me"
+                    onChange = {e => setDescription(e.target.value)}
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -147,28 +185,23 @@ export default function UserProfile() {
               </GridContainer>
             </CardBody>
             <CardFooter>
-              <Button color="primary">Update Profile</Button>
+              <Button onClick={onSubmit} color="primary">Approve</Button>
             </CardFooter>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Card profile>
             <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
+              <a href="#pablo" >
                 <img src={avatar} alt="..." />
               </a>
             </CardAvatar>
             <CardBody profile>
-              <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
-              <h4 className={classes.cardTitle}>Alec Thompson</h4>
+              <h6 className={classes.cardCategory}>Owner</h6>
+              <h4 className={classes.cardTitle}>{name}</h4>
               <p className={classes.description}>
-                Don{"'"}t be scared of the truth because we need to restart the
-                human foundation in truth And I love you like Kanye loves Kanye
-                I love Rick Owens’ bed design but the back is...
+                Gym Owner Description
               </p>
-              <Button color="primary" round>
-                Follow
-              </Button>
             </CardBody>
           </Card>
         </GridItem>

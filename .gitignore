@@ -112,3 +112,4 @@ client/.env.development
 *.lock
 client/package-lock.json
 client/yarn.lock
+server/package-lock.json

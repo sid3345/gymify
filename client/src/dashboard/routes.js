@@ -32,6 +32,7 @@ import Typography from "./views/Typography/Typography.js";
 import Icons from "./views/Icons/Icons.js";
 import Maps from "./views/Maps/Maps.js";
 import NotificationsPage from "./views/Notifications/Notifications.js";
+import GymTableList from "./views/GymTableList/GymTableList.js";
 // core components/views for RTL layout
 
 const dashboardRoutes = [
@@ -49,6 +50,14 @@ const dashboardRoutes = [
     rtlName: "ملف تعريفي للمستخدم",
     icon: Person,
     component: GymProfile,
+    layout: "/admin"
+  },
+  {
+    path: "/gymList",
+    name: "Gym List",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: "content_paste",
+    component: GymTableList,
     layout: "/admin"
   },
   {

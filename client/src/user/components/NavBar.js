@@ -44,7 +44,7 @@ var listEvent = <Link to="/listAll">
             
             <Link to = {!props.uservalue.user && '/login'}>
                   <Button color="primary" className="mx-2" onClick = {handleAuthentication}>
-                        {props.uservalue.user ? 'Sign Out' : 'Sign In'}
+                        {props.uservalue.user ? 'Sign Out' : 'Sign In / Register'}
                   </Button>
             </Link>
           </Nav>

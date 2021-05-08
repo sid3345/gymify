@@ -10,6 +10,7 @@ import EventsList from "./user/EventsList";
 import Login from "./user/components/Login";
 import { auth } from "./user/firebase";
 import { createBrowserHistory } from "history";
+import GymRegister from './user/components/GymRegister'
 
 import {connect} from 'react-redux'
 import store from "./user/Store";
@@ -59,6 +60,7 @@ const App = (props) => {
         <Route path="/status" component={Status} />
         {props.uservalue.user ? <Route path="/listAll" component={EventsList} /> : null}
         <Route path="/login" component={Login} />
+        <Route path="/register_gym" component={GymRegister} />
 
         {admin ? <Route path="/admin" component={Admin} /> : null}  
 

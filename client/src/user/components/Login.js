@@ -38,6 +38,11 @@ function Login() {
 
     }
 
+    const gym_register = e =>{
+        e.preventDefault()
+        history.push('/register_gym')
+    }
+
     return (
         <div className = "login">
             <Link to = "/">
@@ -60,6 +65,8 @@ function Login() {
 
 
                 <button onClick = {register} className = "login__registerButton">Create Your Account</button>
+
+                <button onClick = {gym_register} className = "login__registerButton">Register your Gym</button>
 
             </div>
         </div>

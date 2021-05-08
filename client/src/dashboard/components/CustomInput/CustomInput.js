@@ -18,6 +18,7 @@ export default function CustomInput(props) {
   const classes = useStyles();
   const {
     formControlProps,
+    onChange,
     labelText,
     id,
     labelProps,
@@ -42,6 +43,7 @@ export default function CustomInput(props) {
     <FormControl
       {...formControlProps}
       className={formControlProps.className + " " + classes.formControl}
+      onChange= {onChange}
     >
       {labelText !== undefined ? (
         <InputLabel

@@ -46,7 +46,7 @@ export default function UserProfile() {
   const [name , setName] = useState('')
   const [propertyGovt , setPropertyGovt] = useState('')
   const [city , setCity] = useState('')
-  const [country , setCountry] = useState('')
+  const [address , setAddress] = useState('')
   const [postal , setPostal] = useState('')
   const [description , setDescription] = useState('')
 
@@ -60,7 +60,7 @@ export default function UserProfile() {
       'propertyGovt':propertyGovt,
       'cost':cost,
       'city':city,
-      'country':country,
+      'address':address,
       'postal':postal,
       'description':description
     }
@@ -147,9 +147,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Country"
-                    id="country"
-                    onChange = {e => setCountry(e.target.value)}
+                    labelText="Address"
+                    id="address"
+                    onChange = {e => setAddress(e.target.value)}
                     formControlProps={{
                       fullWidth: true
                     }}

@@ -14,7 +14,7 @@ router.route("/").post((req, res) => {
    propertyGovt : req.body.propertyGovt,
    cost : req.body.cost,
    city : req.body.city,
-   country : req.body.country,
+   address : req.body.address,
    postal : req.body.postal,
    description : req.body.description
   });

@@ -60,9 +60,7 @@ export default function UserProfile() {
   useEffect(() => {
     
   axios.post("http://localhost:5000/gymList/", gymEmail).then((res)=> {
-    console.log('res: ', res.data);
-    console.log('res.gym: ', (res.data)[0].gym);
-    console.log('res.name: ', (res.data)[0].name);
+    //console.log('res: ', res.data);
 
     setGym((res.data)[0].gym);
     setName((res.data)[0].name);
@@ -92,6 +90,8 @@ export default function UserProfile() {
       'description':description
     }
 
+    console.log('data submitted: ', data);
+
     axios.post("http://localhost:5000/gym_register/", data).then((res) => {
       console.log(res.data);
     });
@@ -114,6 +114,7 @@ export default function UserProfile() {
                     id="gym"
                     value={gym}
                     onChange = {e => setGym(e.target.value)}
+                    required
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -125,6 +126,7 @@ export default function UserProfile() {
                     id="email-address"
                     value={email}
                     onChange = {e => setEmail(e.target.value)}
+                    required
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -136,6 +138,7 @@ export default function UserProfile() {
                     id="cost"
                     value={cost}
                     onChange = {e => setCost(e.target.value)}
+                    required
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -149,6 +152,7 @@ export default function UserProfile() {
                     id="name"
                     value={name}
                     onChange = {e => setName(e.target.value)}
+                    required
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -160,6 +164,7 @@ export default function UserProfile() {
                     id="gym-registration"
                     value={propertyGovt}
                     onChange = {e => setPropertyGovt(e.target.value)}
+                    required
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -173,6 +178,7 @@ export default function UserProfile() {
                     id="city"
                     value={city}
                     onChange = {e => setCity(e.target.value)}
+                    required
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -184,6 +190,7 @@ export default function UserProfile() {
                     id="address"
                     value={address}
                     onChange = {e => setAddress(e.target.value)}
+                    required
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -195,6 +202,7 @@ export default function UserProfile() {
                     id="postal-code"
                     value={postal}
                     onChange = {e => setPostal(e.target.value)}
+                    required
                     formControlProps={{
                       fullWidth: true
                     }}

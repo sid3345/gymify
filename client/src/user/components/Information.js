@@ -4,7 +4,20 @@ import doc1 from "../assets/img/fitness1.jfif";
 import GymList from './GymList';
 import {gyms} from './data';
 
+import Search from "@material-ui/icons/Search";
+import { makeStyles } from "@material-ui/core/styles";
+
+// core components
+import CustomInput from "../../dashboard/components/CustomInput/CustomInput.js";
+import Button from "../../dashboard/components/CustomButtons/Button.js";
+
+import styles from "../../dashboard/assets/jss/material-dashboard-react/components/headerLinksStyle";
+
+const useStyles = makeStyles(styles);
+
 const Information = () => {
+    const classes = useStyles();
+
     const [keyword, setKeyword] = useState('');
 
    const handleSearchChange=(e)=>{
@@ -32,10 +45,24 @@ const Information = () => {
           </div>
         </div>
 
-        <form className="search-form" onSubmit={(e)=>handleSearchSubmit(e)}>
-        <input type="text" value={keyword} placeholder="Search for gyms / sports clubs..."  
-        onChange={(e)=>handleSearchChange(e)}/>
-					</form>
+      <div className={classes.searchWrapper}>
+        <CustomInput
+        onChange={(e)=>handleSearchChange(e)}
+        
+          formControlProps={{
+            className: classes.margin + " " + classes.search
+          }}
+          inputProps={{
+            placeholder: "Search",
+            inputProps: {
+              "aria-label": "Search"
+            }
+          }}
+        />
+        <Button color="white" aria-label="edit" justIcon round>
+          <Search />
+        </Button>
+      </div>
 
             <div className="container">
 		    	<GymList gyms={filteredBooks}/>

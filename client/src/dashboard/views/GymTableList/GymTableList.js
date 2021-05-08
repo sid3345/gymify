@@ -50,7 +50,7 @@ export default function GymTableList() {
   const listGym=[]
 
   useEffect(() => {
-    axios.get("http://localhost:5000/gymList/").then(function(res) {
+    axios.post("http://localhost:5000/gymList/").then((res)=> {
       //console.log('res: ', res);
       
       setGymList(res.data)
@@ -61,7 +61,7 @@ export default function GymTableList() {
     console.log('gymList: ',gymList);  
     gymList.map(gym=>{
     //console.log('gym: ',gym)
-    listGym.push([gym.gym, gym.propertyGovt, gym.cost, gym.city, gym.description, gym.approved])})
+    listGym.push([gym.gym, gym.email, gym.propertyGovt, gym.cost, gym.city, gym.approved])})
   }
 
   //console.log('gymList: ', gymList);
@@ -78,12 +78,12 @@ export default function GymTableList() {
             </p>
           </CardHeader>
           <CardBody>
-            <Table
-              link= "/admin/user"
-              tableHeaderColor="primary"
-              tableHead={["Name", "Property registration",'Cost per hr', "City", "Description",'Approve']}
-              tableData={listGym}
-            />
+          <Table
+            link= '/admin/user/'
+            tableHeaderColor="primary"
+            tableHead={["Name","Gym Email" ,"Property registration",'Cost per hr', "City",'Approve']}
+            tableData={listGym}
+          />
           </CardBody>
         </Card>
       </GridItem>

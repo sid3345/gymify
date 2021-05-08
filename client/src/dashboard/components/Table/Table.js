@@ -36,12 +36,12 @@ export default function CustomTable(props) {
           </TableHead>
         ) : null}
         <TableBody>
-          {tableData.map((prop, key) => {
+          {tableData.map((props, key) => {
             return (
               <TableRow key={key} className={classes.tableBodyRow}>
-                {prop.map((prop, key) => {
+                {props.map((prop, key) => {
                   return (
-                    <TableCell component={Link} to={link} className={classes.tableCell} key={key}>
+                    <TableCell component={Link} to={link+props[1]} className={classes.tableCell} key={key}>
                       {prop}
                     </TableCell>
                   );

@@ -45,7 +45,7 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/user",
+    path: "/user/:gym_email",
     name: "Gym Profile",
     rtlName: "ملف تعريفي للمستخدم",
     icon: Person,

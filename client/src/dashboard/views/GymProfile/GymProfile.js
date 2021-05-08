@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import {useParams} from "react-router-dom";
 // @material-ui/core components
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
@@ -39,6 +40,11 @@ const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
   const classes = useStyles();
+  let { gym_email } = useParams();
+
+  const gymEmail= {gymEmail: gym_email}
+
+  //console.log('gymEmail: ',gymEmail);
 
   const [gym , setGym] = useState('')
   const [cost , setCost] = useState('')
@@ -49,6 +55,27 @@ export default function UserProfile() {
   const [address , setAddress] = useState('')
   const [postal , setPostal] = useState('')
   const [description , setDescription] = useState('')
+
+
+  useEffect(() => {
+    
+  axios.post("http://localhost:5000/gymList/", gymEmail).then((res)=> {
+    console.log('res: ', res.data);
+    console.log('res.gym: ', (res.data)[0].gym);
+    console.log('res.name: ', (res.data)[0].name);
+
+    setGym((res.data)[0].gym);
+    setName((res.data)[0].name);
+    setEmail((res.data)[0].email);
+    setCost((res.data)[0].cost);
+    setPropertyGovt((res.data)[0].propertyGovt);
+    setCity((res.data)[0].city);
+    setAddress((res.data)[0].address);
+    setPostal((res.data)[0].postal);
+    setDescription((res.data)[0].description);
+
+    });
+  },[])
 
   const onSubmit= (e) => {
     e.preventDefault();
@@ -85,6 +112,7 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Gym / Club name"
                     id="gym"
+                    value={gym}
                     onChange = {e => setGym(e.target.value)}
                     formControlProps={{
                       fullWidth: true
@@ -95,6 +123,7 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Email address"
                     id="email-address"
+                    value={email}
                     onChange = {e => setEmail(e.target.value)}
                     formControlProps={{
                       fullWidth: true
@@ -105,6 +134,7 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Cost per hour"
                     id="cost"
+                    value={cost}
                     onChange = {e => setCost(e.target.value)}
                     formControlProps={{
                       fullWidth: true
@@ -117,6 +147,7 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Owner Name"
                     id="name"
+                    value={name}
                     onChange = {e => setName(e.target.value)}
                     formControlProps={{
                       fullWidth: true
@@ -127,6 +158,7 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Gym property govt registration"
                     id="gym-registration"
+                    value={propertyGovt}
                     onChange = {e => setPropertyGovt(e.target.value)}
                     formControlProps={{
                       fullWidth: true
@@ -139,6 +171,7 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="City"
                     id="city"
+                    value={city}
                     onChange = {e => setCity(e.target.value)}
                     formControlProps={{
                       fullWidth: true
@@ -149,6 +182,7 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Address"
                     id="address"
+                    value={address}
                     onChange = {e => setAddress(e.target.value)}
                     formControlProps={{
                       fullWidth: true
@@ -159,6 +193,7 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Postal Code"
                     id="postal-code"
+                    value={postal}
                     onChange = {e => setPostal(e.target.value)}
                     formControlProps={{
                       fullWidth: true
@@ -172,6 +207,7 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Check data and approve to register gym"
                     id="about-me"
+                    value={description}
                     onChange = {e => setDescription(e.target.value)}
                     formControlProps={{
                       fullWidth: true

@@ -165,7 +165,7 @@ export default function UserProfile() {
                     inputProps={{
                       required: true,
                       value: email,
-                      onChange: e => setEmail(e.target.value)
+                      
                     }}
                   />
                 </GridItem>

@@ -4,6 +4,8 @@ import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import { useHistory} from 'react-router-dom'
+import {connect} from 'react-redux'
+
 
 // core components
 import GridItem from "../../dashboard/components/Grid/GridItem";
@@ -37,14 +39,14 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function GymRegister() {
+function GymRegister(props) {
   const classes = useStyles();
 
   const history = useHistory()
   
   const [gym , setGym] = useState('')
   const [cost , setCost] = useState('')
-  const [email , setEmail] = useState('')
+  // const [email , setEmail] = useState('')   //controlling from redux
   const [name , setName] = useState('')
   const [propertyGovt , setPropertyGovt] = useState('')
   const [city , setCity] = useState('')
@@ -57,7 +59,7 @@ export default function GymRegister() {
 
     const data= {
       'gym':gym,
-      'email':email,
+      'email':props.uservalue.user.email,
       'name':name,
       'propertyGovt':propertyGovt,
       'cost':cost,
@@ -77,6 +79,7 @@ export default function GymRegister() {
     alert('Gym profile submitted. Wait for sometime to approve.')
 
     history.push('/')
+    
   }
 
   return (
@@ -114,8 +117,7 @@ export default function GymRegister() {
                     }}
                     inputProps={{
                       required: true,
-                      value: email,
-                    onChange: e => setEmail(e.target.value)
+                      value: props.uservalue.user ? props.uservalue.user.email : "",
                     }}
                   />
                 </GridItem>
@@ -237,3 +239,12 @@ export default function GymRegister() {
     </div>
   );
 }
+
+
+const mapStateToProps = (state) =>{
+  return{
+    uservalue : state
+  }
+}
+
+export default connect(mapStateToProps)(GymRegister)

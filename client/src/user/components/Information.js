@@ -25,8 +25,20 @@ const Information = () => {
     useEffect(() => {
     axios.get("http://localhost:5000/gymList/").then((res)=> {
       //console.log('res.data: ', res.data);
-      
-      setGymList(res.data)
+
+      const gymList1=[]
+
+      for(let i=0; i<res.data.length;i++){
+
+      if ((res.data)[i].approved==1)
+      {
+        //console.log('(res.data)[i]: ',(res.data)[i]);
+
+        gymList1.push((res.data)[i]);
+        
+      }
+    }      
+      setGymList(gymList1)
       });
     },[])
 

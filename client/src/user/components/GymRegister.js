@@ -52,7 +52,7 @@ export default function GymRegister() {
   const [postal , setPostal] = useState('')
   const [description , setDescription] = useState('')
 
-  const onSubmit= (e) => {
+    const onSubmit= (e) => {
     e.preventDefault();
 
     const data= {
@@ -68,11 +68,13 @@ export default function GymRegister() {
       'approved': 0
     }
 
+    console.log('data submitted: ', data);
+
     axios.post("http://localhost:5000/gym_register/", data).then((res) => {
       console.log(res.data);
-      alert('Gym profile submitted. Wait for sometime to approve.')
-      history.push('/')
     });
+
+    history.push('/')
   }
 
   return (
@@ -91,9 +93,13 @@ export default function GymRegister() {
                   <CustomInput
                     labelText="Gym / Club name"
                     id="gym"
-                    onChange = {e => setGym(e.target.value)}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      required: true,
+                      value: gym,
+                    onChange: e => setGym(e.target.value)
                     }}
                   />
                 </GridItem>
@@ -101,9 +107,13 @@ export default function GymRegister() {
                   <CustomInput
                     labelText="Email address"
                     id="email-address"
-                    onChange = {e => setEmail(e.target.value)}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      required: true,
+                      value: email,
+                    onChange: e => setEmail(e.target.value)
                     }}
                   />
                 </GridItem>
@@ -111,9 +121,13 @@ export default function GymRegister() {
                   <CustomInput
                     labelText="Cost per hour"
                     id="cost"
-                    onChange = {e => setCost(e.target.value)}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      required: true,
+                      value: cost,
+                    onChange: e => setCost(e.target.value)
                     }}
                   />
                 </GridItem>
@@ -123,9 +137,13 @@ export default function GymRegister() {
                   <CustomInput
                     labelText="Owner Name"
                     id="name"
-                    onChange = {e => setName(e.target.value)}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      required: true,
+                      value: name,
+                    onChange: e => setName(e.target.value)
                     }}
                   />
                 </GridItem>
@@ -133,9 +151,13 @@ export default function GymRegister() {
                   <CustomInput
                     labelText="Gym property govt registration"
                     id="gym-registration"
-                    onChange = {e => setPropertyGovt(e.target.value)}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      required: true,
+                      value: propertyGovt,
+                    onChange: e => setPropertyGovt(e.target.value)
                     }}
                   />
                 </GridItem>
@@ -145,9 +167,13 @@ export default function GymRegister() {
                   <CustomInput
                     labelText="City"
                     id="city"
-                    onChange = {e => setCity(e.target.value)}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      required: true,
+                      value: city,
+                    onChange: e => setCity(e.target.value)
                     }}
                   />
                 </GridItem>
@@ -155,9 +181,13 @@ export default function GymRegister() {
                   <CustomInput
                     labelText="Address"
                     id="address"
-                    onChange = {e => setAddress(e.target.value)}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      required: true,
+                      value: address,
+                    onChange: e => setAddress(e.target.value)
                     }}
                   />
                 </GridItem>
@@ -165,9 +195,13 @@ export default function GymRegister() {
                   <CustomInput
                     labelText="Postal Code"
                     id="postal-code"
-                    onChange = {e => setPostal(e.target.value)}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      required: true,
+                      value: postal,
+                    onChange: e => setPostal(e.target.value)
                     }}
                   />
                 </GridItem>
@@ -178,13 +212,15 @@ export default function GymRegister() {
                   <CustomInput
                     labelText="Fill any description detail if needed"
                     id="about-me"
-                    onChange = {e => setDescription(e.target.value)}
                     formControlProps={{
                       fullWidth: true
                     }}
                     inputProps={{
                       multiline: true,
-                      rows: 5
+                      rows: 5,
+                      required: true,
+                      value: description,
+                    onChange: e => setDescription(e.target.value)
                     }}
                   />
                 </GridItem>

@@ -7,7 +7,9 @@ router.route("/").post((req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.send("Gym added");
 
-  db.collection("gyms").add({
+  console.log('req.body.approved: ',req.body.approved);
+
+  db.collection("gyms").doc(req.body.email).set({
    gym : req.body.gym,
    email : req.body.email,
    name : req.body.name,
@@ -17,7 +19,7 @@ router.route("/").post((req, res) => {
    address : req.body.address,
    postal : req.body.postal,
    description : req.body.description,
-   approved: 0
+   approved: req.body.approved
   });
 });
 

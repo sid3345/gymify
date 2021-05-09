@@ -61,6 +61,7 @@ export default function GymTableList() {
     console.log('gymList: ',gymList);  
     gymList.map(gym=>{
     //console.log('gym: ',gym)
+    gym.approved==1 ? gym.approved='Yes' : gym.approved='No'
     listGym.push([gym.gym, gym.email, gym.propertyGovt, gym.cost, gym.city, gym.approved])})
   }
 

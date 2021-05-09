@@ -64,7 +64,8 @@ export default function GymRegister() {
       'city':city,
       'address':address,
       'postal':postal,
-      'description':description
+      'description':description,
+      'approved': 0
     }
 
     axios.post("http://localhost:5000/gym_register/", data).then((res) => {

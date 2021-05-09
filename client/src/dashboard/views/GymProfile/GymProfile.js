@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
+import { useHistory} from 'react-router-dom'
+
 // @material-ui/core components
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
@@ -40,6 +42,8 @@ const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
   const classes = useStyles();
+  const history = useHistory()
+
   let { gym_email } = useParams();
 
   const gymEmail= {gymEmail: gym_email}
@@ -87,7 +91,8 @@ export default function UserProfile() {
       'city':city,
       'address':address,
       'postal':postal,
-      'description':description
+      'description':description,
+      'approved': 1
     }
 
     console.log('data submitted: ', data);
@@ -95,6 +100,8 @@ export default function UserProfile() {
     axios.post("http://localhost:5000/gym_register/", data).then((res) => {
       console.log(res.data);
     });
+
+    history.push('/admin/gymList')
   }
 
   return (

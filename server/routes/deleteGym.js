@@ -8,6 +8,8 @@ router.route("/").post((req, res) => {
   res.send("Gym Deleted");
 
   db.collection('gyms').doc(req.body.email).delete();
+
+  db.collection('users').doc(req.body.email).delete();
 });
 
 module.exports = router;

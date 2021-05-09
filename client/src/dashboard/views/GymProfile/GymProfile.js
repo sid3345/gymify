@@ -63,19 +63,28 @@ export default function UserProfile() {
 
   useEffect(() => {
     
-  axios.post("http://localhost:5000/gymList/", gymEmail).then((res)=> {
+  axios.get("http://localhost:5000/gymList/").then((res)=> {
     //console.log('res: ', res.data);
 
-    setGym((res.data)[0].gym);
-    setName((res.data)[0].name);
-    setEmail((res.data)[0].email);
-    setCost((res.data)[0].cost);
-    setPropertyGovt((res.data)[0].propertyGovt);
-    setCity((res.data)[0].city);
-    setAddress((res.data)[0].address);
-    setPostal((res.data)[0].postal);
-    setDescription((res.data)[0].description);
+    for(let i=0; i<res.data.length;i++){
+      
 
+      if ((res.data)[i].email==gym_email)
+      {
+        //console.log('(res.data)[i]: ',(res.data)[i]);
+
+        setGym((res.data)[i].gym);
+        setName((res.data)[i].name);
+        setEmail((res.data)[i].email);
+        setCost((res.data)[i].cost);
+        setPropertyGovt((res.data)[i].propertyGovt);
+        setCity((res.data)[i].city);
+        setAddress((res.data)[i].address);
+        setPostal((res.data)[i].postal);
+        setDescription((res.data)[i].description);
+        break
+      }
+    }
     });
   },[])
 

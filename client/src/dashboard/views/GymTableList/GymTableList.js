@@ -50,7 +50,7 @@ export default function GymTableList() {
   const listGym=[]
 
   useEffect(() => {
-    axios.post("http://localhost:5000/gymList/").then((res)=> {
+    axios.get("http://localhost:5000/gymList/").then((res)=> {
       //console.log('res: ', res);
       
       setGymList(res.data)

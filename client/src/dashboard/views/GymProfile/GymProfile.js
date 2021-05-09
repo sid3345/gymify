@@ -46,8 +46,6 @@ export default function UserProfile() {
 
   let { gym_email } = useParams();
 
-  const gymEmail= {gymEmail: gym_email}
-
   //console.log('gymEmail: ',gymEmail);
 
   const [gym , setGym] = useState('')

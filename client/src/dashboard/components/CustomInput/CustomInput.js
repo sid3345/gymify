@@ -18,14 +18,12 @@ export default function CustomInput(props) {
   const classes = useStyles();
   const {
     formControlProps,
-    onChange,
     labelText,
     id,
     labelProps,
     inputProps,
     error,
     success,
-    value
   } = props;
 
   const labelClasses = classNames({
@@ -60,8 +58,6 @@ export default function CustomInput(props) {
           disabled: classes.disabled,
           underline: underlineClasses
         }}
-        value={value}
-         onChange= {onChange}
         id={id}
         {...inputProps}
       />

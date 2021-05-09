@@ -119,11 +119,14 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Gym / Club name"
                     id="gym"
-                    value={gym}
-                    onChange = {e => setGym(e.target.value)}
-                    required
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                      required: true,
+                    }}
+                    inputProps={{
+                      required: true,
+                      value: gym,
+                    onChange: e => setGym(e.target.value)
                     }}
                   />
                 </GridItem>
@@ -131,11 +134,14 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Email address"
                     id="email-address"
-                    value={email}
-                    onChange = {e => setEmail(e.target.value)}
-                    required
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                      required: true,
+                    }}
+                    inputProps={{
+                      required: true,
+                      value: email,
+                      onChange: e => setEmail(e.target.value)
                     }}
                   />
                 </GridItem>
@@ -143,11 +149,14 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Cost per hour"
                     id="cost"
-                    value={cost}
-                    onChange = {e => setCost(e.target.value)}
-                    required
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                      required: true
+                    }}
+                    inputProps={{
+                      required: true,
+                      value: cost,
+                      onChange: e => setCost(e.target.value)
                     }}
                   />
                 </GridItem>
@@ -157,11 +166,13 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Owner Name"
                     id="name"
-                    value={name}
-                    onChange = {e => setName(e.target.value)}
-                    required
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      required: true,
+                      value: name,
+                      onChange: e => setName(e.target.value)
                     }}
                   />
                 </GridItem>
@@ -169,11 +180,13 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Gym property govt registration"
                     id="gym-registration"
-                    value={propertyGovt}
-                    onChange = {e => setPropertyGovt(e.target.value)}
-                    required
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      required: true,
+                      value: propertyGovt,
+                      onChange: e => setPropertyGovt(e.target.value)
                     }}
                   />
                 </GridItem>
@@ -183,11 +196,13 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="City"
                     id="city"
-                    value={city}
-                    onChange = {e => setCity(e.target.value)}
-                    required
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      required: true,
+                      value: city,
+                      onChange: e => setCity(e.target.value)
                     }}
                   />
                 </GridItem>
@@ -195,11 +210,13 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Address"
                     id="address"
-                    value={address}
-                    onChange = {e => setAddress(e.target.value)}
-                    required
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      required: true,
+                      value: address,
+                      onChange: e => setAddress(e.target.value)
                     }}
                   />
                 </GridItem>
@@ -207,11 +224,13 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Postal Code"
                     id="postal-code"
-                    value={postal}
-                    onChange = {e => setPostal(e.target.value)}
-                    required
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      required: true,
+                      value: postal,
+                      onChange: e => setPostal(e.target.value)
                     }}
                   />
                 </GridItem>
@@ -222,14 +241,15 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Check data and approve to register gym"
                     id="about-me"
-                    value={description}
-                    onChange = {e => setDescription(e.target.value)}
                     formControlProps={{
                       fullWidth: true
                     }}
                     inputProps={{
                       multiline: true,
-                      rows: 5
+                      rows: 5,
+                      required: true,
+                      value: description,
+                      onChange: e => setDescription(e.target.value)
                     }}
                   />
                 </GridItem>

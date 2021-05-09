@@ -6,10 +6,9 @@ const Greeting = (props) => {
     <div>
       <Jumbotron fluid>
         <Container fluid>
-          <h1 className="display-3">Welcome</h1>
+          <h1 className="display-4">Welcome</h1>
           <p className="lead">
-            To all Fitness Enthusiasts ! <br /> Press the "Book Fitness Slot" in
-            the header to schedule a fitness activity.
+            To all Fitness Enthusiasts !
           </p>
         </Container>
       </Jumbotron>

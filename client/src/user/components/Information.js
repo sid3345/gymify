@@ -47,7 +47,7 @@ const Information = () => {
           <div className="col-12 col-md-6 p-5">
             <img src={doc1} alt="" width="100%" height="auto" />
           </div>
-          <div className="col-12 col-md-6 text-center p-5">
+          <div className="col-12 col-md-6 text-center p-6">
             <h3 className="display-4">Nothing truly great comes from a comfort zone ! </h3>
           </div>
         </div>

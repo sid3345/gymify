@@ -29,7 +29,7 @@ const NavBar = (props) => {
 
 var listEvent = <Link to="/listAll">
                 <Button color="primary" className="mx-2">
-                  List All events
+                  List All bookings
                 </Button>
               </Link>
 

@@ -105,7 +105,7 @@ class CreateEvent extends Component {
           <div className="col-12 d-flex justify-content-center align-items-center">
             <input
               type="submit"
-              value="Get Events"
+              value="Get all bookings"
               className="btn btn-primary mt-5"
             />
           </div>

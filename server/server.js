@@ -31,6 +31,7 @@ const registerGym = require("./routes/registerGym");
 const createUser = require("./routes/createUser")
 const fetchUser = require("./routes/fetchUser")
 const gymList = require("./routes/gymList");
+const gym_delete = require("./routes/deleteGym");
 
 app.use("/freeSlots", getSlotsRouter);
 app.use("/getEvents", getEventsRouter);
@@ -39,6 +40,7 @@ app.use("/gym_register", registerGym);
 app.use("/createUser", createUser)
 app.use("/fetchUser", fetchUser)
 app.use("/gymList", gymList);
+app.use("/gym_delete", gym_delete);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

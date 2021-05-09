@@ -79,6 +79,20 @@ export default function UserProfile() {
     });
   },[])
 
+  const onDelete= (e)=>{
+     e.preventDefault();
+
+    const data= {
+      'email':email,
+    }
+
+    axios.post("http://localhost:5000/gym_delete/", data).then((res) => {
+      console.log(res.data);
+    });
+
+    history.push('/admin/gymList')
+  }
+
   const onSubmit= (e) => {
     e.preventDefault();
 
@@ -257,6 +271,8 @@ export default function UserProfile() {
             </CardBody>
             <CardFooter>
               <Button onClick={onSubmit} color="primary">Approve</Button>
+
+              <Button onClick={onDelete} color="primary">Delete</Button>
             </CardFooter>
           </Card>
         </GridItem>

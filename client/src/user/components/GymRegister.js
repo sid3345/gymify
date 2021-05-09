@@ -65,7 +65,8 @@ export default function GymRegister() {
       'address':address,
       'postal':postal,
       'description':description,
-      'approved': 0
+      'approved': 0,
+      'img':'gym'+Math.floor(Math.random() * 9)
     }
 
     console.log('data submitted: ', data);
@@ -73,6 +74,7 @@ export default function GymRegister() {
     axios.post("http://localhost:5000/gym_register/", data).then((res) => {
       console.log(res.data);
     });
+    alert('Gym profile submitted. Wait for sometime to approve.')
 
     history.push('/')
   }

@@ -57,6 +57,7 @@ export default function UserProfile() {
   const [address , setAddress] = useState('')
   const [postal , setPostal] = useState('')
   const [description , setDescription] = useState('')
+  const [img , setImg] = useState('')
 
 
   useEffect(() => {
@@ -80,6 +81,7 @@ export default function UserProfile() {
         setAddress((res.data)[i].address);
         setPostal((res.data)[i].postal);
         setDescription((res.data)[i].description);
+        setImg((res.data)[i].img);
         break
       }
     }
@@ -113,7 +115,8 @@ export default function UserProfile() {
       'address':address,
       'postal':postal,
       'description':description,
-      'approved': 1
+      'approved': 1,
+      'img':img
     }
 
     console.log('data submitted: ', data);

@@ -130,7 +130,8 @@ class CreateEvent extends Component {
     const eventParam = {
       reqDateTime: eventDateTime,
       reqDuration: this.state.duration,
-      userEmail: this.props.userState.user.email
+      userEmail: this.props.userState.user.email,
+      gymName : this.props.gymName
     };
 
   if(this.props.userState.token){
@@ -154,7 +155,7 @@ class CreateEvent extends Component {
     // console.log(this.props.priceOnPayment)
     // console.log(this.props.userState.user.email)
     // console.log(this.props.userState.token)
-
+    console.log(this.props.gymName)
 
 
     return (

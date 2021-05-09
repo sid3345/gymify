@@ -43,7 +43,7 @@ const Booking = (props) => {
           Schedule a slot for {title}
         </ModalHeader>
         <ModalBody>
-          <GetAppointment priceOnPayment = {price}/>
+          <GetAppointment priceOnPayment = {price} gymName = {title}/>
         </ModalBody>
       </Modal>
     </div>

@@ -113,6 +113,7 @@ class CreateEvent extends Component {
         <Table className="container mt-5" striped>
           <thead>
             <tr>
+              <th>Gym Name</th>
               <th>Date</th>
               <th>Time</th>
               <th>Duration</th>
@@ -124,6 +125,7 @@ class CreateEvent extends Component {
               let time = moment(e.dateTime).format("hh:mm A");
               return (
                 <tr>
+                  <td>{e.gymName}</td>
                   <td>{date}</td>
                   <td>{time}</td>
                   <td>{e.duration} Minutes</td>

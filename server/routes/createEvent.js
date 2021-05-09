@@ -14,11 +14,15 @@ router.route("/").post((req, res) => {
   const reqDateTime = moment.utc(req.body.reqDateTime).toDate();
   const reqDuration = parseInt(req.body.reqDuration);
   const reqUserEmail = req.body.userEmail
+  const reqGymName = req.body.gymName
+  console.log(reqGymName)
 
   db.collection("events").add({
     dateTime: admin.firestore.Timestamp.fromDate(reqDateTime),
     duration: reqDuration,
-    userEmail: reqUserEmail
+    userEmail: reqUserEmail,
+    gymName: reqGymName
+
   });
 });
 

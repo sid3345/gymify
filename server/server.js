@@ -25,7 +25,7 @@ app.use(function (req, res, next) {
 });
 
 const getSlotsRouter = require("./routes/freeSlots");
-const getEventsRouter = require("./routes/gymList");
+const getEventsRouter = require("./routes/getEvent");
 const createEventsRouter = require("./routes/createEvent");
 const registerGym = require("./routes/registerGym");
 const createUser = require("./routes/createUser")

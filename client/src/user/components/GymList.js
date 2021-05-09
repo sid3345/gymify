@@ -8,7 +8,7 @@ const GymList = ({gyms}) =>{
 			<React.Fragment>
 			{gyms.map(gym =>
 				<GymCard  
-					key={gym.bookID}
+					key={gym.email}
 				 	gym={gym} 
 				/>
 			)}

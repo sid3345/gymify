@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from "react";
+import axios from 'axios'
 import { Container } from "reactstrap";
 import doc1 from "../assets/img/fitness1.jfif";
 import GymList from './GymList';
-import {gyms} from './data';
+//import {gyms} from './data';
 
 import Search from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,18 +20,24 @@ const Information = () => {
     const classes = useStyles();
 
     const [keyword, setKeyword] = useState('');
+    const [gymList, setGymList] = useState('')
+    
+    useEffect(() => {
+    axios.post("http://localhost:5000/gymList/").then((res)=> {
+      //console.log('res.data: ', res.data);
+      
+      setGymList(res.data)
+      });
+    },[])
 
    const handleSearchChange=(e)=>{
     setKeyword(e.target.value.toLowerCase());
     }
-    
-    const handleSearchSubmit=(e)=>{
-      e.preventDefault();
-    }
-   const filteredBooks = gyms.filter((gym)=>{
-  let bookTitle = gym.title.toString().toLowerCase();
+
+   const filteredGyms = gymList ? gymList.filter((gym)=>{
+  let bookTitle = gym.gym.toString().toLowerCase();
   return bookTitle.indexOf(keyword) > -1;
-  });
+  }) : '';
 
   return (
       <div>
@@ -47,7 +54,6 @@ const Information = () => {
 
       <div className={classes.searchWrapper}>
         <CustomInput
-        onChange={(e)=>handleSearchChange(e)}
         
           formControlProps={{
             className: classes.margin + " " + classes.search
@@ -55,7 +61,8 @@ const Information = () => {
           inputProps={{
             placeholder: "Search",
             inputProps: {
-              "aria-label": "Search"
+              "aria-label": "Search",
+              onChange: (e)=>handleSearchChange(e)
             }
           }}
         />
@@ -65,7 +72,7 @@ const Information = () => {
       </div>
 
             <div className="container">
-		    	<GymList gyms={filteredBooks}/>
+		    	<GymList gyms={filteredGyms}/>
           </div>
       </Container>
     </div>

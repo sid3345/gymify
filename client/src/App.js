@@ -19,6 +19,7 @@ import "./dashboard/assets/css/material-dashboard-react.css?v=1.9.0";
 
 // core components
 import Admin from "./dashboard/layouts/Admin";
+import GymHome from "./user/components/GymHome";
 
 const hist = createBrowserHistory();
 
@@ -60,7 +61,9 @@ const App = (props) => {
         <Route path="/status" component={Status} />
         {props.uservalue.user ? <Route path="/listAll" component={EventsList} /> : null}
         <Route path="/login" component={Login} />
-        <Route path="/register_gym" component={GymRegister} />
+        <Route path="/register_gym/profile" component={GymRegister} />
+
+        <Route path="/register_gym" component={GymHome} />
 
         {admin ? <Route path="/admin" component={Admin} /> : null}  
 

@@ -10,11 +10,14 @@ import {
   Nav,
   Button,
 } from "reactstrap";
+import axios from "axios";
 
 
 
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const[checked , setChecked] = useState(false)
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -33,6 +36,22 @@ var listEvent = <Link to="/listAll">
                 </Button>
               </Link>
 
+var profile = <Link to = "/register_gym/profile">
+                <Button color="primary" className="mx-2">
+                  Profile
+                </Button>
+              </Link>
+                
+
+if(props.uservalue.user){
+  axios.post("http://localhost:5000/fetchUser" , {email : props.uservalue.user.email})
+  .then((res) =>{
+    // console.log(res.data[0].checked)
+    setChecked(res.data[0].checked)
+    
+  })
+}
+
   return (
     <div>
       <Navbar color="light" light expand="md" fixed="top">
@@ -40,7 +59,7 @@ var listEvent = <Link to="/listAll">
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
-            {props.uservalue.user ? listEvent : null}
+            {props.uservalue.user ? (checked ? profile : listEvent) : null}
             
             <Link to = {!props.uservalue.user && '/login'}>
                   <Button color="primary" className="mx-2" onClick = {handleAuthentication}>

@@ -27,7 +27,6 @@ import Language from "@material-ui/icons/Language";
 // core components/views for Admin layout
 import DashboardPage from "./views/Dashboard/Dashboard.js";
 import GymProfile from "./views/GymProfile/GymProfile.js";
-import TableList from "./views/TableList/TableList.js";
 import Typography from "./views/Typography/Typography.js";
 import Icons from "./views/Icons/Icons.js";
 import Maps from "./views/Maps/Maps.js";
@@ -59,14 +58,6 @@ const dashboardRoutes = [
     rtlName: "ملف تعريفي للمستخدم",
     icon: "content_paste",
     component: GymTableList,
-    layout: "/admin"
-  },
-  {
-    path: "/table",
-    name: "Table List",
-    rtlName: "قائمة الجدول",
-    icon: "content_paste",
-    component: TableList,
     layout: "/admin"
   },
   {

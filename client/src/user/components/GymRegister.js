@@ -99,7 +99,8 @@ function GymRegister(props) {
                     labelText="Gym / Club name"
                     id="gym"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                      required: true,
                     }}
                     inputProps={{
                       required: true,
@@ -113,7 +114,9 @@ function GymRegister(props) {
                     labelText="Email address"
                     id="email-address"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                      required: true,
+                      disabled: true
                     }}
                     inputProps={{
                       required: true,
@@ -126,7 +129,8 @@ function GymRegister(props) {
                     labelText="Cost per hour"
                     id="cost"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                      required: true,
                     }}
                     inputProps={{
                       required: true,
@@ -142,7 +146,8 @@ function GymRegister(props) {
                     labelText="Owner Name"
                     id="name"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                      required: true,
                     }}
                     inputProps={{
                       required: true,
@@ -156,7 +161,8 @@ function GymRegister(props) {
                     labelText="Gym property govt registration"
                     id="gym-registration"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                      required: true,
                     }}
                     inputProps={{
                       required: true,
@@ -172,7 +178,8 @@ function GymRegister(props) {
                     labelText="City"
                     id="city"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                      required: true,
                     }}
                     inputProps={{
                       required: true,
@@ -186,7 +193,8 @@ function GymRegister(props) {
                     labelText="Address"
                     id="address"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                      required: true,
                     }}
                     inputProps={{
                       required: true,
@@ -200,7 +208,8 @@ function GymRegister(props) {
                     labelText="Postal Code"
                     id="postal-code"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                      required: true,
                     }}
                     inputProps={{
                       required: true,
@@ -222,7 +231,6 @@ function GymRegister(props) {
                     inputProps={{
                       multiline: true,
                       rows: 5,
-                      required: true,
                       value: description,
                     onChange: e => setDescription(e.target.value)
                     }}
@@ -231,7 +239,10 @@ function GymRegister(props) {
               </GridContainer>
             </CardBody>
             <CardFooter>
+            {(gym && name && props.uservalue.user.email && propertyGovt && cost && city && address && postal) ? 
               <Button onClick={onSubmit} color="primary">Submit</Button>
+              : 
+              <Button disabled color="primary">Submit</Button>}
             </CardFooter>
           </Card>
         </GridItem>

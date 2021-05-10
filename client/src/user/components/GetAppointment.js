@@ -131,7 +131,8 @@ class CreateEvent extends Component {
       reqDateTime: eventDateTime,
       reqDuration: this.state.duration,
       userEmail: this.props.userState.user.email,
-      gymName : this.props.gymName
+      gymName : this.props.gymName,
+      gymEmail : this.props.gymEmail
     };
 
   if(this.props.userState.token){

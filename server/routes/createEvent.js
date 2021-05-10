@@ -15,13 +15,16 @@ router.route("/").post((req, res) => {
   const reqDuration = parseInt(req.body.reqDuration);
   const reqUserEmail = req.body.userEmail
   const reqGymName = req.body.gymName
+  const reqGymEmail = req.body.gymEmail
   console.log(reqGymName)
 
   db.collection("events").add({
     dateTime: admin.firestore.Timestamp.fromDate(reqDateTime),
     duration: reqDuration,
     userEmail: reqUserEmail,
-    gymName: reqGymName
+    gymName: reqGymName,
+    gymEmail : reqGymEmail
+
 
   });
 });

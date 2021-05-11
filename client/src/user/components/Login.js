@@ -64,39 +64,52 @@ function Login() {
     // console.log(checked)
 
     return (
-        <div className = "login">
-            <Link to = "/">
-                <img className = "login__logo" 
-                    src = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1200px-Amazon_logo.svg.png" 
-                    />
-            </Link>
-            
-            <div className = "login__container">
-                <h1>Sign In</h1>
-                <form>
-                    <h5>E-mail</h5>
-                    <input type = "email" value = {email} onChange = {e => setEmail(e.target.value)}/>
+        <div className="ftco-section">
+                <div className="container">
+                    <div className="row justify-content-center">
+                        <div className="col-md-12 col-lg-10">
+                            <div className="wrap d-md-flex">
+                                <div className="img" style={{ backgroundImage: `url(${require("../assets/img/login.jpg")})` }}>
+                                </div>
+                            <div className="login-wrap p-4 p-md-5">
+                                <div className="d-flex">
+                                    <div className="w-100">
+                                        <h3 className="mb-4">Sign In</h3>
+                                    </div>
+                                </div>
+                                <form className="signin-form">
+                                    <div className="form-group mb-3">
+                                        <label className="label" for="name">Username</label>
+                                        <input type="email" className="form-control"  placeholder="Username" value = {email} onChange = {e => setEmail(e.target.value)} required />
 
-                    <h5>Password</h5>
-                    <input type = "password" value = {password} onChange = {e => setPassword(e.target.value)}/>
+                                    </div>
+                                    <div className="form-group mb-3">
+                                        <label className="label" for="password">Password</label>
+                                        <input type="password" className="form-control" placeholder="Password" value = {password} onChange = {e => setPassword(e.target.value)} required />
 
-                    <label>
-                        <input type="checkbox" defaultChecked={checked} onChange={() => setChecked(!checked)} />
-                        GYM OWNER
-                    </label>
+                                    </div>
 
-                    <button type = "submit" onClick = {signIn} className = "login__signInButton">Sign In</button>
+                                    <label>
+                                        <input type="checkbox" defaultChecked={checked} onChange={() => setChecked(!checked)} />
+                                    GYM OWNER
+                                    </label>
 
-                    
-                </form>
+                                    <div className="form-group">
 
+                                        <button type = "submit" onClick = {signIn} className = "form-control btn btn-primary rounded submit px-3">Sign In</button>
 
-                <button onClick = {register} className = "login__registerButton">Create Your Account</button>
+                                    </div>
+                                </form>
+                                <button onClick = {register} className = "form-control btn btn-primary rounded submit px-3">Create Your Account</button>
 
-                
-
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+        
     )
 }
 

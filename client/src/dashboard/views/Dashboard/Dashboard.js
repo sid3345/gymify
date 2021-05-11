@@ -1,4 +1,7 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import axios from 'axios';
+import moment from "moment-timezone";
+
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -13,6 +16,7 @@ import Update from "@material-ui/icons/Update";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import AccessTime from "@material-ui/icons/AccessTime";
 import Accessibility from "@material-ui/icons/Accessibility";
+import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import BugReport from "@material-ui/icons/BugReport";
 import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
@@ -43,32 +47,55 @@ const useStyles = makeStyles(styles);
 
 export default function Dashboard() {
   const classes = useStyles();
+
+  const[gymList, setGymList]= useState('');
+  const[userList, setUserList]= useState('');
+  const[eventList, setEventList]= useState('');
+  const[revenue, setRevenue]= useState('');
+
+  useEffect(() => {
+  axios.get("http://localhost:5000/gymList/").then((res)=> {
+    //console.log('res: ', res);
+    setGymList(res.data)
+    });
+
+    axios.post("http://localhost:5000/fetchUser/").then((res)=> {
+    //console.log('res: ', res);
+    
+    setUserList(res.data)
+    });
+
+    const range = {
+      reqStart: moment.tz(new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), "Asia/Kolkata").toDate(),
+      reqEnd: moment.tz(new Date(), "Asia/Kolkata").toDate(),
+    };
+
+    axios.post("http://localhost:5000/getEvents/", range).then((res) => {
+      //console.log('event data: ' ,res.data)
+      setEventList(res.data)
+      })
+      .then(()=>{
+
+      let total=0
+      console.log('eventList: ',eventList);
+
+    for(let i=0; i<eventList.length;i++){
+
+      for(let j=0; j<gymList.length;j++){
+      
+        if(eventList[i].gymEmail==gymList[j].email){
+      total += parseInt(gymList[j].cost)
+        }
+      }
+    }
+    setRevenue(total)
+    //console.log('total: ',total);
+  })
+  },[revenue])
+
   return (
     <div>
       <GridContainer>
-        <GridItem xs={12} sm={6} md={3}>
-          <Card>
-            <CardHeader color="warning" stats icon>
-              <CardIcon color="warning">
-                <Icon>content_copy</Icon>
-              </CardIcon>
-              <p className={classes.cardCategory}>Used Space</p>
-              <h3 className={classes.cardTitle}>
-                49/50 <small>GB</small>
-              </h3>
-            </CardHeader>
-            <CardFooter stats>
-              <div className={classes.stats}>
-                <Danger>
-                  <Warning />
-                </Danger>
-                <a href="#pablo" onClick={e => e.preventDefault()}>
-                  Get more space
-                </a>
-              </div>
-            </CardFooter>
-          </Card>
-        </GridItem>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="success" stats icon>
@@ -76,7 +103,7 @@ export default function Dashboard() {
                 <Store />
               </CardIcon>
               <p className={classes.cardCategory}>Revenue</p>
-              <h3 className={classes.cardTitle}>$34,245</h3>
+              <h3 className={classes.cardTitle}>{revenue}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -106,11 +133,28 @@ export default function Dashboard() {
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="info" stats icon>
-              <CardIcon color="info">
+              <CardIcon color="warning">
                 <Accessibility />
               </CardIcon>
-              <p className={classes.cardCategory}>Followers</p>
-              <h3 className={classes.cardTitle}>+245</h3>
+              <p className={classes.cardCategory}>Users Count</p>
+              <h3 className={classes.cardTitle}>{userList.length}</h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <Update />
+                Just Updated
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+         <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="info" stats icon>
+              <CardIcon color="info">
+                <FitnessCenterIcon />
+              </CardIcon>
+              <p className={classes.cardCategory}>Gym Count</p>
+              <h3 className={classes.cardTitle}>{gymList.length}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>

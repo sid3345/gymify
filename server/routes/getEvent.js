@@ -18,9 +18,28 @@ router.route("/").post((req, res) => {
   console.log(reqEnd);
   console.log(reqUserEmail)
   let eventsList = [];
+
+  reqUserEmail ?
+
   db.collection("events")
-    
     .where("userEmail", "==", reqUserEmail)
+    .where("dateTime", ">", reqStart)
+    .where("dateTime", "<", reqEnd)
+    .get()
+    .then((snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        eventsList.push(doc.data());
+      });
+      eventsList.map((event) => {
+        event.dateTime = event.dateTime.toDate();
+        event.dateTime = moment
+          .tz(event.dateTime, staticConfig.timezone)
+          .format();
+      });
+      res.json(eventsList);
+    })
+    :
+    db.collection("events")
     .where("dateTime", ">", reqStart)
     .where("dateTime", "<", reqEnd)
     .get()

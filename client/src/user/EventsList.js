@@ -15,53 +15,20 @@ class CreateEvent extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeStart = this.onChangeStart.bind(this);
-    this.onChangeEnd = this.onChangeEnd.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.getEventsList = this.getEventsList.bind(this);
 
     this.state = {
       events: [],
-      startDate: new Date(),
-      endDate: new Date(),
     };
   }
 
   componentDidMount() {
     this.setState({
-      events: [],
-      startDate: moment()
-        .tz("Asia/Kolkata")
-        .set({ hour: 0, minute: 0, second: 0 })
-        .toDate(),
-      endDate: moment()
-        .tz("Asia/Kolkata")
-        .set({ hour: 23, minute: 59, second: 59 })
-        .toDate(),
+      events: []
     });
   }
 
-  onChangeStart = (start) => {
-    this.setState({
-      startDate: moment(start)
-        .tz("Asia/Kolkata")
-        .set({ hour: 0, minute: 0, second: 0 })
-        .add(1, "day")
-        .toDate(),
-    });
-    console.log(this.state.startDate);
-  };
-
-  onChangeEnd = (end) => {
-    this.setState({
-      endDate: moment(end)
-        .tz("Asia/Kolkata")
-        .set({ hour: 23, minute: 59, second: 59 })
-        .add(1, "day")
-        .toDate(),
-    });
-    console.log(this.state.endDate);
-  };
 
   getEventsList(eventsList) {
     this.setState({
@@ -73,8 +40,6 @@ class CreateEvent extends Component {
     e.preventDefault();
 
     const range = {
-      reqStart: moment.tz(this.state.startDate, "Asia/Kolkata").toDate(),
-      reqEnd: moment.tz(this.state.endDate, "Asia/Kolkata").toDate(),
       userEmail: this.props.uservalue.user.email
     };
 
@@ -88,20 +53,6 @@ class CreateEvent extends Component {
     return (
       <div className="container">
         <form className="range-selector row mt-5" onSubmit={this.onSubmit}>
-          <div className="col-12 col-md-6 mt-5">
-            <div className="display-3 mb-3">Start Date</div>
-            <Calendar
-              selected={this.state.startDate}
-              onChange={this.onChangeStart}
-            />
-          </div>
-          <div className="col-12 col-md-6 mt-5">
-            <div className="display-3 mb-3">End Date</div>
-            <Calendar
-              selected={this.state.endDate}
-              onChange={this.onChangeEnd}
-            />
-          </div>
           <div className="col-12 d-flex justify-content-center align-items-center">
             <input
               type="submit"

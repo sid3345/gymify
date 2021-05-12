@@ -23,8 +23,6 @@ router.route("/").post((req, res) => {
 
   db.collection("events")
     .where("userEmail", "==", reqUserEmail)
-    .where("dateTime", ">", reqStart)
-    .where("dateTime", "<", reqEnd)
     .get()
     .then((snapshot) => {
       snapshot.docs.forEach((doc) => {

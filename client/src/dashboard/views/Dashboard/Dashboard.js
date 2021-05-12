@@ -17,6 +17,7 @@ import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import AccessTime from "@material-ui/icons/AccessTime";
 import Accessibility from "@material-ui/icons/Accessibility";
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
+import HourglassFullIcon from '@material-ui/icons/HourglassFull';
 import BugReport from "@material-ui/icons/BugReport";
 import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
@@ -79,7 +80,6 @@ export default function Dashboard() {
   useEffect(() => {
 
       let total=0
-      console.log('eventList: ',eventList);
 
     for(let i=0; i<eventList.length;i++){
 
@@ -109,7 +109,7 @@ export default function Dashboard() {
             <CardFooter stats>
               <div className={classes.stats}>
                 <DateRange />
-                Last 24 Hours
+                From this month to next 3 months
               </div>
             </CardFooter>
           </Card>
@@ -118,15 +118,15 @@ export default function Dashboard() {
           <Card>
             <CardHeader color="danger" stats icon>
               <CardIcon color="danger">
-                <Icon>info_outline</Icon>
+                <HourglassFullIcon/>
               </CardIcon>
-              <p className={classes.cardCategory}>Fixed Issues</p>
-              <h3 className={classes.cardTitle}>75</h3>
+              <p className={classes.cardCategory}>Number of Bookings</p>
+              <h3 className={classes.cardTitle}>{eventList.length}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
                 <LocalOffer />
-                Tracked from Github
+                From this month to next 3 months
               </div>
             </CardFooter>
           </Card>

@@ -27,8 +27,6 @@ import Language from "@material-ui/icons/Language";
 // core components/views for Admin layout
 import DashboardPage from "./views/Dashboard/Dashboard.js";
 import GymProfile from "./views/GymProfile/GymProfile.js";
-import Typography from "./views/Typography/Typography.js";
-import Icons from "./views/Icons/Icons.js";
 import Maps from "./views/Maps/Maps.js";
 import NotificationsPage from "./views/Notifications/Notifications.js";
 import GymTableList from "./views/GymTableList/GymTableList.js";
@@ -58,22 +56,6 @@ const dashboardRoutes = [
     rtlName: "ملف تعريفي للمستخدم",
     icon: "content_paste",
     component: GymTableList,
-    layout: "/admin"
-  },
-  {
-    path: "/typography",
-    name: "Typography",
-    rtlName: "طباعة",
-    icon: LibraryBooks,
-    component: Typography,
-    layout: "/admin"
-  },
-  {
-    path: "/icons",
-    name: "Icons",
-    rtlName: "الرموز",
-    icon: BubbleChart,
-    component: Icons,
     layout: "/admin"
   },
   {

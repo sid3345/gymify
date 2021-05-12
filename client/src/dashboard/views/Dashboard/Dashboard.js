@@ -66,15 +66,17 @@ export default function Dashboard() {
     });
 
     const range = {
-      reqStart: moment.tz(new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), "Asia/Kolkata").toDate(),
-      reqEnd: moment.tz(new Date(), "Asia/Kolkata").toDate(),
+      reqStart: moment.tz(new Date(Date.now() - 30 * 24 * 60 * 60 * 1000), "Asia/Kolkata").toDate(),
+      reqEnd: moment.tz(new Date(Date.now() + 90 * 24 * 60 * 60 * 1000), "Asia/Kolkata").toDate(),
     };
 
     axios.post("http://localhost:5000/getEvents/", range).then((res) => {
       //console.log('event data: ' ,res.data)
       setEventList(res.data)
       })
-      .then(()=>{
+  },[])
+
+  useEffect(() => {
 
       let total=0
       console.log('eventList: ',eventList);
@@ -84,14 +86,14 @@ export default function Dashboard() {
       for(let j=0; j<gymList.length;j++){
       
         if(eventList[i].gymEmail==gymList[j].email){
+          //console.log('matched: ',gymList[j].email, eventList[i].gymEmail)
       total += parseInt(gymList[j].cost)
         }
       }
     }
     setRevenue(total)
     //console.log('total: ',total);
-  })
-  },[revenue])
+  },[eventList])
 
   return (
     <div>

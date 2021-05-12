@@ -92,7 +92,6 @@ export default function Dashboard() {
       }
     }
     setRevenue(total)
-    //console.log('total: ',total);
   },[eventList])
 
   return (

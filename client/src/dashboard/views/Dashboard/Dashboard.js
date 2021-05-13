@@ -9,32 +9,23 @@ import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Store from "@material-ui/icons/Store";
-import Warning from "@material-ui/icons/Warning";
 import DateRange from "@material-ui/icons/DateRange";
-import LocalOffer from "@material-ui/icons/LocalOffer";
 import Update from "@material-ui/icons/Update";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import AccessTime from "@material-ui/icons/AccessTime";
 import Accessibility from "@material-ui/icons/Accessibility";
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
-import HourglassFullIcon from '@material-ui/icons/HourglassFull';
-import BugReport from "@material-ui/icons/BugReport";
-import Code from "@material-ui/icons/Code";
-import Cloud from "@material-ui/icons/Cloud";
+import TouchAppIcon from '@material-ui/icons/TouchApp';
+
 // core components
 import GridItem from "../../components/Grid/GridItem.js";
 import GridContainer from "../../components/Grid/GridContainer.js";
 import Table from "../../components/Table/Table.js";
-import Tasks from "../../components/Tasks/Tasks.js";
-import CustomTabs from "../../components/CustomTabs/CustomTabs.js";
-import Danger from "../../components/Typography/Danger.js";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardIcon from "../../components/Card/CardIcon.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
-
-import { bugs, website, server } from "../../variables/general.js";
 
 import {
   dailySalesChart,
@@ -52,7 +43,10 @@ export default function Dashboard() {
   const[gymList, setGymList]= useState('');
   const[userList, setUserList]= useState('');
   const[eventList, setEventList]= useState('');
-  const[revenue, setRevenue]= useState('');
+  const[revenue, setRevenue]= useState('')
+  const[listOfGym, setlistOfGym]= useState([]);
+
+  var total
 
   useEffect(() => {
   axios.get("http://localhost:5000/gymList/").then((res)=> {
@@ -75,24 +69,57 @@ export default function Dashboard() {
       //console.log('event data: ' ,res.data)
       setEventList(res.data)
       })
+
   },[])
 
+
   useEffect(() => {
+    var total=0
 
-      let total=0
+    if(gymList && eventList){
 
-    for(let i=0; i<eventList.length;i++){
+      let gymList_copy = JSON.parse(JSON.stringify(gymList))
+      let eventList_copy = JSON.parse(JSON.stringify(eventList))
 
-      for(let j=0; j<gymList.length;j++){
-      
-        if(eventList[i].gymEmail==gymList[j].email){
-          //console.log('matched: ',gymList[j].email, eventList[i].gymEmail)
-      total += parseInt(gymList[j].cost)
-        }
-      }
+        gymList_copy.map((gyms)=>{
+        gyms.gymRevenue=0
+        gyms.bookings=0
+
+        eventList_copy.map((events)=>{
+        
+          if(events.gymEmail==gyms.email){
+            //console.log('matched: ',gymList[j].email, eventList[i].gymEmail)
+              total += parseInt(gyms.cost)
+
+              gyms.gymRevenue+=parseInt(gyms.cost) 
+              gyms.bookings+=1
+            }
+          })
+      })
+      //console.log('gymList_copy inside: ', gymList_copy);
+      //console.log('total: ', total);
+
+      setGymList(gymList_copy)
+      setRevenue(total)
     }
-    setRevenue(total)
-  },[eventList])
+  },[eventList, revenue])
+
+ 
+  useEffect(() => {
+    var listGym=[]
+
+    if(gymList){
+     
+      gymList.map(gyms=>{
+        listGym.push([gyms.gym, gyms.email, gyms.gymRevenue, gyms.bookings, gyms.city])
+      })
+    } 
+    setlistOfGym(listGym)
+
+  },[gymList])
+
+  //console.log('gymList: ', gymList);
+  //console.log('listOfGym: ', listOfGym);
 
   return (
     <div>
@@ -118,14 +145,14 @@ export default function Dashboard() {
           <Card>
             <CardHeader color="danger" stats icon>
               <CardIcon color="danger">
-                <HourglassFullIcon/>
+                <TouchAppIcon/>
               </CardIcon>
               <p className={classes.cardCategory}>Number of Bookings</p>
               <h3 className={classes.cardTitle}>{eventList.length}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
-                <LocalOffer />
+                <DateRange />
                 From this month to next 3 months
               </div>
             </CardFooter>
@@ -241,65 +268,19 @@ export default function Dashboard() {
         </GridItem>
       </GridContainer>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={6}>
-          <CustomTabs
-            title="Tasks:"
-            headerColor="primary"
-            tabs={[
-              {
-                tabName: "Bugs",
-                tabIcon: BugReport,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[0, 3]}
-                    tasksIndexes={[0, 1, 2, 3]}
-                    tasks={bugs}
-                  />
-                )
-              },
-              {
-                tabName: "Website",
-                tabIcon: Code,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[0]}
-                    tasksIndexes={[0, 1]}
-                    tasks={website}
-                  />
-                )
-              },
-              {
-                tabName: "Server",
-                tabIcon: Cloud,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[1]}
-                    tasksIndexes={[0, 1, 2]}
-                    tasks={server}
-                  />
-                )
-              }
-            ]}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
+        <GridItem xs={12}>
           <Card>
             <CardHeader color="warning">
-              <h4 className={classes.cardTitleWhite}>Employees Stats</h4>
+              <h4 className={classes.cardTitleWhite}>Gym Stats</h4>
               <p className={classes.cardCategoryWhite}>
-                New employees on 15th September, 2016
+                Top booked gyms
               </p>
             </CardHeader>
             <CardBody>
               <Table
                 tableHeaderColor="warning"
-                tableHead={["ID", "Name", "Salary", "Country"]}
-                tableData={[
-                  ["1", "Dakota Rice", "$36,738", "Niger"],
-                  ["2", "Minerva Hooper", "$23,789", "Curaçao"],
-                  ["3", "Sage Rodriguez", "$56,142", "Netherlands"],
-                  ["4", "Philip Chaney", "$38,735", "Korea, South"]
-                ]}
+                tableHead={["Name","Gym Email" ,"Revenue",'Bookings', "City"]}
+                tableData={listOfGym}
               />
             </CardBody>
           </Card>

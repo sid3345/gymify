@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import {auth} from "../firebase"
 import {connect} from 'react-redux'
@@ -42,15 +42,16 @@ var profile = <Link to = "/register_gym/profile">
                 </Button>
               </Link>
                 
-
-if(props.uservalue.user){
-  axios.post("http://localhost:5000/fetchUser" , {email : props.uservalue.user.email})
-  .then((res) =>{
-    // console.log(res.data[0].checked)
-    setChecked(res.data[0].checked)
-    
-  })
-}
+useEffect(() => {
+  if(props.uservalue.user){
+    axios.post("http://localhost:5000/fetchUser" , {email : props.uservalue.user.email})
+    .then((res) =>{
+      console.log(res.data[0].checked)
+      setChecked(res.data[0].checked)
+      
+    })
+  }
+},[props.uservalue.user])
 
   return (
     <div>

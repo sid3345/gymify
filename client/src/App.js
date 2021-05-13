@@ -43,7 +43,8 @@ const App = (props) => {
   var showNav = true
   var admin = false
 
-  if(props.uservalue.user){
+  useEffect(() => {
+     if(props.uservalue.user){
     // console.log(props.uservalue.user.email)
     if(props.uservalue.user.email == "admin@admin.com"){
       showNav = false
@@ -51,6 +52,8 @@ const App = (props) => {
       
     }
   }
+  }, [props.uservalue.user])
+
   return (
 
     <Router history={hist}>

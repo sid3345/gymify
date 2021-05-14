@@ -44,7 +44,7 @@ const App = (props) => {
   var admin = false
 
   if(props.uservalue.user){
-    // console.log(props.uservalue.user.email)
+    console.log(props.uservalue.user.email)
     if(props.uservalue.user.email == "admin@admin.com"){
       showNav = false
       admin = true

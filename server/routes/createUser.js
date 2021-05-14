@@ -6,7 +6,7 @@ const db = require("../db");
 router.route("/").post((req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.send(req.body);
-  console.log(req.body)
+  console.log("create" , req.body)
   db.collection("users").doc(req.body.email).set({
     email : req.body.email,
     checked : req.body.check.checked,

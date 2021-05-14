@@ -8,7 +8,7 @@ import axios from 'axios';
 
 class Payments extends Component {
   render() {
-    console.log(this.props.wallet)
+
     return (
       <StripeCheckout
         name= "GYMIFY"
@@ -17,10 +17,10 @@ class Payments extends Component {
         currency = 'INR'
       //   token={token => store.dispatch({type : 'SET_TOKEN' , payload : token})
       // }
-        token={token => axios.post("http://localhost:5000/updateWallet" , {wallet : this.props.wallet , email : this.props.uservalue.user.email})
+        token={token => {axios.post("http://localhost:5000/updateWallet" , {wallet : this.props.wallet , email : this.props.uservalue.user.email})
         .then((res) => {
           console.log(res.data)
-        })}
+        }) ; window.location.reload()}}
         stripeKey={process.env.REACT_APP_STRIPE_KEY}
       >
         <Button color="primary" className="mx-2">

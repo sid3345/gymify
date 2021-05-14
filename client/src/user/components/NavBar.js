@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import {auth} from "../firebase"
 import {connect} from 'react-redux'
@@ -12,6 +12,7 @@ import {
 } from "reactstrap";
 import axios from "axios";
 import Payments from "./Payments";
+import store from "../Store";
 
 
 
@@ -19,8 +20,6 @@ const NavBar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const[checked , setChecked] = useState(false)
-
-  const[wallet , setWallet] = useState(0)
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -46,19 +45,33 @@ var profile = <Link to = "/register_gym/profile">
               </Link>
 
 var money = <Button color = "primary" className="mx-2">
-              Money : {wallet}
+              Money : {props.uservalue.wallet}
              </Button>
-                
 
-if(props.uservalue.user){
-  axios.post("http://localhost:5000/fetchUser" , {email : props.uservalue.user.email})
-  .then((res) =>{
-    console.log(res.data[0])
-    setChecked(res.data[0].checked)
-    setWallet(res.data[0].wallet)
+var signout = <Button color="primary" className="mx-2" onClick = {handleAuthentication}>
+              Sign Out
+             </Button>
+
+var signin = <Link to = '/login'>
+              <Button color="primary" className="mx-2" >
+                    Sign In / Register
+              </Button>
+             </Link>
+                
+useEffect(() => {
+  // console.log(props.uservalue.user)
+  if(props.uservalue.user){
+    axios.post("http://localhost:5000/fetchUser" , {email : props.uservalue.user.email})
+    .then((res) =>{
+      console.log(res.data[0])
+      setChecked(res.data[0].checked)
+      store.dispatch({type : 'SET_WALLET' , payload : res.data[0].wallet})  
+      
+    })
     
-  })
-}
+  }
+}, [props.uservalue.user])
+
 
   return (
     <div>
@@ -67,17 +80,17 @@ if(props.uservalue.user){
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
-          {props.uservalue.user ? (!checked ? <Payments wallet = {wallet}/> : null) : null}
+
+          {props.uservalue.user ? (!checked ? <Payments wallet = {props.uservalue.wallet}/> : null) : null}
 
           {props.uservalue.user ? (checked ? profile : listEvent) : null}
 
           {props.uservalue.user ? (!checked ? money : null): null}
 
-          <Link to = {!props.uservalue.user && '/login'}>
-                <Button color="primary" className="mx-2" onClick = {handleAuthentication}>
-                      {props.uservalue.user ? 'Sign Out' : 'Sign In / Register'}
-                </Button>
-          </Link>
+          {props.uservalue.user ? signout : null}
+
+          {!props.uservalue.user ? signin : null}
+          
           </Nav>
         </Collapse>
       </Navbar>

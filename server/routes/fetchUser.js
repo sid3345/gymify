@@ -17,7 +17,7 @@ router.route("/").post((req, res) => {
         snapshot.docs.forEach((doc) => {
             user.push(doc.data())
           })
-        // console.log(user)
+        console.log("Fetch",user)
         res.json(user);   
     })
     :

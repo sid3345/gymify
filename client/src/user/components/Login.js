@@ -48,9 +48,12 @@ function Login() {
                     .then((res) =>{
                         if(res.data.check.checked == true){
                             history.push('/register_gym')
+                            window.location.reload()
                         }
                         else{
                             history.push('/')
+                            window.location.reload()
+
                         }
                     })
                 }

@@ -1,6 +1,7 @@
 const initialState = {
     user : null,
-    token : null
+    token : null,
+    wallet : 0
 
 }
 const reducer = (state = initialState , action) =>{
@@ -17,6 +18,12 @@ const reducer = (state = initialState , action) =>{
             return{
                 ...state,
                 token : action.payload
+            }
+
+        case "SET_WALLET":
+            return{
+                ...state,
+                wallet : action.payload
             }
 
         default:

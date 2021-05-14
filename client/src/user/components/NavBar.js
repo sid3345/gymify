@@ -11,6 +11,7 @@ import {
   Button,
 } from "reactstrap";
 import axios from "axios";
+import Payments from "./Payments";
 
 
 
@@ -18,6 +19,8 @@ const NavBar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const[checked , setChecked] = useState(false)
+
+  const[wallet , setWallet] = useState(0)
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -41,13 +44,18 @@ var profile = <Link to = "/register_gym/profile">
                   Profile
                 </Button>
               </Link>
+
+var money = <Button color = "primary" className="mx-2">
+              Money : {wallet}
+             </Button>
                 
 
 if(props.uservalue.user){
   axios.post("http://localhost:5000/fetchUser" , {email : props.uservalue.user.email})
   .then((res) =>{
-    // console.log(res.data[0].checked)
+    console.log(res.data[0])
     setChecked(res.data[0].checked)
+    setWallet(res.data[0].wallet)
     
   })
 }
@@ -59,13 +67,17 @@ if(props.uservalue.user){
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
-            {props.uservalue.user ? (checked ? profile : listEvent) : null}
-            
-            <Link to = {!props.uservalue.user && '/login'}>
-                  <Button color="primary" className="mx-2" onClick = {handleAuthentication}>
-                        {props.uservalue.user ? 'Sign Out' : 'Sign In / Register'}
-                  </Button>
-            </Link>
+          {props.uservalue.user ? (!checked ? <Payments wallet = {wallet}/> : null) : null}
+
+          {props.uservalue.user ? (checked ? profile : listEvent) : null}
+
+          {props.uservalue.user ? (!checked ? money : null): null}
+
+          <Link to = {!props.uservalue.user && '/login'}>
+                <Button color="primary" className="mx-2" onClick = {handleAuthentication}>
+                      {props.uservalue.user ? 'Sign Out' : 'Sign In / Register'}
+                </Button>
+          </Link>
           </Nav>
         </Collapse>
       </Navbar>

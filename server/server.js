@@ -32,6 +32,7 @@ const createUser = require("./routes/createUser")
 const fetchUser = require("./routes/fetchUser")
 const gymList = require("./routes/gymList");
 const gym_delete = require("./routes/deleteGym");
+const updateWallet = require("./routes/updateWallet")
 
 app.use("/freeSlots", getSlotsRouter);
 app.use("/getEvents", getEventsRouter);
@@ -41,6 +42,7 @@ app.use("/createUser", createUser)
 app.use("/fetchUser", fetchUser)
 app.use("/gymList", gymList);
 app.use("/gym_delete", gym_delete);
+app.use("/updateWallet" , updateWallet)
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

@@ -214,6 +214,8 @@ export default function Dashboard() {
     var listGym=[]
 
     if(gymList){
+
+      gymList.sort((a, b) => b.bookings - a.bookings);
      
       gymList.map(gyms=>{
         listGym.push([gyms.gym, gyms.email, gyms.gymRevenue, gyms.bookings, gyms.city])
@@ -375,14 +377,14 @@ export default function Dashboard() {
             <CardHeader color="warning">
               <h4 className={classes.cardTitleWhite}>Gym Stats</h4>
               <p className={classes.cardCategoryWhite}>
-                Top booked gyms
+                Top 5 most booked gyms
               </p>
             </CardHeader>
             <CardBody>
               <Table
                 tableHeaderColor="warning"
                 tableHead={["Name","Gym Email" ,"Revenue",'Bookings', "City"]}
-                tableData={listOfGym}
+                tableData={listOfGym.slice(0, 5)}
               />
             </CardBody>
           </Card>

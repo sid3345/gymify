@@ -25,7 +25,7 @@ const dailySalesChart = {
       tension: 0
     }),
     low: 0,
-    high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+    high: 20, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
     chartPadding: {
       top: 0,
       right: 0,
@@ -92,7 +92,7 @@ const emailsSubscriptionChart = {
       showGrid: false
     },
     low: 0,
-    high: 1000,
+    high: 50,
     chartPadding: {
       top: 0,
       right: 5,
@@ -144,7 +144,7 @@ const completedTasksChart = {
       tension: 0
     }),
     low: 0,
-    high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+    high: 20, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
     chartPadding: {
       top: 0,
       right: 0,

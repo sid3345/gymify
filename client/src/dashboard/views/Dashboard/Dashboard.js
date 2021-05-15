@@ -37,16 +37,19 @@ import styles from "../../assets/jss/material-dashboard-react/views/dashboardSty
 
 const useStyles = makeStyles(styles);
 
+moment.tz.setDefault("Asia/Kolkata");
+
 export default function Dashboard() {
   const classes = useStyles();
 
   const[gymList, setGymList]= useState('');
   const[userList, setUserList]= useState('');
   const[eventList, setEventList]= useState('');
-  const[revenue, setRevenue]= useState('')
+  const[revenue, setRevenue]= useState(0)
   const[listOfGym, setlistOfGym]= useState([]);
-
-  var total
+  const[countDayofWeek, setCountDayofWeek]= useState([]);
+  const[countMonthofYear, setCountMonthofYear]= useState([]);
+  const[countHoursofDay, setCountHoursofDay]= useState([]);
 
   useEffect(() => {
   axios.get("http://localhost:5000/gymList/").then((res)=> {
@@ -69,7 +72,6 @@ export default function Dashboard() {
       //console.log('event data: ' ,res.data)
       setEventList(res.data)
       })
-
   },[])
 
 
@@ -101,9 +103,112 @@ export default function Dashboard() {
 
       setGymList(gymList_copy)
       setRevenue(total)
+
+      var countDay={}
+      var countmonth= {}
+      var countHours={}
+
+      var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+      countDay["Sunday"]=0
+      countDay["Monday"]=0
+      countDay["Tuesday"]=0
+      countDay["Wednesday"]=0
+      countDay["Thursday"]=0
+      countDay["Friday"]=0
+      countDay["Saturday"]=0
+
+      countmonth['January']=0
+      countmonth['February']=0
+      countmonth['March']=0
+      countmonth['April']=0
+      countmonth['May']=0
+      countmonth['June']=0
+      countmonth['July']=0
+      countmonth['August']=0
+      countmonth['September']=0
+      countmonth['October']=0
+      countmonth['November']=0
+      countmonth['December']=0
+
+      countHours['6AM']=0
+      countHours['7AM']=0
+      countHours['8AM']=0
+      countHours['9AM']=0
+      countHours['10AM']=0
+      countHours['11AM']=0
+      countHours['12PM']=0
+      countHours['1PM']=0
+      countHours['2PM']=0
+      countHours['3PM']=0
+      countHours['4PM']=0
+      countHours['5PM']=0
+      countHours['6PM']=0
+      countHours['7PM']=0
+      countHours['8PM']=0
+      countHours['9PM']=0
+      countHours['10PM']=0
+
+    eventList.map((events)=>{
+      //console.log('event: ',event);
+
+      let hr= new Date(events.dateTime).getHours();
+      let _hrs = hr
+      let _daynight = "AM";
+      if (hr > 12) {
+        _hrs = hr - 12;
+        _daynight = "PM";
+      } else if (hr === 12) {
+        _hrs = 12;
+        _daynight = "PM";
+      }
+
+      var day = days[ new Date(events.dateTime).getDay() ];
+      var month = months[ new Date(events.dateTime).getMonth() ];
+
+      countDay[day]+= 1
+      countmonth[month] += 1
+      countHours[_hrs+_daynight]+=1
+      })
+
+      var listDay=[]
+      var listMonth=[]
+      var listHours=[]
+
+      for(var i in countDay)
+        listDay.push(countDay[i]);
+
+      for(var i in countmonth)
+        listMonth.push(countmonth[i]);
+
+      for(var i in countHours)
+        listHours.push(countHours[i]);
+
+      setCountDayofWeek({'labels':['S', "M", "T", "W", "T", "F", "S"], 'series':[listDay]})
+      setCountMonthofYear({'labels':[
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ], 'series':[listMonth]})
+
+    setCountHoursofDay({'labels':['6AM','7AM','8AM','9AM','10AM','11AM','12PM','1PM','2PM','3PM','4PM','5PM','6PM','7PM','8PM','9PM','10PM'],
+        'series':[listHours]})
+
+      //console.log(countDay);
+      //console.log(countmonth);
+      //console.log(('countHours: ',countHours));
     }
   },[eventList, revenue])
-
  
   useEffect(() => {
     var listGym=[]
@@ -131,7 +236,7 @@ export default function Dashboard() {
                 <Store />
               </CardIcon>
               <p className={classes.cardCategory}>Revenue</p>
-              <h3 className={classes.cardTitle}>{revenue}</h3>
+              <h3 className={classes.cardTitle}>₹ {revenue}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -194,39 +299,36 @@ export default function Dashboard() {
         </GridItem>
       </GridContainer>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={4}>
+        <GridItem xs={12} sm={6}>
           <Card chart>
             <CardHeader color="success">
               <ChartistGraph
                 className="ct-chart"
-                data={dailySalesChart.data}
+                data={countDayofWeek}
                 type="Line"
                 options={dailySalesChart.options}
                 listener={dailySalesChart.animation}
               />
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Daily Sales</h4>
+              <h4 className={classes.cardTitle}>Daily Bookings</h4>
               <p className={classes.cardCategory}>
-                <span className={classes.successText}>
-                  <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                </span>{" "}
-                increase in today sales.
+                Daily Performance
               </p>
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> updated 4 minutes ago
+                <AccessTime /> Last 30 days
               </div>
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
+        <GridItem xs={12} sm={6} >
           <Card chart>
             <CardHeader color="warning">
               <ChartistGraph
                 className="ct-chart"
-                data={emailsSubscriptionChart.data}
+                data={countMonthofYear}
                 type="Bar"
                 options={emailsSubscriptionChart.options}
                 responsiveOptions={emailsSubscriptionChart.responsiveOptions}
@@ -234,34 +336,34 @@ export default function Dashboard() {
               />
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Email Subscriptions</h4>
-              <p className={classes.cardCategory}>Last Campaign Performance</p>
+              <h4 className={classes.cardTitle}>Monthly Bookings</h4>
+              <p className={classes.cardCategory}>Booking Performance</p>
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> campaign sent 2 days ago
+                <AccessTime /> Year
               </div>
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
+        <GridItem xs={12} sm={12}>
           <Card chart>
             <CardHeader color="danger">
               <ChartistGraph
                 className="ct-chart"
-                data={completedTasksChart.data}
+                data={countHoursofDay}
                 type="Line"
                 options={completedTasksChart.options}
                 listener={completedTasksChart.animation}
               />
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Completed Tasks</h4>
-              <p className={classes.cardCategory}>Last Campaign Performance</p>
+              <h4 className={classes.cardTitle}>Hourly Booking Stats</h4>
+              <p className={classes.cardCategory}>Hourly Performance</p>
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> campaign sent 2 days ago
+                <AccessTime /> Just Updated
               </div>
             </CardFooter>
           </Card>

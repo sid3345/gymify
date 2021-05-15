@@ -135,28 +135,35 @@ class CreateEvent extends Component {
       gymEmail : this.props.gymEmail
     };
 
-  if(this.props.userState.token){
+  if(this.props.userState.wallet > parseInt(this.props.priceOnPayment)){
     axios
       .post("http://localhost:5000/createEvent", eventParam)
       .then(() => {
-        window.location = `/status/${eventParam.reqDateTime}/${eventParam.reqDuration}`;
+        axios
+          .post("http://localhost:5000/updateWallet", {wallet : parseInt(this.props.userState.wallet - parseInt(this.props.priceOnPayment)) , email : this.props.userState.user.email , action : "book"})
+          .then((res) =>{
+            console.log(res.data)
+            window.location = `/status/${eventParam.reqDateTime}/${eventParam.reqDuration}`;
+
+          })
       })
       .catch(() => {
         window.location = `/Error/:442`;
       });
   }
   else{
-    alert("Please Pay First!")
+    alert("You Don't have enough balance!")
   }
 
     
   }
 
   render() {
-    // console.log(this.props.priceOnPayment)
+    console.log(this.props.priceOnPayment)
+    console.log(typeof parseInt(this.props.priceOnPayment))
     // console.log(this.props.userState.user.email)
-    // console.log(this.props.userState.token)
     console.log(this.props.gymName)
+    console.log(typeof this.props.userState.wallet)
 
 
     return (
@@ -206,10 +213,7 @@ class CreateEvent extends Component {
                 </Button>
               );
             })}
-            <Payments price = {this.props.priceOnPayment}/>
-            <span>
-                {this.props.userState.token ? 'Paid' : 'Please Pay to book slot'}
-            </span>
+    
           </div>
         </div>
       </div>

@@ -25,11 +25,11 @@ import Notifications from "@material-ui/icons/Notifications";
 import Unarchive from "@material-ui/icons/Unarchive";
 import Language from "@material-ui/icons/Language";
 // core components/views for Admin layout
-import DashboardPage from "./views/Dashboard/Dashboard.js";
-import GymProfile from "./views/GymProfile/GymProfile.js";
-import Maps from "./views/Maps/Maps.js";
-import NotificationsPage from "./views/Notifications/Notifications.js";
-import GymTableList from "./views/GymTableList/GymTableList.js";
+import DashboardPage from "./views/Admin/Dashboard/Dashboard.js";
+import GymProfile from "./views/Admin/GymProfile/GymProfile.js";
+import Maps from "./views/Admin/Maps/Maps.js";
+import NotificationsPage from "./views/Admin/Notifications/Notifications.js";
+import GymTableList from "./views/Admin/GymTableList/GymTableList.js";
 // core components/views for RTL layout
 
 const dashboardRoutes = [

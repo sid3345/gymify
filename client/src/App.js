@@ -10,7 +10,7 @@ import EventsList from "./user/EventsList";
 import Login from "./user/components/Login";
 import { auth } from "./user/firebase";
 import { createBrowserHistory } from "history";
-import GymRegister from './user/components/GymRegister'
+import GymRegister from './dashboard/views/GymOwner/GymRegister'
 
 import {connect} from 'react-redux'
 import store from "./user/Store";
@@ -19,7 +19,7 @@ import "./dashboard/assets/css/material-dashboard-react.css?v=1.9.0";
 
 // core components
 import Admin from "./dashboard/layouts/Admin";
-import GymHome from "./user/components/GymHome";
+import GymHome from "./dashboard/views/GymOwner/GymHome";
 
 const hist = createBrowserHistory();
 

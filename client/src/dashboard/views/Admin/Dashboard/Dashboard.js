@@ -18,22 +18,23 @@ import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import TouchAppIcon from '@material-ui/icons/TouchApp';
 
 // core components
-import GridItem from "../../components/Grid/GridItem.js";
-import GridContainer from "../../components/Grid/GridContainer.js";
-import Table from "../../components/Table/Table.js";
-import Card from "../../components/Card/Card.js";
-import CardHeader from "../../components/Card/CardHeader.js";
-import CardIcon from "../../components/Card/CardIcon.js";
-import CardBody from "../../components/Card/CardBody.js";
-import CardFooter from "../../components/Card/CardFooter.js";
+import GridItem from "../../../components/Grid/GridItem.js";
+import GridContainer from "../../../components/Grid/GridContainer.js";
+import Table from "../../../components/Table/Table.js";
+import Card from "../../../components/Card/Card.js";
+import CardHeader from "../../../components/Card/CardHeader.js";
+import CardIcon from "../../../components/Card/CardIcon.js";
+import CardBody from "../../../components/Card/CardBody.js";
+//import CardFooter from "../../../../components/Card/CardFooter.js";
+import CardFooter from "../../../components/Card/CardFooter";
 
 import {
   dailySalesChart,
   emailsSubscriptionChart,
   completedTasksChart
-} from "../../variables/charts.js";
+} from "../../../variables/charts.js";
 
-import styles from "../../assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import styles from "../../../assets/jss/material-dashboard-react/views/dashboardStyle";
 
 const useStyles = makeStyles(styles);
 

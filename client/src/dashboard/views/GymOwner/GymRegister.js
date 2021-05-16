@@ -8,15 +8,15 @@ import {connect} from 'react-redux'
 
 
 // core components
-import GridItem from "../../dashboard/components/Grid/GridItem";
-import GridContainer from "../../dashboard/components/Grid/GridContainer.js";
-import CustomInput from "../../dashboard/components/CustomInput/CustomInput.js";
-import Button from "../../dashboard/components/CustomButtons/Button.js";
-import Card from "../../dashboard/components/Card/Card.js";
-import CardHeader from "../../dashboard/components/Card/CardHeader.js";
-import CardAvatar from "../../dashboard/components/Card/CardAvatar.js";
-import CardBody from "../../dashboard/components/Card/CardBody.js";
-import CardFooter from "../../dashboard/components/Card/CardFooter.js";
+import GridItem from "../../components/Grid/GridItem";
+import GridContainer from "../../components/Grid/GridContainer.js";
+import CustomInput from "../../components/CustomInput/CustomInput.js";
+import Button from "../../components/CustomButtons/Button.js";
+import Card from "../../components/Card/Card.js";
+import CardHeader from "../../components/Card/CardHeader.js";
+import CardAvatar from "../../components/Card/CardAvatar.js";
+import CardBody from "../../components/Card/CardBody.js";
+import CardFooter from "../../components/Card/CardFooter.js";
 
 const styles = {
   cardCategoryWhite: {

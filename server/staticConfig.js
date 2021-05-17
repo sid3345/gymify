@@ -1,7 +1,7 @@
 const staticConfig = {
-  startHours: "10:00",
-  endHours: "17:00",
-  duration: 30,
+  startHours: "06:00",
+  endHours: "21:00",
+  duration: 60,
   timezone: "Asia/Kolkata",
 };
 

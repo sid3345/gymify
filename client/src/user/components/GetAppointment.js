@@ -6,7 +6,7 @@ import axios from "axios";
 import moment from "moment-timezone";
 import timezones from "../timezones";
 import {connect} from 'react-redux'
-import Payments from "./Payments";
+
 
 
 moment.tz.setDefault("Asia/Kolkata");
@@ -34,7 +34,7 @@ class CreateEvent extends Component {
   }
   
   componentDidMount() {
-    console.log()
+    console.log(new Date().toTimeString().split(" ")[0])
     this.setState({
       date: new Date(),
       timezone: "Asia/Kolkata",
@@ -71,21 +71,26 @@ class CreateEvent extends Component {
     });
     let tmp = [];
     this.state.slots.map((slot) => {
+      // console.log(new Date().getHours())
+      let cur_hr = new Date().getHours()
       let Hours = slot.hours();
       let min = slot.minutes();
       let _hrs = Hours;
       let _daynight = "AM";
-      if (Hours > 12) {
-        _hrs = Hours - 12;
-        _daynight = "PM";
-      } else if (Hours === 12) {
-        _hrs = 12;
-        _daynight = "PM";
+      if(cur_hr < Hours){
+        if (Hours > 12) {
+          _hrs = Hours - 12;
+          _daynight = "PM";
+        } else if (Hours === 12) {
+          _hrs = 12;
+          _daynight = "PM";
+        }
+        let _min = min;
+        if (min === 0) _min = "00";
+        tmp.push(`${_hrs}:${_min} ${_daynight}`);
+        return tmp;
       }
-      let _min = min;
-      if (min === 0) _min = "00";
-      tmp.push(`${_hrs}:${_min} ${_daynight}`);
-      return tmp;
+      
     });
     this.setState({
       buttons: tmp,
@@ -204,6 +209,8 @@ class CreateEvent extends Component {
             {this.state.buttons.map((button) => {
               return (
                 <Button
+                  key = {button}
+                  style={{width : "120px" , height : "auto"}}
                   color="primary"
                   className="m-2"
                   onClick={() => {

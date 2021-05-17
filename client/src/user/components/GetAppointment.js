@@ -177,6 +177,7 @@ class CreateEvent extends Component {
                   <DatePicker
                     selected={this.state.date}
                     onChange={this.onChangeDate}
+                    minDate={moment().toDate()}
                   />
                 </div>
               </div>

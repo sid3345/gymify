@@ -63,7 +63,12 @@ class CreateEvent extends Component {
   getSlots(availableSlots) {
     let refSlots = [];
     availableSlots.map((slot) => {
-      refSlots.push(moment.tz(slot, this.state.timezone));
+
+      if(new Date().getHours() < (moment.tz(slot , this.state.timezone)).hours()){
+        
+        refSlots.push(moment.tz(slot, this.state.timezone));
+        
+      }
       return moment.tz(slot, this.state.timezone);
     });
     this.setState({
@@ -77,7 +82,7 @@ class CreateEvent extends Component {
       let min = slot.minutes();
       let _hrs = Hours;
       let _daynight = "AM";
-      if(cur_hr < Hours){
+      // if(cur_hr < Hours){
         if (Hours > 12) {
           _hrs = Hours - 12;
           _daynight = "PM";
@@ -89,7 +94,7 @@ class CreateEvent extends Component {
         if (min === 0) _min = "00";
         tmp.push(`${_hrs}:${_min} ${_daynight}`);
         return tmp;
-      }
+      // }
       
     });
     this.setState({

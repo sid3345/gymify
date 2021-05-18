@@ -34,7 +34,7 @@ class CreateEvent extends Component {
   }
   
   componentDidMount() {
-    console.log(new Date().toTimeString().split(" ")[0])
+    //console.log(new Date().toTimeString().split(" ")[0])
     this.setState({
       date: new Date(),
       timezone: "Asia/Kolkata",
@@ -180,11 +180,7 @@ class CreateEvent extends Component {
 
   render() {
     console.log(this.props.priceOnPayment)
-    console.log(typeof parseInt(this.props.priceOnPayment))
     // console.log(this.props.userState.user.email)
-    console.log(this.props.gymName)
-    console.log(typeof this.props.userState.wallet)
-
 
     return (
       <div>

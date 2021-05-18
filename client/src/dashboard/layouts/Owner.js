@@ -24,7 +24,6 @@ const switchRoutes = (
     {GymOwnerdashboardRoutes.map((prop, key) => {
       if (prop.layout === "/owner") {
         //prop.hidden= false;
-        console.log('prop.path: ',prop.path)
         return (
           <Route
             path={prop.layout + prop.path}
@@ -36,7 +35,6 @@ const switchRoutes = (
       //return null;
     })}
 
-    {console.log('GymOwnerdashboardRoutes: ',GymOwnerdashboardRoutes)}
     <Redirect from="/owner" to="/owner/register_gym" />
   </Switch>
 );

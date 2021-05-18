@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 // @material-ui/core components
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
@@ -78,9 +78,36 @@ function GymRegister(props) {
     });
     alert('Gym profile submitted. Wait for sometime to approve.')
 
-    history.push('/')
+    history.push('/owner')
     
   }
+
+   useEffect(() => {
+    
+  axios.get("http://localhost:5000/gymList/").then((res)=> {
+    //console.log('res: ', res.data);
+
+    for(let i=0; i<res.data.length;i++){
+      
+
+      if ((res.data)[i].email==props.uservalue.user.email)
+      {
+        //console.log('(res.data)[i]: ',(res.data)[i]);
+
+        setGym((res.data)[i].gym);
+        setName((res.data)[i].name);
+        setCost((res.data)[i].cost);
+        setPropertyGovt((res.data)[i].propertyGovt);
+        setCity((res.data)[i].city);
+        setAddress((res.data)[i].address);
+        setPostal((res.data)[i].postal);
+        setDescription((res.data)[i].description);
+        //setImg((res.data)[i].img);
+        break
+      }
+    }
+    });
+  },[])
 
   return (
     <div>

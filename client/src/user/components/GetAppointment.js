@@ -63,12 +63,23 @@ class CreateEvent extends Component {
   getSlots(availableSlots) {
     let refSlots = [];
     availableSlots.map((slot) => {
+      // console.log((moment.tz(slot , this.state.timezone)).date())
+      // console.log(this.state.date.getDate())
+      if(this.state.date.getDate() === (moment.tz(slot , this.state.timezone)).date()){
+        
+        if(new Date().getHours() < (moment.tz(slot , this.state.timezone)).hours()){
+        
+          refSlots.push(moment.tz(slot, this.state.timezone));
+        
+          }
 
-      if(new Date().getHours() < (moment.tz(slot , this.state.timezone)).hours()){
-        
-        refSlots.push(moment.tz(slot, this.state.timezone));
-        
       }
+      else{
+        refSlots.push(moment.tz(slot, this.state.timezone));
+
+      }
+
+      
       return moment.tz(slot, this.state.timezone);
     });
     this.setState({
@@ -116,56 +127,55 @@ class CreateEvent extends Component {
   }
 
   onSlotSelect(e) {
-    
-    let refSlots = [];
-    this.state.slots.map((slot) => {
-      refSlots.push(moment.tz(slot, "Asia/Kolkata"));
-      return moment.tz(slot, "Asia/Kolkata");
-    });
-    let index = this.state.buttons.indexOf(e.button);
-    const selectedSlot = refSlots[index];
-    let date = this.state.date,
-      yr = date.getFullYear(),
-      month = date.getMonth(),
-      day = date.getDate(),
-      hr = moment(selectedSlot).hours(),
-      min = moment(selectedSlot).minutes();
-
-    // let eventDateTime = new Date(yr, month, day, hr, min, 0);
-    let eventDateTime = moment
-      .tz([yr, month, day, hr, min], "Asia/Kolkata")
-      .format();
-    // console.log(eventDateTime);
-
-    const eventParam = {
-      reqDateTime: eventDateTime,
-      reqDuration: this.state.duration,
-      userEmail: this.props.userState.user.email,
-      gymName : this.props.gymName,
-      gymEmail : this.props.gymEmail
-    };
-
-  if(this.props.userState.wallet > parseInt(this.props.priceOnPayment)){
-    axios
-      .post("http://localhost:5000/createEvent", eventParam)
-      .then(() => {
-        axios
-          .post("http://localhost:5000/updateWallet", {wallet : parseInt(this.props.userState.wallet - parseInt(this.props.priceOnPayment)) , email : this.props.userState.user.email , action : "book"})
-          .then((res) =>{
-            console.log(res.data)
-            window.location = `/status/${eventParam.reqDateTime}/${eventParam.reqDuration}`;
-
-          })
-      })
-      .catch(() => {
-        window.location = `/Error/:442`;
+    if(window.confirm("Are You Sure wanna continue?")){
+      let refSlots = [];
+      this.state.slots.map((slot) => {
+        refSlots.push(moment.tz(slot, "Asia/Kolkata"));
+        return moment.tz(slot, "Asia/Kolkata");
       });
-  }
-  else{
-    alert("You Don't have enough balance!")
-  }
+      let index = this.state.buttons.indexOf(e.button);
+      const selectedSlot = refSlots[index];
+      let date = this.state.date,
+        yr = date.getFullYear(),
+        month = date.getMonth(),
+        day = date.getDate(),
+        hr = moment(selectedSlot).hours(),
+        min = moment(selectedSlot).minutes();
 
-    
+      // let eventDateTime = new Date(yr, month, day, hr, min, 0);
+      let eventDateTime = moment
+        .tz([yr, month, day, hr, min], "Asia/Kolkata")
+        .format();
+      // console.log(eventDateTime);
+
+      const eventParam = {
+        reqDateTime: eventDateTime,
+        reqDuration: this.state.duration,
+        userEmail: this.props.userState.user.email,
+        gymName : this.props.gymName,
+        gymEmail : this.props.gymEmail
+      };
+
+    if(this.props.userState.wallet > parseInt(this.props.priceOnPayment)){
+      axios
+        .post("http://localhost:5000/createEvent", eventParam)
+        .then(() => {
+          axios
+            .post("http://localhost:5000/updateWallet", {wallet : parseInt(this.props.userState.wallet - parseInt(this.props.priceOnPayment)) , email : this.props.userState.user.email , action : "book"})
+            .then((res) =>{
+              console.log(res.data)
+              window.location = `/status/${eventParam.reqDateTime}/${eventParam.reqDuration}`;
+
+            })
+        })
+        .catch(() => {
+          window.location = `/Error/:442`;
+        });
+    }
+    else{
+      alert("You Don't have enough balance!")
+    }
+    } 
   }
 
   render() {

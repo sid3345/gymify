@@ -25,7 +25,7 @@ function Login() {
                         .then((res) =>{
                             // console.log(res.data[0].email)
                             if(res.data[0].checked == true){
-                                history.push('/register_gym')
+                                history.push('/owner')
                             }
                             else{
                                 history.push('/')
@@ -47,8 +47,8 @@ function Login() {
                     axios.post("http://localhost:5000/createUser" , {email : auth.user.email , check : {checked}})
                     .then((res) =>{
                         if(res.data.check.checked == true){
-                            history.push('/register_gym')
-                            window.location.reload()
+                            history.push('/owner')
+                            //window.location.reload()
                         }
                         else{
                             history.push('/')

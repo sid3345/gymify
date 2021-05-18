@@ -10,7 +10,7 @@ import Navbar from "../components/Navbars/Navbar.js";
 import Footer from "../components/Footer/Footer.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
 
-import {AdmindashboardRoutes} from "../routes.js";
+import {GymOwnerdashboardRoutes} from "../routes.js";
 
 import styles from "../assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
@@ -21,21 +21,23 @@ let ps;
 
 const switchRoutes = (
   <Switch>
-    {AdmindashboardRoutes.map((prop, key) => {
-      if (prop.layout === "/admin") {
-        //prop.hidden= true
+    {GymOwnerdashboardRoutes.map((prop, key) => {
+      if (prop.layout === "/owner") {
+        //prop.hidden= false;
+        console.log('prop.path: ',prop.path)
         return (
           <Route
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}
           />
-        );
-      }
+        )}
       //else prop.hidden= true
       //return null;
     })}
-    <Redirect from="/admin" to="/admin/dashboard" />
+
+    {console.log('GymOwnerdashboardRoutes: ',GymOwnerdashboardRoutes)}
+    <Redirect from="/owner" to="/owner/register_gym" />
   </Switch>
 );
 
@@ -96,7 +98,7 @@ export default function Admin({ ...rest }) {
   return (
     <div className={classes.wrapper}>
       <Sidebar
-        routes={AdmindashboardRoutes}
+        routes={GymOwnerdashboardRoutes}
         logoText={"Gymify"}
         logo={logo}
         image={image}
@@ -107,7 +109,7 @@ export default function Admin({ ...rest }) {
       />
       <div className={classes.mainPanel} ref={mainPanel}>
         <Navbar
-          routes={AdmindashboardRoutes}
+          routes={GymOwnerdashboardRoutes}
           handleDrawerToggle={handleDrawerToggle}
           {...rest}
         />

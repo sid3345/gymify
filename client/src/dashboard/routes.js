@@ -30,9 +30,11 @@ import GymProfile from "./views/Admin/GymProfile/GymProfile.js";
 import Maps from "./views/Admin/Maps/Maps.js";
 import NotificationsPage from "./views/Admin/Notifications/Notifications.js";
 import GymTableList from "./views/Admin/GymTableList/GymTableList.js";
+import GymOwnerDashboard from './views/GymOwner/GymOwnerDashboard.js'
+import UserTableList from './views/GymOwner/UserTableList'
 // core components/views for RTL layout
 
-const dashboardRoutes = [
+export const AdmindashboardRoutes = [
   {
     path: "/dashboard",
     name: "Dashboard",
@@ -73,7 +75,31 @@ const dashboardRoutes = [
     icon: Notifications,
     component: NotificationsPage,
     layout: "/admin"
+  }
+];
+  export const GymOwnerdashboardRoutes = [
+  {
+    path: "/register_gym",
+    name: "Gym Owner Dashboard",
+    rtlName: "إخطارات",
+    icon: Dashboard,
+    component: GymOwnerDashboard,
+    layout: "/owner"
+  },
+  {
+    path: "/userList",
+    name: "User List",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: "content_paste",
+    component: UserTableList,
+    layout: "/owner"
+  },
+  {
+    path: "/maps",
+    name: "Maps",
+    rtlName: "خرائط",
+    icon: LocationOn,
+    component: Maps,
+    layout: "/owner"
   },
 ];
-
-export default dashboardRoutes;

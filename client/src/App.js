@@ -10,7 +10,6 @@ import EventsList from "./user/EventsList";
 import Login from "./user/components/Login";
 import { auth } from "./user/firebase";
 import { createBrowserHistory } from "history";
-import GymRegister from './dashboard/views/GymOwner/GymRegister'
 
 import {connect} from 'react-redux'
 import store from "./user/Store";
@@ -19,7 +18,8 @@ import "./dashboard/assets/css/material-dashboard-react.css?v=1.9.0";
 
 // core components
 import Admin from "./dashboard/layouts/Admin";
-import GymHome from "./dashboard/views/GymOwner/GymHome";
+import Owner from "./dashboard/layouts/Owner";
+import GymRegister from "./dashboard/views/GymOwner/GymRegister";
 
 const hist = createBrowserHistory();
 
@@ -44,11 +44,9 @@ const App = (props) => {
   var admin = false
 
   if(props.uservalue.user){
-    console.log(props.uservalue.user.email)
     if(props.uservalue.user.email == "admin@admin.com"){
       showNav = false
       admin = true
-      
     }
   }
   return (
@@ -60,12 +58,11 @@ const App = (props) => {
         <Route exact path="/" component={Home} />
         <Route path="/status" component={Status} />
         {props.uservalue.user ? <Route path="/listAll" component={EventsList} /> : null}
+        <Route path="/admin" component={Admin} />
+        <Route path="/owner" component={Owner} />
         <Route path="/login" component={Login} />
+
         <Route path="/register_gym/profile" component={GymRegister} />
-
-        <Route path="/register_gym" component={GymHome} />
-
-        {admin ? <Route path="/admin" component={Admin} /> : null}  
 
         <Route path="*" component={Error} />
       </Switch>

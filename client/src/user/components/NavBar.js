@@ -44,6 +44,12 @@ var profile = <Link to = "/register_gym/profile">
                 </Button>
               </Link>
 
+var owner = <Link to = "/owner">
+                <Button color="primary" className="mx-2">
+                  Dashboard
+                </Button>
+              </Link>
+
 var money = <Button color = "primary" className="mx-2">
               Money : {props.uservalue.wallet}
              </Button>
@@ -84,6 +90,8 @@ useEffect(() => {
           {props.uservalue.user ? (!checked ? <Payments wallet = {props.uservalue.wallet}/> : null) : null}
 
           {props.uservalue.user ? (checked ? profile : listEvent) : null}
+
+          {props.uservalue.user ? (checked ? owner : listEvent) : null}
 
           {props.uservalue.user ? (!checked ? money : null): null}
 

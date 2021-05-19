@@ -14,6 +14,7 @@ router.route("/").post((req, res) => {
     // .tz(staticConfig.timezone)
     .toDate();
   reqUserEmail = req.body.userEmail
+  reqGymEmail = req.body.gymEmail
   console.log(reqStart);
   console.log(reqEnd);
   console.log(reqUserEmail)
@@ -23,6 +24,24 @@ router.route("/").post((req, res) => {
 
   db.collection("events")
     .where("userEmail", "==", reqUserEmail)
+    .get()
+    .then((snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        eventsList.push(doc.data());
+      });
+      eventsList.map((event) => {
+        event.dateTime = event.dateTime.toDate();
+        event.dateTime = moment
+          .tz(event.dateTime, staticConfig.timezone)
+          .format();
+      });
+      res.json(eventsList);
+    })
+    :
+    reqGymEmail ?
+
+    db.collection("events")
+    .where("gymEmail", "==", reqGymEmail)
     .get()
     .then((snapshot) => {
       snapshot.docs.forEach((doc) => {

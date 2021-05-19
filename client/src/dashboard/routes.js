@@ -21,6 +21,7 @@ import Person from "@material-ui/icons/Person";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import BubbleChart from "@material-ui/icons/BubbleChart";
 import LocationOn from "@material-ui/icons/LocationOn";
+import EventIcon from '@material-ui/icons/Event';
 import Notifications from "@material-ui/icons/Notifications";
 import Unarchive from "@material-ui/icons/Unarchive";
 import Language from "@material-ui/icons/Language";
@@ -32,6 +33,7 @@ import NotificationsPage from "./views/Admin/Notifications/Notifications.js";
 import GymTableList from "./views/Admin/GymTableList/GymTableList.js";
 import GymOwnerDashboard from './views/GymOwner/GymOwnerDashboard.js'
 import UserTableList from './views/GymOwner/UserTableList'
+import SetSlots from "./views/GymOwner/SetSlots.js";
 // core components/views for RTL layout
 
 export const AdmindashboardRoutes = [
@@ -100,6 +102,14 @@ export const AdmindashboardRoutes = [
     rtlName: "خرائط",
     icon: LocationOn,
     component: Maps,
+    layout: "/owner"
+  },
+  {
+    path: "/setSlots",
+    name: "Set free slots",
+    rtlName: "خرائط",
+    icon: EventIcon,
+    component: SetSlots,
     layout: "/owner"
   },
 ];

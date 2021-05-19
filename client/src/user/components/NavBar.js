@@ -38,17 +38,18 @@ var listEvent = <Link to="/listAll">
                 </Button>
               </Link>
 
-var profile = <Link to = "/register_gym/profile">
-                <Button color="primary" className="mx-2">
-                  Profile
-                </Button>
-              </Link>
-
-var owner = <Link to = "/owner">
+var owner = <div>
+                  <Link to = "/register_gym/profile">
+                  <Button color="primary" className="mx-2">
+                    Profile
+                  </Button>
+                </Link>
+                <Link to = "/owner">
                 <Button color="primary" className="mx-2">
                   Dashboard
                 </Button>
               </Link>
+              </div>
 
 var money = <Button color = "primary" className="mx-2">
               Money : {props.uservalue.wallet}
@@ -88,8 +89,6 @@ useEffect(() => {
           <Nav className="ml-auto" navbar>
 
           {props.uservalue.user ? (!checked ? <Payments wallet = {props.uservalue.wallet}/> : null) : null}
-
-          {props.uservalue.user ? (checked ? profile : listEvent) : null}
 
           {props.uservalue.user ? (checked ? owner : listEvent) : null}
 

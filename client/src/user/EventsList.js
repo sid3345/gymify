@@ -14,8 +14,6 @@ moment.tz.setDefault("Asia/Kolkata");
 class CreateEvent extends Component {
   constructor(props) {
     super(props);
-
-    this.onSubmit = this.onSubmit.bind(this);
     this.getEventsList = this.getEventsList.bind(this);
 
     this.state = {
@@ -24,8 +22,13 @@ class CreateEvent extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      events: []
+    const email = {
+      userEmail: this.props.uservalue.user.email
+    };
+
+    axios.post("http://localhost:5000/getEvents/", email).then((res) => {
+      console.log(res.data)
+      this.getEventsList(res.data);
     });
   }
 
@@ -36,31 +39,11 @@ class CreateEvent extends Component {
     });
   }
 
-  onSubmit(e) {
-    e.preventDefault();
 
-    const range = {
-      userEmail: this.props.uservalue.user.email
-    };
-
-    axios.post("http://localhost:5000/getEvents/", range).then((res) => {
-      console.log(res.data)
-      this.getEventsList(res.data);
-    });
-  }
   render() {
     
     return (
       <div className="container">
-        <form className="range-selector row mt-5" onSubmit={this.onSubmit}>
-          <div className="col-12 d-flex justify-content-center align-items-center">
-            <input
-              type="submit"
-              value="Get all bookings"
-              className="btn btn-primary mt-5"
-            />
-          </div>
-        </form>
         <Table className="container mt-5" striped>
           <thead>
             <tr>

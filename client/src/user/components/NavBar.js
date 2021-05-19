@@ -39,12 +39,12 @@ var listEvent = <Link to="/listAll">
               </Link>
 
 var owner = <div>
-                  <Link to = "/register_gym/profile">
-                  <Button color="primary" className="mx-2">
-                    Profile
-                  </Button>
-                </Link>
-                <Link to = "/owner">
+              <Link to = "/register_gym/profile">
+                <Button color="primary" className="mx-2">
+                  Profile
+                </Button>
+              </Link>
+              <Link to = "/owner">
                 <Button color="primary" className="mx-2">
                   Dashboard
                 </Button>

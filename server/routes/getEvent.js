@@ -15,6 +15,7 @@ router.route("/").post((req, res) => {
     .toDate();
   reqUserEmail = req.body.userEmail
   reqGymEmail = req.body.gymEmail
+  console.log(req.body)
   console.log(reqStart);
   console.log(reqEnd);
   console.log(reqUserEmail)

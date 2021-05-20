@@ -10,7 +10,7 @@ router.route("/").post((req, res) => {
   wallet = req.body.wallet
   res.send(req.body)
 
-  req.body.action ?
+  req.body.action  || req.body.update ?
 
   db.collection("users").doc(req.body.email).update({
     "wallet": wallet ,

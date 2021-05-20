@@ -153,7 +153,8 @@ class CreateEvent extends Component {
         reqDuration: this.state.duration,
         userEmail: this.props.userState.user.email,
         gymName : this.props.gymName,
-        gymEmail : this.props.gymEmail
+        gymEmail : this.props.gymEmail,
+        cost : parseInt(this.props.priceOnPayment)
       };
 
     if(this.props.userState.wallet > parseInt(this.props.priceOnPayment)){

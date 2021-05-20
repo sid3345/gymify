@@ -16,6 +16,7 @@ router.route("/").post((req, res) => {
   const reqUserEmail = req.body.userEmail
   const reqGymName = req.body.gymName
   const reqGymEmail = req.body.gymEmail
+  const reqCost = req.body.cost
   console.log(reqGymName)
 
   db.collection("events").add({
@@ -23,7 +24,8 @@ router.route("/").post((req, res) => {
     duration: reqDuration,
     userEmail: reqUserEmail,
     gymName: reqGymName,
-    gymEmail : reqGymEmail
+    gymEmail : reqGymEmail,
+    cost : reqCost
 
 
   });

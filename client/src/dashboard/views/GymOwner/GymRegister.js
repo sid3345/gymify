@@ -68,6 +68,7 @@ function GymRegister(props) {
       'postal':postal,
       'description':description,
       'approved': 0,
+      slots:[],
       'img':'gym'+Math.floor(Math.random() * 9)
     }
 
@@ -78,7 +79,7 @@ function GymRegister(props) {
     });
     alert('Gym profile submitted. Wait for sometime to approve.')
 
-    history.push('/owner')
+    history.push('/')
     
   }
 

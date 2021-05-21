@@ -10,7 +10,7 @@ router.route("/").post((req, res) => {
   console.log('req.body received: ',req.body);
   console.log('req.body.slots received: ',req.body.slots);
 
-  req.body.slots ?
+  req.body.slots.length >0 ?
   db.collection("gyms").doc(req.body.email).update({
    slots: req.body.slots ? req.body.slots: '',
   })

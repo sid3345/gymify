@@ -47,7 +47,7 @@ function Login() {
                     axios.post("http://localhost:5000/createUser" , {email : auth.user.email , check : {checked}})
                     .then((res) =>{
                         if(res.data.check.checked == true){
-                            history.push('/owner')
+                            history.push('/register_gym/profile')
                             //window.location.reload()
                         }
                         else{

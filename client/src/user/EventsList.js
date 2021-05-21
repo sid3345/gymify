@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import {  } from "reactstrap";
+import { Button } from 'reactstrap'
 import Calendar from "react-calendar";
 import axios from "axios";
 import { Table } from "reactstrap";
@@ -41,7 +41,7 @@ class CreateEvent extends Component {
 
   removeBooking(id){
 
-    if(window.confirm("Are You Sure Wanna Cancel Your Booking?")){
+    if(window.confirm("Are You Sure Wanna Cancel Your Booking? You Will Refunded with 80 percent of actual cost.")){
       const arrayCopy = this.state.events.filter((row) => this.state.events.indexOf(row) + 1 == id)
       const arrayCopyTwo = this.state.events.filter((row) => this.state.events.indexOf(row) + 1 !== id)
       console.log("one:" , arrayCopy)
@@ -51,7 +51,7 @@ class CreateEvent extends Component {
       axios.post("http://localhost:5000/removeEvent/", arrayCopy)
       .then((res) => {this.setState({events : arrayCopyTwo}) 
               console.log(res.data)
-              axios.post("http://localhost:5000/updateWallet", {wallet : parseInt(this.props.uservalue.wallet + parseInt((res.data)[0].cost)) , email : this.props.uservalue.user.email , action : "update"})
+              axios.post("http://localhost:5000/updateWallet", {wallet : parseInt(this.props.uservalue.wallet + parseInt(((res.data)[0].cost)*80)/100) , email : this.props.uservalue.user.email , action : "update"})
               .then(window.location.reload())
     })
     }
@@ -86,7 +86,7 @@ class CreateEvent extends Component {
                   <td>{date}</td>
                   <td>{time}</td>
                   <td>{e.duration} Minutes</td>
-                  <td><button onClick = {() =>this.removeBooking(this.state.events.indexOf(e) + 1)}>X</button></td>
+                  <td><Button outline color="danger" onClick = {() =>this.removeBooking(this.state.events.indexOf(e) + 1)}>Cancel</Button></td>
                 </tr>
               );
             })}

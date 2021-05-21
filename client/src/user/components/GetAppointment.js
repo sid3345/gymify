@@ -218,7 +218,7 @@ class CreateEvent extends Component {
             </form>
           </div>
           <div className="col-12 col-md-6">
-            {this.state.buttons.map((button) => {
+            {this.state.buttons.length > 0 ? this.state.buttons.map((button) => {
               return (
                 <Button
                   key = {button}
@@ -232,7 +232,7 @@ class CreateEvent extends Component {
                   {button}
                 </Button>
               );
-            })}
+            }) : <h2> No Slot Available </h2>}
     
           </div>
         </div>

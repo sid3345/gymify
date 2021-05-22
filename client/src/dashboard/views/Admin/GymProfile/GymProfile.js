@@ -57,6 +57,7 @@ export default function UserProfile() {
   const [address , setAddress] = useState('')
   const [postal , setPostal] = useState('')
   const [description , setDescription] = useState('')
+  const [slots , setSlots] = useState([])
   const [img , setImg] = useState('')
 
 
@@ -81,6 +82,7 @@ export default function UserProfile() {
         setAddress((res.data)[i].address);
         setPostal((res.data)[i].postal);
         setDescription((res.data)[i].description);
+        setSlots((res.data)[i].slots);
         setImg((res.data)[i].img);
         break
       }
@@ -104,6 +106,7 @@ export default function UserProfile() {
 
   const onSubmit= (e) => {
     e.preventDefault();
+    console.log('slots: ', slots);
 
     const data= {
       'gym':gym,
@@ -116,6 +119,7 @@ export default function UserProfile() {
       'postal':postal,
       'description':description,
       'approved': 1,
+      'slots':slots,
       'img':img
     }
 
@@ -123,9 +127,9 @@ export default function UserProfile() {
 
     axios.post("http://localhost:5000/gym_register/", data).then((res) => {
       console.log(res.data);
+      history.push('/admin/gymList')
     });
 
-    history.push('/admin/gymList')
   }
 
   return (

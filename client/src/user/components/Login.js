@@ -48,7 +48,7 @@ function Login() {
                     .then((res) =>{
                         if(res.data.check.checked == true){
                             history.push('/register_gym/profile')
-                            //window.location.reload()
+                            window.location.reload()
                         }
                         else{
                             history.push('/')

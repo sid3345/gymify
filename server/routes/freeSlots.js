@@ -19,7 +19,7 @@ router.route("/").post((req, res) => {
   // reqEndDate = new Date(reqEndDate);
   // reqEndDate = admin.firestore.Timestamp.fromDate(reqEndDate);
   const reqTimezone = req.body.reqTimezone;
-  console.log(reqTimezone);
+  
 
   let start = moment(staticConfig.startHours, "HH:mm");
   let end = moment(staticConfig.endHours, "HH:mm");

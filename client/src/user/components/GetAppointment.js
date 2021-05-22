@@ -180,7 +180,7 @@ class CreateEvent extends Component {
   }
 
   render() {
-    console.log(this.props.priceOnPayment)
+    
     // console.log(this.props.userState.user.email)
 
     return (

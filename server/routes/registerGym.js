@@ -7,12 +7,11 @@ router.route("/").post((req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.send("Gym added");
 
-  console.log('req.body received: ',req.body);
-  console.log('req.body.slots received: ',req.body.slots);
+  console.log('Gym register req: ',req.body);
 
   req.body.slots.length >0 ?
   db.collection("gyms").doc(req.body.email).update({
-   slots: req.body.slots ? req.body.slots: '',
+   slots: req.body.slots,
   })
   :
   db.collection("gyms").doc(req.body.email).set({
@@ -26,6 +25,7 @@ router.route("/").post((req, res) => {
    postal : req.body.postal ? req.body.postal : ' ',
    description : req.body.description ? req.body.description : ' ',
    approved: req.body.approved,
+   slots: [],
    img: req.body.img
   });
 });

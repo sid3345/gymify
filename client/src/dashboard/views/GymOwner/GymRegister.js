@@ -90,8 +90,8 @@ function GymRegister(props) {
 
     for(let i=0; i<res.data.length;i++){
       
-
-      if ((res.data)[i].email==props.uservalue.user.email)
+      if(props.uservalue.user){
+        if ((res.data)[i].email==props.uservalue.user.email)
       {
         //console.log('(res.data)[i]: ',(res.data)[i]);
 
@@ -106,6 +106,9 @@ function GymRegister(props) {
         //setImg((res.data)[i].img);
         break
       }
+      }
+
+      
     }
     });
   },[])

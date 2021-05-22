@@ -58,7 +58,7 @@ const App = (props) => {
         <Route exact path="/" component={Home} />
         <Route path="/status" component={Status} />
         {props.uservalue.user ? <Route path="/listAll" component={EventsList} /> : null}
-        <Route path="/admin" component={Admin} />
+        {props.uservalue.user ? (props.uservalue.user.email  == "admin@admin.com" ?<Route path="/admin" component={Admin} /> : null) : null}
         <Route path="/owner" component={Owner} />
         <Route path="/login" component={Login} />
 

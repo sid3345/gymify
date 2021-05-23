@@ -113,3 +113,4 @@ client/.env.development
 client/package-lock.json
 client/yarn.lock
 server/package-lock.json
+*.mp4

@@ -68,7 +68,25 @@ const UserTableList= (props)=> {
     //console.log('userList: ',userList);  
     userList.map(user=>{
     //console.log('user: ',user)
-    listUser.push([user.userEmail, user.dateTime, user.duration])
+
+    let Hours = new Date(user.dateTime).getHours();
+    let min = new Date(user.dateTime).getMinutes();
+    let _hrs = Hours;
+    let _daynight = "AM";
+    // if(cur_hr < Hours){
+      if (Hours > 12) {
+        _hrs = Hours - 12;
+        _daynight = "PM";
+      } else if (Hours === 12) {
+        _hrs = 12;
+        _daynight = "PM";
+      }
+      let _min = min;
+      if (min === 0) _min = "00";
+
+    let dateTime= new Date(user.dateTime).getDate()+'-'+new Date(user.dateTime).getMonth()+'-'+new Date(user.dateTime).getFullYear()+' '+ _hrs +':'+_min+ ' '+ _daynight
+
+    listUser.push([user.userEmail, dateTime])
   })
   }
 
@@ -89,7 +107,7 @@ const UserTableList= (props)=> {
           <Table
             link= ''
             tableHeaderColor="primary"
-            tableHead={["User Email", 'Date Time booked', 'Duration',]}
+            tableHead={["User Email", 'Date Time booked']}
             tableData={listUser}
           />
           </CardBody>

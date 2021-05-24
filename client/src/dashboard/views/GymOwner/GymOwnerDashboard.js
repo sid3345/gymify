@@ -27,6 +27,7 @@ import CardIcon from "../../components/Card/CardIcon.js";
 import CardBody from "../../components/Card/CardBody.js";
 //import CardFooter from "../../../../components/Card/CardFooter.js";
 import CardFooter from "../../components/Card/CardFooter";
+import {connect} from 'react-redux'
 
 import {
   dailySalesChart,
@@ -40,66 +41,71 @@ const useStyles = makeStyles(styles);
 
 moment.tz.setDefault("Asia/Kolkata");
 
-export default function GymOwnerDashboard() {
+function GymOwnerDashboard(props) {
 
   const classes = useStyles();
 
   const[gymList, setGymList]= useState('');
-  const[userList, setUserList]= useState('');
   const[eventList, setEventList]= useState('');
   const[revenue, setRevenue]= useState(0)
-  const[listOfGym, setlistOfGym]= useState([]);
+  const[listOfUsers, setlistOfUsers]= useState([]);
   const[countDayofWeek, setCountDayofWeek]= useState([]);
   const[countMonthofYear, setCountMonthofYear]= useState([]);
   const[countHoursofDay, setCountHoursofDay]= useState([]);
 
   useEffect(() => {
-  axios.get("http://localhost:5000/gymList/").then((res)=> {
-    //console.log('res: ', res);
-    setGymList(res.data)
-    });
+  if(props.userState.user && gymList.length==0){
+    //console.log('props.userState.user: ', props.userState.user);
 
-    axios.post("http://localhost:5000/fetchUser/").then((res)=> {
-    //console.log('res: ', res);
-    
-    setUserList(res.data)
-    });
+      axios.get("http://localhost:5000/gymList/").then((res)=> {
+        //console.log('res: ', res);
+        
+        for (var i in res.data){
+            if(res.data[i].email== props.userState.user.email){
+            setGymList(res.data[i])
+            break
+            }
+          }
+      });
 
     const range = {
       reqStart: moment.tz(new Date(Date.now() - 30 * 24 * 60 * 60 * 1000), "Asia/Kolkata").toDate(),
       reqEnd: moment.tz(new Date(Date.now() + 90 * 24 * 60 * 60 * 1000), "Asia/Kolkata").toDate(),
+      gymEmail: props.userState.user.email
     };
 
     axios.post("http://localhost:5000/getEvents/", range).then((res) => {
       //console.log('event data: ' ,res.data)
+      
       setEventList(res.data)
       })
-  },[])
+
+    }
+  },[props.userState.user])
 
 
   useEffect(() => {
     var total=0
+    //console.log('gymList: ', gymList);
 
     if(gymList && eventList){
 
       let gymList_copy = JSON.parse(JSON.stringify(gymList))
       let eventList_copy = JSON.parse(JSON.stringify(eventList))
 
-        gymList_copy.map((gyms)=>{
-        gyms.gymRevenue=0
-        gyms.bookings=0
+        gymList_copy.gymRevenue=0
+        gymList_copy.bookings=0
 
         eventList_copy.map((events)=>{
         
-          if(events.gymEmail==gyms.email){
+          if(events.gymEmail==gymList_copy.email){
             //console.log('matched: ',gymList[j].email, eventList[i].gymEmail)
-              total += parseInt(gyms.cost)
+              total += parseInt(gymList_copy.cost)
 
-              gyms.gymRevenue+=parseInt(gyms.cost) 
-              gyms.bookings+=1
+              gymList_copy.gymRevenue+=parseInt(gymList_copy.cost) 
+              gymList_copy.bookings+=1
             }
           })
-      })
       //console.log('gymList_copy inside: ', gymList_copy);
       //console.log('total: ', total);
 
@@ -152,8 +158,15 @@ export default function GymOwnerDashboard() {
       countHours['9PM']=0
       countHours['10PM']=0
 
+    const listUser=[]
+    const listUser_aggregate={}
+
     eventList.map((events)=>{
       //console.log('event: ',event);
+
+      if(!(listUser_aggregate[events.userEmail])){
+        listUser_aggregate[events.userEmail] ={revenue: 0, bookings: 0}
+      }
 
       let hr= new Date(events.dateTime).getHours();
       let _hrs = hr
@@ -172,7 +185,24 @@ export default function GymOwnerDashboard() {
       countDay[day]+= 1
       countmonth[month] += 1
       countHours[_hrs+_daynight]+=1
+
+     
+      listUser.push([events.userEmail, events.dateTime, events.duration])
+
+      listUser_aggregate[events.userEmail].revenue += events.cost
+      listUser_aggregate[events.userEmail].bookings += 1
+
       })
+
+      //console.log('listUser_aggregate: ', listUser_aggregate);
+
+      let user_array=[]
+
+      for (var user in listUser_aggregate){
+        user_array.push([user, listUser_aggregate[user].revenue, listUser_aggregate[user].bookings])
+      }
+
+      setlistOfUsers(user_array)
 
       var listDay=[]
       var listMonth=[]
@@ -209,26 +239,9 @@ export default function GymOwnerDashboard() {
       //console.log(countDay);
       //console.log(countmonth);
       //console.log(('countHours: ',countHours));
+
     }
-  },[eventList, revenue])
- 
-  useEffect(() => {
-    var listGym=[]
-
-    if(gymList){
-
-      gymList.sort((a, b) => b.bookings - a.bookings);
-     
-      gymList.map(gyms=>{
-        listGym.push([gyms.gym, gyms.email, gyms.gymRevenue, gyms.bookings, gyms.city])
-      })
-    } 
-    setlistOfGym(listGym)
-
-  },[gymList])
-
-  //console.log('gymList: ', gymList);
-  //console.log('listOfGym: ', listOfGym);
+  },[eventList])
 
   return (
     <div>
@@ -274,24 +287,7 @@ export default function GymOwnerDashboard() {
                 <Accessibility />
               </CardIcon>
               <p className={classes.cardCategory}>Users Count</p>
-              <h3 className={classes.cardTitle}>{userList.length}</h3>
-            </CardHeader>
-            <CardFooter stats>
-              <div className={classes.stats}>
-                <Update />
-                Just Updated
-              </div>
-            </CardFooter>
-          </Card>
-        </GridItem>
-         <GridItem xs={12} sm={6} md={3}>
-          <Card>
-            <CardHeader color="info" stats icon>
-              <CardIcon color="info">
-                <FitnessCenterIcon />
-              </CardIcon>
-              <p className={classes.cardCategory}>Gym Count</p>
-              <h3 className={classes.cardTitle}>{gymList.length}</h3>
+              <h3 className={classes.cardTitle}>{listOfUsers.length}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -377,16 +373,16 @@ export default function GymOwnerDashboard() {
         <GridItem xs={12}>
           <Card>
             <CardHeader color="warning">
-              <h4 className={classes.cardTitleWhite}>Gym Stats</h4>
+              <h4 className={classes.cardTitleWhite}>User Stats</h4>
               <p className={classes.cardCategoryWhite}>
-                Top 5 most booked gyms
+                Top 5 users
               </p>
             </CardHeader>
             <CardBody>
               <Table
                 tableHeaderColor="warning"
-                tableHead={["Name","Gym Email" ,"Revenue",'Bookings', "City"]}
-                tableData={listOfGym.slice(0, 5)}
+                tableHead={["User Email", "Booking revenue", "No. of Bookings"]}
+                tableData={listOfUsers}
               />
             </CardBody>
           </Card>
@@ -395,3 +391,11 @@ export default function GymOwnerDashboard() {
     </div>
   );
 }
+
+const mapStateToProps = (state) =>{
+  return{
+    userState : state
+  }
+}
+
+export default connect(mapStateToProps)(GymOwnerDashboard)

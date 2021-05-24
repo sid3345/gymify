@@ -53,6 +53,9 @@ function GymRegister(props) {
   const [address , setAddress] = useState('')
   const [postal , setPostal] = useState('')
   const [description , setDescription] = useState('')
+  const [approved , setApproved] = useState(0)
+  const [slots , setSlots] = useState([])
+  const [img , setImg] = useState('')
 
     const onSubmit= (e) => {
     e.preventDefault();
@@ -67,9 +70,9 @@ function GymRegister(props) {
       'address':address,
       'postal':postal,
       'description':description,
-      'approved': 0,
-      slots:[],
-      'img':'gym'+Math.floor(Math.random() * 9)
+      'approved': approved==1 ? approved : 0,
+      'slots' :slots,
+      'img':img.length>0 ? img :'gym'+Math.floor(Math.random() * 9)
     }
 
     console.log('data submitted: ', data);
@@ -103,7 +106,9 @@ function GymRegister(props) {
         setAddress((res.data)[i].address);
         setPostal((res.data)[i].postal);
         setDescription((res.data)[i].description);
-        //setImg((res.data)[i].img);
+        setApproved((res.data)[i].approved);
+        setSlots((res.data)[i].slots);
+        setImg((res.data)[i].img);
         break
       }
       }

@@ -222,7 +222,7 @@ class CreateEvent extends Component {
       })
 
       const eventParam = {
-        slots: arr,
+        slots_changed: arr,
         email: this.props.userState.user.email,
       };
 

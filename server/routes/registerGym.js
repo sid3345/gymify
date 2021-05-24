@@ -9,9 +9,9 @@ router.route("/").post((req, res) => {
 
   console.log('Gym register req: ',req.body);
 
-  req.body.slots.length >0 ?
+  req.body.slots_changed ?
   db.collection("gyms").doc(req.body.email).update({
-   slots: req.body.slots,
+   slots: req.body.slots_changed,
   })
   :
   db.collection("gyms").doc(req.body.email).set({
@@ -25,7 +25,7 @@ router.route("/").post((req, res) => {
    postal : req.body.postal ? req.body.postal : ' ',
    description : req.body.description ? req.body.description : ' ',
    approved: req.body.approved,
-   slots: [],
+   slots: req.body.slots,
    img: req.body.img
   });
 });

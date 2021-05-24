@@ -86,7 +86,7 @@ const UserTableList= (props)=> {
 
     let dateTime= new Date(user.dateTime).getDate()+'-'+new Date(user.dateTime).getMonth()+'-'+new Date(user.dateTime).getFullYear()+' '+ _hrs +':'+_min+ ' '+ _daynight
 
-    listUser.push([user.userEmail, dateTime])
+    listUser.push([user.userEmail, dateTime, user.cost])
   })
   }
 
@@ -107,7 +107,7 @@ const UserTableList= (props)=> {
           <Table
             link= ''
             tableHeaderColor="primary"
-            tableHead={["User Email", 'Date Time booked']}
+            tableHead={["User Email", 'Date Time booked', 'Amount']}
             tableData={listUser}
           />
           </CardBody>

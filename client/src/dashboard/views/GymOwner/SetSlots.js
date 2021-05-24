@@ -250,6 +250,7 @@ class CreateEvent extends Component {
                     selected={this.state.date}
                     onChange={this.onChangeDate}
                     minDate={moment().toDate()}
+                    maxDate= {new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()+27)}
                   />
                 </div>
               </div>

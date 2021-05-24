@@ -26,6 +26,7 @@ function Login() {
                             // console.log(res.data[0].email)
                             if(res.data[0].checked == true){
                                 history.push('/owner')
+                                window.location.reload()
                             }
                             else{
                                 history.push('/')

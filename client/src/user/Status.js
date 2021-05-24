@@ -16,7 +16,7 @@ const Success = () => {
 };
 
 const BookingStatus = () => {
-  let { dateTime, duration } = useParams();
+  let { dateTime } = useParams();
   let date = moment(dateTime).format("dddd, MMMM Do YYYY");
   let time = moment(dateTime).format("hh:mm A");
   return (
@@ -27,7 +27,6 @@ const BookingStatus = () => {
       <h3>Your slot is successfully booked</h3>
       <p>Date: {date}</p>
       <p>Time: {time}</p>
-      <p>duration: {duration}</p>
       <a href="/">Back to Home</a>
     </div>
   );

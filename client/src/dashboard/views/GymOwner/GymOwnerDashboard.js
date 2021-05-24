@@ -161,6 +161,8 @@ function GymOwnerDashboard(props) {
     const listUser=[]
     const listUser_aggregate={}
 
+    //eventList.sort((a, b) => b.bookings - a.bookings);
+
     eventList.map((events)=>{
       //console.log('event: ',event);
 
@@ -382,7 +384,7 @@ function GymOwnerDashboard(props) {
               <Table
                 tableHeaderColor="warning"
                 tableHead={["User Email", "Booking revenue", "No. of Bookings"]}
-                tableData={listOfUsers}
+                tableData={listOfUsers.slice(0, 5)}
               />
             </CardBody>
           </Card>

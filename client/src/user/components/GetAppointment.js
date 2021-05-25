@@ -18,18 +18,16 @@ class CreateEvent extends Component {
 
     this.onChangeDate = this.onChangeDate.bind(this);
     this.onChangeTimezone = this.onChangeTimezone.bind(this);
-    this.onChangeDuration = this.onChangeDuration.bind(this);
     this.getSlots = this.getSlots.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
     this.onSlotSelect = this.onSlotSelect.bind(this);
 
     this.state = {
       date: new Date(),
       timezones: timezones,
       timezone: "",
-      duration: 0,
       slots: [],
       buttons: [],
+      all_slots: [],
     };
   }
   
@@ -38,8 +36,20 @@ class CreateEvent extends Component {
     this.setState({
       date: new Date(),
       timezone: "Asia/Kolkata",
-      duration: 30,
     });
+
+    axios.get("http://localhost:5000/gymList/").then((res)=> {
+        console.log('res: ', res);
+
+        for (var i in res.data){
+            if(res.data[i].email== this.props.gymEmail){
+              this.setState({
+                all_slots: res.data[i].slots
+              });
+            break
+            }
+          }
+      });
   }
 
   onChangeTimezone(e) {
@@ -48,19 +58,26 @@ class CreateEvent extends Component {
     });
   }
 
-  onChangeDuration(e) {
-    this.setState({
-      duration: e.target.value,
-    });
-  }
-
   onChangeDate(date) {
     this.setState({
       date: date,
     });
+    let flag=0;
+
+    this.state.all_slots.map((eachDate) =>  Number(Object.keys(eachDate)) == date.getDate() ?
+    flag=eachDate[Object.keys(eachDate)]
+    :null)
+
+    if (flag==0)
+     return this.getSlots([])
+    else
+     return this.getSlots(flag)
+
   }
 
   getSlots(availableSlots) {
+    //console.log('availableSlots: ', availableSlots);
+
     let refSlots = [];
     availableSlots.map((slot) => {
       // console.log((moment.tz(slot , this.state.timezone)).date())
@@ -76,17 +93,16 @@ class CreateEvent extends Component {
       }
       else{
         refSlots.push(moment.tz(slot, this.state.timezone));
-
       }
 
-      
       return moment.tz(slot, this.state.timezone);
     });
+    //console.log('refSlots: ', refSlots);
     this.setState({
       slots: refSlots,
     });
     let tmp = [];
-    this.state.slots.map((slot) => {
+    refSlots.map((slot) => {
       // console.log(new Date().getHours())
       let cur_hr = new Date().getHours()
       let Hours = slot.hours();
@@ -113,19 +129,6 @@ class CreateEvent extends Component {
     });
   }
 
-  onSubmit(e) {
-    e.preventDefault();
-
-    const events = {
-      reqDate: this.state.date.valueOf(),
-      reqTimezone: this.state.timezone,
-    };
-
-    axios.post("http://localhost:5000/freeSlots", events).then((res) => {
-      this.getSlots(res.data);
-    });
-  }
-
   onSlotSelect(e) {
     if(window.confirm("Are You Sure wanna continue?")){
       let refSlots = [];
@@ -133,8 +136,18 @@ class CreateEvent extends Component {
         refSlots.push(moment.tz(slot, "Asia/Kolkata"));
         return moment.tz(slot, "Asia/Kolkata");
       });
-      let index = this.state.buttons.indexOf(e.button);
+      let index=0
+
+      for (var j=0; j< this.state.buttons.length; j++){
+          if (this.state.buttons[j]== e.button){
+            index= j;
+            break
+          }
+        }
+
       const selectedSlot = refSlots[index];
+      //console.log('selectedSlot: ', selectedSlot);
+
       let date = this.state.date,
         yr = date.getFullYear(),
         month = date.getMonth(),
@@ -150,12 +163,13 @@ class CreateEvent extends Component {
 
       const eventParam = {
         reqDateTime: eventDateTime,
-        reqDuration: this.state.duration,
         userEmail: this.props.userState.user.email,
         gymName : this.props.gymName,
         gymEmail : this.props.gymEmail,
         cost : parseInt(this.props.priceOnPayment)
       };
+
+      
 
     if(this.props.userState.wallet > parseInt(this.props.priceOnPayment)){
       axios
@@ -165,7 +179,7 @@ class CreateEvent extends Component {
             .post("http://localhost:5000/updateWallet", {wallet : parseInt(this.props.userState.wallet - parseInt(this.props.priceOnPayment)) , email : this.props.userState.user.email , action : "book"})
             .then((res) =>{
               console.log(res.data)
-              window.location = `/status/${eventParam.reqDateTime}/${eventParam.reqDuration}`;
+              window.location = `/status/${eventParam.reqDateTime}`;
 
             })
         })
@@ -176,6 +190,7 @@ class CreateEvent extends Component {
     else{
       alert("You Don't have enough balance!")
     }
+    
     } 
   }
 
@@ -187,7 +202,7 @@ class CreateEvent extends Component {
       <div>
         <div className="row px-3">
           <div className="col-12 col-md-6">
-            <form onSubmit={this.onSubmit}>
+            <form>
               <div className="form-group">
                 <label> Date:</label>
                 <div>
@@ -195,28 +210,12 @@ class CreateEvent extends Component {
                     selected={this.state.date}
                     onChange={this.onChangeDate}
                     minDate={moment().toDate()}
+                    maxDate= {new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()+27)}
                   />
                 </div>
               </div>
-              
-              <div className="form-group">
-                <label> Duration</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  value={this.state.duration}
-                  onChange={this.onChangeDuration}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  type="submit"
-                  value="Get Slots"
-                  className="btn btn-primary"
-                />
-              </div>
             </form>
-          </div>
+            </div>
           <div className="col-12 col-md-6">
             {this.state.buttons.length > 0 ? this.state.buttons.map((button) => {
               return (

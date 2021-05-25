@@ -71,7 +71,6 @@ class CreateEvent extends Component {
               <th>Gym Name</th>
               <th>Date</th>
               <th>Time</th>
-              <th>Duration</th>
             </tr>
           </thead>
           <tbody>
@@ -85,7 +84,6 @@ class CreateEvent extends Component {
                   <td>{e.gymName}</td>
                   <td>{date}</td>
                   <td>{time}</td>
-                  <td>{e.duration} Minutes</td>
                   <td><Button outline color="danger" onClick = {() =>this.removeBooking(this.state.events.indexOf(e) + 1)}>Cancel</Button></td>
                 </tr>
               );

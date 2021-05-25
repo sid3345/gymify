@@ -7,7 +7,7 @@ const Success = () => {
     <div>
       <Switch>
         <Route
-          path="/status/:dateTime/:duration"
+          path="/status/:dateTime"
           children={<BookingStatus />}
         />
       </Switch>

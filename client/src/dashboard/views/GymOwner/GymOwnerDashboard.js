@@ -189,7 +189,7 @@ function GymOwnerDashboard(props) {
       countHours[_hrs+_daynight]+=1
 
      
-      listUser.push([events.userEmail, events.dateTime, events.duration])
+      listUser.push([events.userEmail, events.dateTime])
 
       listUser_aggregate[events.userEmail].revenue += events.cost
       listUser_aggregate[events.userEmail].bookings += 1

@@ -12,7 +12,6 @@ router.route("/").post((req, res) => {
   res.send("New slot added");
   
   const reqDateTime = moment.utc(req.body.reqDateTime).toDate();
-  const reqDuration = parseInt(req.body.reqDuration);
   const reqUserEmail = req.body.userEmail
   const reqGymName = req.body.gymName
   const reqGymEmail = req.body.gymEmail
@@ -21,7 +20,6 @@ router.route("/").post((req, res) => {
 
   db.collection("events").add({
     dateTime: admin.firestore.Timestamp.fromDate(reqDateTime),
-    duration: reqDuration,
     userEmail: reqUserEmail,
     gymName: reqGymName,
     gymEmail : reqGymEmail,

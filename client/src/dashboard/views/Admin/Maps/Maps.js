@@ -10,7 +10,7 @@ const CustomSkinMap = withScriptjs(
   withGoogleMap(() => (
     <GoogleMap
       defaultZoom={13}
-      defaultCenter={{ lat: 40.748817, lng: -73.985428 }}
+      defaultCenter={{ lat: 19.0760, lng: 72.8777 }}
       defaultOptions={{
         scrollwheel: false,
         zoomControl: true,
@@ -76,7 +76,7 @@ const CustomSkinMap = withScriptjs(
         ]
       }}
     >
-      <Marker position={{ lat: 40.748817, lng: -73.985428 }} />
+      <Marker position={{ lat: 19.0760, lng: 72.8777 }} />
     </GoogleMap>
   ))
 );
@@ -84,7 +84,7 @@ const CustomSkinMap = withScriptjs(
 export default function Maps() {
   return (
     <CustomSkinMap
-      googleMapURL="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"
+      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAquWtUzhvsm5lnO0swYWbwD9uHZglpmo8"
       loadingElement={<div style={{ height: `100%` }} />}
       containerElement={<div style={{ height: `100vh` }} />}
       mapElement={<div style={{ height: `100%` }} />}

@@ -1,11 +1,13 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
+
+/* global google */
+
 // @material-ui/core components
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import { useHistory} from 'react-router-dom'
 import {connect} from 'react-redux'
-
 
 // core components
 import GridItem from "../../components/Grid/GridItem";
@@ -56,6 +58,10 @@ function GymRegister(props) {
   const [approved , setApproved] = useState(0)
   const [slots , setSlots] = useState([])
   const [img , setImg] = useState('')
+  const [state , setState] = useState('')
+  const [googleMapLink , setGoogleMapLink] = useState('')
+
+  var autocomplete = null
 
     const onSubmit= (e) => {
     e.preventDefault();
@@ -67,6 +73,7 @@ function GymRegister(props) {
       'propertyGovt':propertyGovt,
       'cost':cost,
       'city':city,
+      'state': state,
       'address':address,
       'postal':postal,
       'description':description,
@@ -87,6 +94,12 @@ function GymRegister(props) {
   }
 
    useEffect(() => {
+
+  autocomplete = new google.maps.places.Autocomplete(document.getElementById('address'), {})
+
+  autocomplete.addListener("place_changed", handlePlaceSelect)
+
+  console.log('autocomplete: ', autocomplete);
     
   axios.get("http://localhost:5000/gymList/").then((res)=> {
     //console.log('res: ', res.data);
@@ -103,6 +116,7 @@ function GymRegister(props) {
         setCost((res.data)[i].cost);
         setPropertyGovt((res.data)[i].propertyGovt);
         setCity((res.data)[i].city);
+        setState((res.data)[i].state);
         setAddress((res.data)[i].address);
         setPostal((res.data)[i].postal);
         setDescription((res.data)[i].description);
@@ -111,12 +125,22 @@ function GymRegister(props) {
         setImg((res.data)[i].img);
         break
       }
-      }
-
-      
+      }      
     }
     });
   },[])
+
+  const handlePlaceSelect = ()=> {
+    let addressObject = autocomplete.getPlace()
+    let address = addressObject.address_components
+    
+    setAddress(addressObject.name)
+    setCity(address[4].long_name)
+    setState(address[6].short_name)
+    setPostal(address[8].short_name)
+    setGoogleMapLink(addressObject.url)
+  }
+
 
   return (
     <div>
@@ -209,6 +233,22 @@ function GymRegister(props) {
                 </GridItem>
               </GridContainer>
               <GridContainer>
+               <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    useRef="input"
+                    labelText="Address"
+                    id="address"
+                    formControlProps={{
+                      fullWidth: true,
+                      required: true,
+                    }}
+                    inputProps={{
+                      required: true,
+                      value: address,
+                    onChange: e => setAddress(e.target.value)
+                    }}
+                  />
+                </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     labelText="City"
@@ -221,21 +261,6 @@ function GymRegister(props) {
                       required: true,
                       value: city,
                     onChange: e => setCity(e.target.value)
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Address"
-                    id="address"
-                    formControlProps={{
-                      fullWidth: true,
-                      required: true,
-                    }}
-                    inputProps={{
-                      required: true,
-                      value: address,
-                    onChange: e => setAddress(e.target.value)
                     }}
                   />
                 </GridItem>

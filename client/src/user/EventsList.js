@@ -27,15 +27,18 @@ class CreateEvent extends Component {
     };
 
     axios.post("http://localhost:5000/getEvents/", email).then((res) => {
-      // console.log(res.data)
+      console.log(res.data)
       this.getEventsList(res.data);
     });
   }
 
 
   getEventsList(eventsList) {
+    eventsList = eventsList.sort(function(x , y){
+      return moment(x.dateTime) - moment(y.dateTime)
+    })
     this.setState({
-      events: eventsList,
+      events: eventsList.reverse(),
     });
   }
 
@@ -55,8 +58,6 @@ class CreateEvent extends Component {
               .then(window.location.reload())
     })
     }
-    
-   
     
   }
 
@@ -81,10 +82,10 @@ class CreateEvent extends Component {
               let time = moment(e.dateTime).format("hh:mm A");
               return (
                 <tr key = {this.state.events.indexOf(e) + 1}>
-                  <td>{e.gymName}</td>
-                  <td>{date}</td>
-                  <td>{time}</td>
-                  <td><Button outline color="danger" onClick = {() =>this.removeBooking(this.state.events.indexOf(e) + 1)}>Cancel</Button></td>
+                  <td>{moment() < moment(e.dateTime) ? e.gymName : <s>{e.gymName}</s>}</td>
+                  <td>{moment() < moment(e.dateTime) ? date : <s>{date}</s>}</td>
+                  <td>{moment() < moment(e.dateTime) ? time : <s>{time}</s>}</td>
+                  <td><Button outline color="danger" disabled = {moment() > moment(e.dateTime)} onClick = {() =>this.removeBooking(this.state.events.indexOf(e) + 1)}>Cancel</Button></td>
                 </tr>
               );
             })}

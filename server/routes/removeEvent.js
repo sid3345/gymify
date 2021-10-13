@@ -11,6 +11,7 @@ router.route("/").post((req, res) => {
     .where("dateTime" , "==" , new Date((req.body)[0].dateTime))
     .where("gymEmail" , "==" , (req.body)[0].gymEmail)
     .where("userEmail" , "==" , (req.body)[0].userEmail)
+    .limit(1)
 
     delEvent.get()
     .then(function(querySnapshot) {

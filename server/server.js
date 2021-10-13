@@ -37,7 +37,7 @@ const updateWallet = require("./routes/updateWallet")
 
 app.use("/freeSlots", getSlotsRouter);
 app.use("/getEvents", getEventsRouter);
-app.use("/removeEvent", removeEvent)/
+app.use("/removeEvent", removeEvent)
 app.use("/createEvent", createEventsRouter);
 app.use("/gym_register", registerGym);
 app.use("/createUser", createUser)

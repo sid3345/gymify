@@ -53,7 +53,7 @@ export default function Dashboard() {
   const[countHoursofDay, setCountHoursofDay]= useState([]);
 
   useEffect(() => {
-  axios.get("http://localhost:5000/gymList/").then((res)=> {
+  axios.post("http://localhost:5000/gymList/").then((res)=> {
     //console.log('res: ', res);
     setGymList(res.data)
     });

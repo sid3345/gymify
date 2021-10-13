@@ -38,7 +38,7 @@ class CreateEvent extends Component {
       timezone: "Asia/Kolkata",
     });
 
-    axios.get("http://localhost:5000/gymList/").then((res)=> {
+    axios.post("http://localhost:5000/gymList/").then((res)=> {
         console.log('res: ', res);
 
         for (var i in res.data){

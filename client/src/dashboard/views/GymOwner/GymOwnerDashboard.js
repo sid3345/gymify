@@ -57,7 +57,7 @@ function GymOwnerDashboard(props) {
   if(props.userState.user && gymList.length==0){
     //console.log('props.userState.user: ', props.userState.user);
 
-      axios.get("http://localhost:5000/gymList/").then((res)=> {
+      axios.post("http://localhost:5000/gymList/").then((res)=> {
         //console.log('res: ', res);
         
         for (var i in res.data){

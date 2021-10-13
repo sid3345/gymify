@@ -42,6 +42,9 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 function GymRegister(props) {
+
+  console.log(props.uservalue.user && props.uservalue.user.email)
+
   const classes = useStyles();
 
   const history = useHistory()
@@ -94,6 +97,9 @@ function GymRegister(props) {
   }
 
    useEffect(() => {
+    console.log(props.uservalue.user)
+    var email = props.uservalue.user && props.uservalue.user.email
+    // console.log(email)
 
   autocomplete = new google.maps.places.Autocomplete(document.getElementById('address'), {})
 
@@ -101,8 +107,8 @@ function GymRegister(props) {
 
   console.log('autocomplete: ', autocomplete);
     
-  axios.get("http://localhost:5000/gymList/").then((res)=> {
-    //console.log('res: ', res.data);
+  axios.post("http://localhost:5000/gymList/" , {email : email}).then((res)=> {
+    console.log('res: ', res.data);
 
     for(let i=0; i<res.data.length;i++){
       

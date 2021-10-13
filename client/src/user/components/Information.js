@@ -23,7 +23,7 @@ const Information = () => {
     const [gymList, setGymList] = useState('')
     
     useEffect(() => {
-    axios.get("http://localhost:5000/gymList/").then((res)=> {
+    axios.post("http://localhost:5000/gymList/").then((res)=> {
       //console.log('res.data: ', res.data);
 
       const gymList1=[]

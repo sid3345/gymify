@@ -47,7 +47,7 @@ class CreateEvent extends Component {
       
     if(this.props.userState.user && this.state.gymList.length==0){
 
-      axios.get("http://localhost:5000/gymList/").then((res)=> {
+      axios.post("http://localhost:5000/gymList/").then((res)=> {
         //console.log('res: ', res);
 
         for (var i in res.data){

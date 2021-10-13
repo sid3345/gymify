@@ -63,7 +63,7 @@ export default function UserProfile() {
 
   useEffect(() => {
     
-  axios.get("http://localhost:5000/gymList/").then((res)=> {
+  axios.post("http://localhost:5000/gymList/").then((res)=> {
     //console.log('res: ', res.data);
 
     for(let i=0; i<res.data.length;i++){

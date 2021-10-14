@@ -58,10 +58,6 @@ function UserProfile(props) {
   const [address , setAddress] = useState('')
   const [postal , setPostal] = useState('')
   const [description , setDescription] = useState('')
-  // const [approved , setApproved] = useState(0)
-  // const [slots , setSlots] = useState([])
-  // const [img , setImg] = useState('')
-  // const [state , setState] = useState('')
   const [googleMapLink , setGoogleMapLink] = useState('')
 
   var autocomplete = null
@@ -76,13 +72,9 @@ function UserProfile(props) {
       'MobileNumber':MobileNumber,
       'weight':weight,
       'city':city,
-      // 'state': state,
       'address':address,
       'postal':postal,
       'description':description,
-      // 'approved': approved==1 ? approved : 0,
-      // 'slots' :slots,
-    //   'img':img.length>0 ? img :'name'+Math.floor(Math.random() * 9)
     }
 
     console.log('data submitted: ', data);
@@ -110,29 +102,17 @@ function UserProfile(props) {
   axios.post("http://localhost:5000/fetchUser/" , {email : email}).then((res)=> {
     console.log('res: ', res.data);
 
-    for(let i=0; i<res.data.length;i++){
-      
-      if(props.uservalue.user){
-        if ((res.data)[i].email==props.uservalue.user.email)
-      {
-        //console.log('(res.data)[i]: ',(res.data)[i]);
+        setName((res.data)[0].name);
+        setBodyType((res.data)[0].Body_type);
+        setCost((res.data)[0].weight);
+        setMobileNum((res.data)[0].MobileNumber);
+        setCity((res.data)[0].city);
+        setAddress((res.data)[0].address);
+        setPostal((res.data)[0].postal);
+        setDescription((res.data)[0].description);
 
-        setName((res.data)[i].name);
-        setBodyType((res.data)[i].Body_type);
-        setCost((res.data)[i].weight);
-        setMobileNum((res.data)[i].MobileNumber);
-        setCity((res.data)[i].city);
-        // setState((res.data)[i].state);
-        setAddress((res.data)[i].address);
-        setPostal((res.data)[i].postal);
-        setDescription((res.data)[i].description);
-        // setApproved((res.data)[i].approved);
-        // setSlots((res.data)[i].slots);
-        // setImg((res.data)[i].img);
-        break
-      }
-      }      
-    }
+           
+    
     });
   },[props])
 
@@ -142,7 +122,6 @@ function UserProfile(props) {
     
     setAddress(addressObject.name)
     setCity(address[4].long_name)
-    // setState(address[6].short_name)
     setPostal(address[8].short_name)
     setGoogleMapLink(addressObject.url)
   }
@@ -155,8 +134,7 @@ function UserProfile(props) {
         <GridItem xs={12} sm={12} md={8}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Register Gym</h4>
-              <p className={classes.cardCategoryWhite}>Fill in your Gym Profile</p>
+              <h4 className={classes.cardTitleWhite}>Your Profile</h4>
             </CardHeader>
             <CardBody>
               <GridContainer>
@@ -288,7 +266,7 @@ function UserProfile(props) {
               </GridContainer>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
-                  <InputLabel style={{ color: "#AAAAAA" }}>Description</InputLabel>
+                  {/* <InputLabel style={{ color: "#AAAAAA" }}>Description</InputLabel> */}
                   <CustomInput
                     labelText="About me"
                     id="about-me"

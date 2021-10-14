@@ -48,6 +48,8 @@ function UserProfile(props) {
   const classes = useStyles();
 
   const history = useHistory()
+
+  const [readOnly , setReadOnly] = useState(true)
   
   const [name , setName] = useState('')
   const [weight , setCost] = useState('')
@@ -149,6 +151,7 @@ function UserProfile(props) {
                     inputProps={{
                       required: true,
                       value: name,
+                      readOnly : readOnly,
                     onChange: e => setName(e.target.value)
                     }}
                   />
@@ -179,6 +182,7 @@ function UserProfile(props) {
                     inputProps={{
                       required: true,
                       value: weight,
+                      readOnly : readOnly,
                     onChange: e => setCost(e.target.value)
                     }}
                   />
@@ -196,6 +200,7 @@ function UserProfile(props) {
                     inputProps={{
                       required: true,
                       value: Body_type,
+                      readOnly : readOnly,
                     onChange: e => setBodyType(e.target.value)
                     }}
                   />
@@ -211,6 +216,7 @@ function UserProfile(props) {
                     inputProps={{
                       required: true,
                       value: MobileNumber,
+                      readOnly : readOnly,
                     onChange: e => setMobileNum(e.target.value)
                     }}
                   />
@@ -229,6 +235,7 @@ function UserProfile(props) {
                     inputProps={{
                       required: true,
                       value: address,
+                      readOnly : readOnly,
                     onChange: e => setAddress(e.target.value)
                     }}
                   />
@@ -244,6 +251,7 @@ function UserProfile(props) {
                     inputProps={{
                       required: true,
                       value: city,
+                      readOnly : readOnly,
                     onChange: e => setCity(e.target.value)
                     }}
                   />
@@ -259,6 +267,7 @@ function UserProfile(props) {
                     inputProps={{
                       required: true,
                       value: postal,
+                      readOnly : readOnly,
                     onChange: e => setPostal(e.target.value)
                     }}
                   />
@@ -277,6 +286,7 @@ function UserProfile(props) {
                       multiline: true,
                       rows: 5,
                       value: description,
+                      readOnly : readOnly,
                     onChange: e => setDescription(e.target.value)
                     }}
                   />
@@ -288,6 +298,8 @@ function UserProfile(props) {
               <Button onClick={onSubmit} color="primary">Submit</Button>
               : 
               <Button disabled color="primary">Submit</Button>}
+
+              <Button color="primary" onClick = {e => setReadOnly(!readOnly)}>{readOnly ? 'Edit' : 'Cancel'}</Button>
             </CardFooter>
           </Card>
         </GridItem>

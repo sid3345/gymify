@@ -20,6 +20,7 @@ import "./dashboard/assets/css/material-dashboard-react.css?v=1.9.0";
 import Admin from "./dashboard/layouts/Admin";
 import Owner from "./dashboard/layouts/Owner";
 import GymRegister from "./dashboard/views/GymOwner/GymRegister";
+import UserProfile from "./user/components/UserProfile";
 
 const hist = createBrowserHistory();
 
@@ -63,6 +64,7 @@ const App = (props) => {
         <Route path="/login" component={Login} />
 
         <Route path="/register_gym/profile" component={GymRegister} />
+        <Route path = "/userProfile" component = {UserProfile} />
 
         <Route path="*" component={Error} />
       </Switch>

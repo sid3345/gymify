@@ -34,7 +34,7 @@ const NavBar = (props) => {
 
 var listEvent = <Link to="/listAll">
                 <Button color="primary" className="mx-2">
-                  List All bookings
+                  Bookings
                 </Button>
               </Link>
 
@@ -51,9 +51,18 @@ var owner = <div>
               </Link>
               </div>
 
-var money = <Button color = "primary" className="mx-2">
+var money = <div>
+             <Button color = "primary" className="mx-2">
               Money : {props.uservalue.wallet}
              </Button>
+
+            <Link to = "/userProfile">
+            <Button color="primary" className="mx-2">
+              Profile
+            </Button>
+            </Link>
+
+           </div>
 
 var signout = <Button color="primary" className="mx-2" onClick = {handleAuthentication}>
               Sign Out

@@ -31,6 +31,7 @@ const createEventsRouter = require("./routes/createEvent");
 const registerGym = require("./routes/registerGym");
 const createUser = require("./routes/createUser")
 const fetchUser = require("./routes/fetchUser")
+const updateUser = require("./routes/updateUser")
 const gymList = require("./routes/gymList");
 const gym_delete = require("./routes/deleteGym");
 const updateWallet = require("./routes/updateWallet")
@@ -42,6 +43,7 @@ app.use("/createEvent", createEventsRouter);
 app.use("/gym_register", registerGym);
 app.use("/createUser", createUser)
 app.use("/fetchUser", fetchUser)
+app.use("/updateUser" , updateUser)
 app.use("/gymList", gymList);
 app.use("/gym_delete", gym_delete);
 app.use("/updateWallet" , updateWallet)

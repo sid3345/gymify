@@ -81,11 +81,9 @@ function UserProfile(props) {
       'description':description,
     }
 
-    console.log('data submitted: ', data);
-
     axios.post("http://localhost:5000/updateUser/", data).then((res) => {
       console.log(res.data);
-      res.data && localStorage.setItem('userData' , JSON.stringify(data))
+      localStorage.setItem('userData' , JSON.stringify(res.data[0]))
 
     });
     setReadOnly(!readOnly)

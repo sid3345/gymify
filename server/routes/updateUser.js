@@ -5,9 +5,10 @@ const db = require("../db");
 
 router.route("/").post((req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.send("Gym added");
+  // res.send("Gym added");
 
   console.log('user req: ',req.body);
+  let user = [] 
 
   db.collection("users").doc(req.body.email).update({
    name : req.body.name,
@@ -19,10 +20,19 @@ router.route("/").post((req, res) => {
    address : req.body.address ? req.body.address : ' ',
    postal : req.body.postal ? req.body.postal : ' ',
    description : req.body.description ? req.body.description : ' ',
-  //  approved: req.body.approved,
-  //  slots: req.body.slots,
-//    img: req.body.img
-  });
+  }).then(response =>{
+    db.collection("users")
+    .where("email" , "==" , req.body.email)
+    .get()
+    .then((snapshot) =>{
+        snapshot.docs.forEach((doc) => {
+            user.push(doc.data())
+          })
+        console.log("Fetch",user)
+        res.json(user);   
+    })
+  }
+  );
 });
 
 module.exports = router;

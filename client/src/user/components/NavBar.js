@@ -27,6 +27,7 @@ const NavBar = (props) => {
 
   const handleAuthentication = () =>{
     if (props.uservalue.user){
+        localStorage.removeItem('userData')
         auth.signOut()
         history.push('/')
     }

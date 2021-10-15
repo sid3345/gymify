@@ -23,6 +23,7 @@ function Login() {
                     else if(auth){
                         axios.post("http://localhost:5000/fetchUser" , {email : auth.user.email})
                         .then((res) =>{
+                            localStorage.setItem("userData" , JSON.stringify(res.data[0]))
                             // console.log(res.data[0].email)
                             if(res.data[0].checked == true){
                                 history.push('/owner')
@@ -47,6 +48,9 @@ function Login() {
                 if(auth){
                     axios.post("http://localhost:5000/createUser" , {email : auth.user.email , check : {checked}})
                     .then((res) =>{
+
+                        localStorage.setItem("userData" , JSON.stringify(res.data))
+
                         if(res.data.check.checked == true){
                             history.push('/register_gym/profile')
                             window.location.reload()

@@ -5,7 +5,7 @@ import React, {useState, useEffect, useRef} from "react";
 // @material-ui/core components
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
+// import InputLabel from "@material-ui/core/InputLabel";
 import { useHistory} from 'react-router-dom'
 import {connect} from 'react-redux'
 
@@ -43,33 +43,35 @@ const useStyles = makeStyles(styles);
 
 function UserProfile(props) {
 
-  console.log(props.uservalue.user && props.uservalue.user.email)
-
   const classes = useStyles();
 
   const history = useHistory()
 
   const [readOnly , setReadOnly] = useState(true)
-  
-  const [name , setName] = useState('')
-  const [weight , setCost] = useState('')
-  // const [email , setEmail] = useState('')   //controlling from redux
-  const [Body_type , setBodyType] = useState('')
-  const [MobileNumber , setMobileNum] = useState('')
-  const [city , setCity] = useState('')
-  const [address , setAddress] = useState('')
-  const [postal , setPostal] = useState('')
-  const [description , setDescription] = useState('')
-  const [googleMapLink , setGoogleMapLink] = useState('')
 
-  var autocomplete = null
+  const userData = JSON.parse(localStorage.getItem('userData'))
+
+  console.log(userData)
+  
+  const [name , setName] = useState(userData.name)
+  const [weight , setCost] = useState(userData.weight)
+  const [email , setEmail] = useState(userData.email)
+  const [Body_type , setBodyType] = useState(userData.Body_type)
+  const [MobileNumber , setMobileNum] = useState(userData.MobileNumber)
+  const [city , setCity] = useState(userData.city)
+  const [address , setAddress] = useState(userData.address)
+  const [postal , setPostal] = useState(userData.postal)
+  const [description , setDescription] = useState(userData.description)
+  // const [googleMapLink , setGoogleMapLink] = useState('')
+
+  // var autocomplete = null
 
     const onSubmit= (e) => {
     e.preventDefault();
 
     const data= {
       'name':name,
-      'email':props.uservalue.user.email,
+      'email':email,
       'Body_type':Body_type,
       'MobileNumber':MobileNumber,
       'weight':weight,
@@ -83,50 +85,34 @@ function UserProfile(props) {
 
     axios.post("http://localhost:5000/updateUser/", data).then((res) => {
       console.log(res.data);
-    });
-    alert('Gym profile submitted. Wait for sometime to approve.')
+      res.data && localStorage.setItem('userData' , JSON.stringify(data))
 
-    history.push('/')
+    });
+    setReadOnly(!readOnly)
+
+    // history.push('/')
     
   }
 
-   useEffect(() => {
-    console.log(props.uservalue.user)
-    var email = props.uservalue.user && props.uservalue.user.email
-    // console.log(email)
+  //  useEffect(() => {
 
-  autocomplete = new google.maps.places.Autocomplete(document.getElementById('address'), {})
+  // autocomplete = new google.maps.places.Autocomplete(document.getElementById('address'), {})
 
-  autocomplete.addListener("place_changed", handlePlaceSelect)
+  // autocomplete.addListener("place_changed", handlePlaceSelect)
 
-  console.log('autocomplete: ', autocomplete);
+  // console.log('autocomplete: ', autocomplete);
+
+  // },[])
+
+  // const handlePlaceSelect = ()=> {
+  //   let addressObject = autocomplete.getPlace()
+  //   let address = addressObject.address_components
     
-  axios.post("http://localhost:5000/fetchUser/" , {email : email}).then((res)=> {
-    console.log('res: ', res.data);
-
-        setName((res.data)[0].name);
-        setBodyType((res.data)[0].Body_type);
-        setCost((res.data)[0].weight);
-        setMobileNum((res.data)[0].MobileNumber);
-        setCity((res.data)[0].city);
-        setAddress((res.data)[0].address);
-        setPostal((res.data)[0].postal);
-        setDescription((res.data)[0].description);
-
-           
-    
-    });
-  },[props])
-
-  const handlePlaceSelect = ()=> {
-    let addressObject = autocomplete.getPlace()
-    let address = addressObject.address_components
-    
-    setAddress(addressObject.name)
-    setCity(address[4].long_name)
-    setPostal(address[8].short_name)
-    setGoogleMapLink(addressObject.url)
-  }
+  //   setAddress(addressObject.name)
+  //   setCity(address[4].long_name)
+  //   setPostal(address[8].short_name)
+  //   setGoogleMapLink(addressObject.url)
+  // }
 
 
   return (
@@ -167,7 +153,7 @@ function UserProfile(props) {
                     }}
                     inputProps={{
                       required: true,
-                      value: props.uservalue.user ? props.uservalue.user.email : "",
+                      value: email,
                     }}
                   />
                 </GridItem>
@@ -294,7 +280,7 @@ function UserProfile(props) {
               </GridContainer>
             </CardBody>
             <CardFooter>
-            {(name && Body_type && props.uservalue.user.email && MobileNumber && weight && city && address && postal) ? 
+            {(name && Body_type && email && MobileNumber && weight && city && address && postal) ? 
               <Button onClick={onSubmit} color="primary">Submit</Button>
               : 
               <Button disabled color="primary">Submit</Button>}

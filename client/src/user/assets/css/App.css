@@ -117,6 +117,7 @@ html {
   flex-wrap: wrap;
   justify-content: center;
   padding: 0 7rem;
+  margin: 10px;
 }
 
 .gym-list-item {

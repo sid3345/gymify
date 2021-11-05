@@ -83,9 +83,9 @@ const Information = () => {
         </Button>
       </div>
 
-            <div className="container">
+        <div className="container">
 		    	<GymList gyms={filteredGyms}/>
-          </div>
+        </div>
       </Container>
     </div>
   );

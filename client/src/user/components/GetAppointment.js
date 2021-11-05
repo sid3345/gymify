@@ -38,17 +38,14 @@ class CreateEvent extends Component {
       timezone: "Asia/Kolkata",
     });
 
-    axios.post("http://localhost:5000/gymList/").then((res)=> {
+    axios.post("http://localhost:5000/gymList/" , {email : this.props.gymEmail}).then((res)=> {
         console.log('res: ', res);
 
-        for (var i in res.data){
-            if(res.data[i].email== this.props.gymEmail){
-              this.setState({
-                all_slots: res.data[i].slots
-              });
-            break
-            }
-          }
+        if(res.data[0].email== this.props.gymEmail){
+          this.setState({
+            all_slots: res.data[0].slots
+          });
+        }
       });
   }
 

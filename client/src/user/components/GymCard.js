@@ -4,9 +4,25 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { CardActionArea, CardActions } from '@mui/material';
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import GymProfile from './GymProfile';
+
 
 const GymCard = ({gym}) =>{
+
+  const [modal, setModal] = useState(false);
+
+  const toggle = () =>{
+    setModal(!modal)
+  }
+
+  const closeBtn = (
+    <button className="close" onClick={toggle}>
+      &times;
+    </button>
+  );
+
 	return(
 		// <div className="gym-list-item">
 		// 	<p>{gym.gym.toString().substring(0, 80)}</p>
@@ -19,7 +35,7 @@ const GymCard = ({gym}) =>{
 			
         //     <Booking gymEmail = {gym.email} title={gym.gym} price={gym.cost} className="BookApp" />
 		// </div>
-
+<>
 	<Card sx={{ width : 300 ,  maxWidth: 300 , margin : 1 }}>
 		<CardContent>
 			<Typography gutterBottom variant="h6" component="div">
@@ -32,6 +48,7 @@ const GymCard = ({gym}) =>{
           height="140"
           image={`./gyms/${gym.img}.jpg`}
           alt="green iguana"
+          onClick = {toggle}
         />
       </CardActionArea>
 	
@@ -40,9 +57,9 @@ const GymCard = ({gym}) =>{
           <Typography gutterBottom variant="p" component="div">
 		  	<i className="fas fa-rupee-sign"></i> City: {gym.city}
           </Typography>
-          <Typography gutterBottom variant="p" component="div">
+          {/* <Typography gutterBottom variant="p" component="div">
 		  	<i className="fas fa-rupee-sign"></i> Location: {gym.address}
-          </Typography>
+          </Typography> */}
           <Typography gutterBottom variant="p" component="div">
 		  	<i className="fas fa-rupee-sign"></i> Rating:
           </Typography>
@@ -59,6 +76,21 @@ const GymCard = ({gym}) =>{
 	  	<Booking gymEmail = {gym.email} title={gym.gym} price={gym.cost} />
       </CardActions>
     </Card>
+
+    <Modal
+        isOpen={modal}
+        toggle={toggle}
+        centered
+        size="lg"
+      >
+        <ModalHeader toggle={toggle} close={closeBtn}>
+          {gym.gym}
+        </ModalHeader>
+        <ModalBody>
+          {modal ? <GymProfile image={`./gyms/${gym.img}.jpg`} gymData = {gym}/> : null }
+        </ModalBody>
+      </Modal>
+  </>
 	);
 	
 

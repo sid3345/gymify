@@ -1,6 +1,6 @@
 import React from 'react'
 
-const GymProfile = ({image , gymData}) => {
+const GymProfileModal = ({image , gymData}) => {
     console.log(gymData)
     return (
         <div style = {{display : 'flex'}}>
@@ -18,4 +18,4 @@ const GymProfile = ({image , gymData}) => {
     )
 }
 
-export default GymProfile
+export default GymProfileModal

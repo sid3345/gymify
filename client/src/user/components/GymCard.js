@@ -6,7 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, CardActions } from '@mui/material';
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-import GymProfile from './GymProfile';
+import GymProfileModal from './GymProfileModal';
 
 
 const GymCard = ({gym}) =>{
@@ -87,7 +87,7 @@ const GymCard = ({gym}) =>{
           {gym.gym}
         </ModalHeader>
         <ModalBody>
-          {modal ? <GymProfile image={`./gyms/${gym.img}.jpg`} gymData = {gym}/> : null }
+          {modal ? <GymProfileModal image={`./gyms/${gym.img}.jpg`} gymData = {gym}/> : null }
         </ModalBody>
       </Modal>
   </>

@@ -62,8 +62,10 @@ class CreateEvent extends Component {
     let flag=0;
 
     this.state.all_slots.map((eachDate) =>  Number(Object.keys(eachDate)) == date.getDate() ?
-    flag=eachDate[Object.keys(eachDate)]
+    flag=(eachDate[Object.keys(eachDate)]).filter(curr => moment(curr).format("YYYY/MM/DD") == moment(date).format("YYYY/MM/DD"))
     :null)
+
+    console.log("flag" , flag)
 
     if (flag==0)
      return this.getSlots([])

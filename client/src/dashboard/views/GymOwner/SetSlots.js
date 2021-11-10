@@ -47,8 +47,8 @@ class CreateEvent extends Component {
       
     if(this.props.userState.user && this.state.gymList.length==0){
 
-      axios.post("http://localhost:5000/gymList/").then((res)=> {
-        //console.log('res: ', res);
+      axios.post("http://localhost:5000/gymList/" , {email : this.props.userState.user.email}).then((res)=> {
+        console.log('res: ', res);
 
         for (var i in res.data){
             if(res.data[i].email== this.props.userState.user.email){
@@ -73,10 +73,13 @@ class CreateEvent extends Component {
       slots_booked:[]
     })
     if (this.state.gymList.slots)
-    this.state.gymList.slots.map((eachDate) =>  Number(Object.keys(eachDate)) == date.getDate() ?
+    console.log(this.state.gymList.slots)
+    this.state.gymList.slots.map((eachDate) =>  Number(Object.keys(eachDate)) == date.getDate() ?(
+
+      // console.log(eachDate[Object.keys(eachDate)].filter(curr => moment(curr).format("YYYY/MM/DD") == moment(date).format("YYYY/MM/DD"))),
     this.setState({
-      slots_booked: eachDate[Object.keys(eachDate)]
-    })
+      slots_booked: (eachDate[Object.keys(eachDate)]).filter(curr => moment(curr).format("YYYY/MM/DD") == moment(date).format("YYYY/MM/DD"))
+    }))
     :null)
 
     this.onGetSlot()
@@ -91,10 +94,10 @@ class CreateEvent extends Component {
 
   getSlots(availableSlots) {
     let refSlots = [];
-    //console.log('availableSlots: ', availableSlots);
+    // console.log('availableSlots: ', availableSlots);
 
     availableSlots.map((slot) => {
-       //console.log('slot1: ',new Date(slot))
+      //  console.log('slot1: ',new Date(slot))
       let booked=0;
 
       for (var i=0; i <  this.state.slots_booked.length; i++){
@@ -149,18 +152,24 @@ class CreateEvent extends Component {
   }
 
   onGetSlot() {
+
+    console.log(this.state.date)
+
     const events = {
       reqDate: this.state.date.valueOf(),
       reqTimezone: this.state.timezone,
     };
 
     axios.post("http://localhost:5000/freeSlots", events).then((res) => {
+      // console.log(res.data)
       this.getSlots(res.data);
     });
   }
 
 
   onSlotSelect(e) {
+
+    console.log(this.state.slots)
 
       let refSlots = [];
       this.state.slots.map((slot) => {

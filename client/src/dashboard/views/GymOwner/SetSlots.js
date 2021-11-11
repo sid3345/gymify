@@ -153,8 +153,6 @@ class CreateEvent extends Component {
 
   onGetSlot() {
 
-    console.log(this.state.date)
-
     const events = {
       reqDate: this.state.date.valueOf(),
       reqTimezone: this.state.timezone,
@@ -169,14 +167,14 @@ class CreateEvent extends Component {
 
   onSlotSelect(e) {
 
-    console.log(this.state.slots)
+    // console.log(this.state.slots)
+    e.button.booked=1;
 
       let refSlots = [];
       this.state.slots.map((slot) => {
         refSlots.push(moment.tz(slot.slot_available, "Asia/Kolkata"));
         return moment.tz(slot, "Asia/Kolkata");
       });
-      e.button.booked=1;
 
       //let index = this.state.buttons.tmp.indexOf(e.button.tmp);
       let index=0
@@ -273,12 +271,14 @@ class CreateEvent extends Component {
             </form>
           </div>
           <div className="col-12 col-md-6">
-            {this.state.buttons.map((button) => {
+            {this.state.buttons.map((button , index) => {
+              // console.log(index)
               return (
                 <Button
                   key = {button.tmp}
                   style={{width : "120px" , height : "auto"}}
                   color={button.booked==1 ? 'success' : "primary"}
+                  disabled = {this.state.slots[index].booked == 1}
                   className="m-2"
                   onClick={() => {
                     this.onSlotSelect({ button });

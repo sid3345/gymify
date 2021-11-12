@@ -168,7 +168,10 @@ class CreateEvent extends Component {
   onSlotSelect(e) {
 
     // console.log(this.state.slots)
-    e.button.booked=1;
+    console.log(e)
+    console.log(this.state.slots_booked)
+    e.button.booked = 1;
+    
 
       let refSlots = [];
       this.state.slots.map((slot) => {
@@ -271,8 +274,11 @@ class CreateEvent extends Component {
             </form>
           </div>
           <div className="col-12 col-md-6">
+            {/* {console.log("buttons" ,this.state.buttons)}
+            {console.log("SLots" , this.state.slots)} */}
             {this.state.buttons.map((button , index) => {
-              // console.log(index)
+              console.log(this.state.slots[index])
+              if(this.state.buttons.length == this.state.slots.length){
               return (
                 <Button
                   key = {button.tmp}
@@ -286,7 +292,7 @@ class CreateEvent extends Component {
                 >
                   {button.tmp}
                 </Button>
-              );
+              )};
             })}
           </div>
         </div>

@@ -170,7 +170,6 @@ class CreateEvent extends Component {
     // console.log(this.state.slots)
     console.log(e)
     console.log(this.state.slots_booked)
-    e.button.booked = 1;
     
 
       let refSlots = [];
@@ -178,6 +177,8 @@ class CreateEvent extends Component {
         refSlots.push(moment.tz(slot.slot_available, "Asia/Kolkata"));
         return moment.tz(slot, "Asia/Kolkata");
       });
+
+      console.log(refSlots)
 
       //let index = this.state.buttons.tmp.indexOf(e.button.tmp);
       let index=0
@@ -191,7 +192,7 @@ class CreateEvent extends Component {
 
       const selectedSlot = refSlots[index];
       
-      //console.log('selectedSlot: ',selectedSlot);
+      console.log('selectedSlot: ',selectedSlot);
       
       let date = this.state.date,
         yr = date.getFullYear(),
@@ -204,11 +205,20 @@ class CreateEvent extends Component {
       let eventDateTime = moment
         .tz([yr, month, day, hr, min], "Asia/Kolkata")
         .format();
+
+        console.log("eventDateTime" , eventDateTime)
       
       if(!(this.state.slots_booked.includes(eventDateTime))){
       this.setState(prevState => ({
           slots_booked: [...prevState.slots_booked, eventDateTime]
         }))
+        e.button.booked = 1
+      }
+      else{
+        this.setState(prevState => ({
+          slots_booked : prevState.slots_booked.filter(e => e != eventDateTime)
+        }))
+        e.button.booked = 0
       }
       
         //console.log('this.state.slots_booked: ', this.state.slots_booked);
@@ -277,7 +287,7 @@ class CreateEvent extends Component {
             {/* {console.log("buttons" ,this.state.buttons)}
             {console.log("SLots" , this.state.slots)} */}
             {this.state.buttons.map((button , index) => {
-              console.log(this.state.slots[index])
+              // console.log(this.state.slots[index])
               if(this.state.buttons.length == this.state.slots.length){
               return (
                 <Button

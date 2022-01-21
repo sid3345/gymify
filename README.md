@@ -23,6 +23,8 @@
 
 Our idea is to create a Gym / sport club slot booking application for employees. The application will be booking & subscription platform that enables employees to browse and book fitness & wellness services across partnered gyms / sports clubs in India (or any local campus for now) making it a holistic destination for all things fitness and sports.
 
+YouTube video explaining the project as on 23rd May, 2021 (may not include newly updated features): https://youtu.be/oyxZlfoSnPs
+
 ### Built With
 
 This web application uses the following technology
@@ -53,6 +55,7 @@ To run this application locally
    ```
 3. Create a firebase firestore database with collection name `event`
 4. Add your firebase service account API key in `server/serviceAccountKey.json`
+5. Add your Stripe API keys in `/client/.env` file.
 
 ### Prerequisites
 
@@ -60,6 +63,7 @@ You need to have the following Prerequisite to get started
 
 - NodeJS
 - Firebase Account
+- Stripe test API
 
 ## Project Structure
 
